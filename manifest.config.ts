@@ -24,5 +24,11 @@ export default defineManifest({
 			matches: ["https://*/*"],
 		},
 	],
-	permissions: ["contentSettings", "tabs"],
+	permissions: ["tabs"],
+	browser_specific_settings: {
+		gecko: {
+			id: "skip-intro@malolan.net",
+			strict_min_version: "109.0",
+		},
+	},
 });

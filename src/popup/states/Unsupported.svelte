@@ -1,3 +1,5 @@
+<script lang="ts"></script>
+
 <div class="unsupported">
   <span class="icon">📺</span>
   <p>Not on a supported<br />streaming platform</p>
