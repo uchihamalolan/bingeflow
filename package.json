@@ -12,6 +12,7 @@
 		"fix": "biome check --write"
 	},
 	"dependencies": {
+		"consola": "^3.4.2",
 		"svelte": "^5.53.12"
 	},
 	"devDependencies": {

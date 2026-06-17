@@ -20,10 +20,6 @@ const isTypingContext = (target: EventTarget | null): boolean => {
 };
 
 export function isValidPress(event: KeyboardEvent): boolean {
-	if (event.defaultPrevented) {
-		return false;
-	}
-
 	if (event.repeat || event.altKey || event.ctrlKey || event.metaKey) {
 		return false;
 	}
