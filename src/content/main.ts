@@ -1,18 +1,16 @@
-import { mount } from "svelte";
-import App from "./views/App.svelte";
+import { PLATFORMS } from "./platforms";
 
-console.log("[CRXJS] Hello world from content script!");
-
-/**
- * Mount the Svelte app to the DOM.
- */
-function mountApp() {
-	const container = document.createElement("div");
-	container.id = "crxjs-app";
-	document.body.appendChild(container);
-	mount(App, {
-		target: container,
-	});
+function detectConfig(hostname: string) {
+	return (
+		Object.values(PLATFORMS).find(
+			({ urlPattern, enabled }) => enabled && urlPattern.test(hostname),
+		) ?? null
+	);
 }
 
-mountApp();
+document.addEventListener("keydown", (e: KeyboardEvent) => {
+	if (e.key !== "s") return;
+	const config = detectConfig(window.location.hostname);
+	if (!config) return;
+	document.querySelector<HTMLElement>(config.skipSelector)?.click();
+});
