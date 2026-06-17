@@ -17,7 +17,8 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 	amazon_prime: {
 		label: "Amazon Prime Video",
 		urlPattern: /primevideo\.com/,
-		skipSelector: ".skipelement",
+		skipSelector:
+			".atvwebplayersdk-action-buttons button.atvwebplayersdk-skipelement-button",
 		enabled: true,
 		shortcutKey: "s",
 	},

@@ -1,52 +1,65 @@
-# Svelte + Vite + CRXJS
+# Skip Intro ⏭️
 
-This template helps you quickly start developing Chrome extensions with Svelte, TypeScript and Vite. It includes the CRXJS Vite plugin for seamless Chrome extension development.
+A lightweight Chrome Extension built with **Svelte 5**, **TypeScript**, and **Vite** (via CRXJS) that allows you to quickly skip intros, recaps, and credits on popular streaming platforms with a single keystroke.
 
 ## Features
 
-- Svelte with component syntax
-- TypeScript support
-- Vite build tool
-- CRXJS Vite plugin integration
-- Chrome extension manifest configuration
+- **One-key skipping**: Press a simple key (default: `S`) to click the skip button instantly.
+- **Auto-detection**: Automatically identifies the streaming platform you are viewing.
+- **Clean Popup UI**: Shows the active platform, its extension state, and the configured shortcut.
+- **Multiple Platform Support**: Pre-configured CSS selectors for:
+  - **Amazon Prime Video** (Enabled by default)
+  - **Disney+ Hotstar** (Enabled by default)
+  - **Netflix** (Disabled by default)
+
+---
 
 ## Quick Start
 
-1. Install dependencies:
+This project uses [Bun](https://bun.sh) as the package manager and [Biome](https://biomejs.dev) for linting and formatting.
 
+### 1. Install Dependencies
 ```bash
-npm install
+bun install
 ```
 
-2. Start development server:
-
+### 2. Run the Development Server
 ```bash
-npm run dev
+bun run dev
 ```
+This starts the Vite dev server and generates an unpacked extension in the `dist` directory.
 
-3. Open Chrome and navigate to `chrome://extensions/`, enable "Developer mode", and load the unpacked extension from the `dist` directory.
+### 3. Load the Extension in Chrome
+1. Open Google Chrome and navigate to `chrome://extensions/`.
+2. Toggle **Developer mode** on in the top-right corner.
+3. Click **Load unpacked** in the top-left corner.
+4. Select the `dist` directory in your project folder.
 
-4. Build for production:
+---
 
+## How It Works
+
+1. **Content Script**: [src/content/main.ts](file:///Users/malolan/Projects/skip-intro/src/content/main.ts) runs on all pages (`matches: ["https://*/*"]`).
+2. **Platform Registry**: When a page loads, the content script detects if the hostname matches any of the registered patterns in [src/common/platforms.ts](file:///Users/malolan/Projects/skip-intro/src/common/platforms.ts).
+3. **Event Listener**: If matched and enabled, the extension registers a keydown event listener. When the configured shortcut key is pressed, it queries the page for the platform's specific skip button selector and clicks it.
+4. **Popup UI**: Clicking the extension icon displays a popup showing the current page's compatibility and configuration.
+
+---
+
+## Production Build
+
+To compile and bundle the extension for release:
 ```bash
-npm run build
+bun run build
 ```
+This builds the extension into the `dist` directory and packages it into a production-ready ZIP file.
 
-## Project Structure
+---
 
-- `src/popup/` - Extension popup UI
-- `src/content/` - Content scripts
-- `manifest.config.ts` - Chrome extension manifest configuration
+## Code Quality
 
-## Chrome Extension Development Notes
-
-- Use `manifest.config.ts` to configure your extension
-- The CRXJS plugin automatically handles manifest generation
-- Content scripts should be placed in `src/content/`
-- Popup UI should be placed in `src/popup/`
-
-## Documentation
-
-- [Svelte Documentation](https://svelte.dev/)
-- [Vite Documentation](https://vitejs.dev/)
-- [CRXJS Documentation](https://crxjs.dev/vite-plugin)
+Check formatting and linting rules using Biome:
+```bash
+bun run check  # Run linter and formatter checks
+bun run fix    # Automatically fix linting and formatting issues
+```
