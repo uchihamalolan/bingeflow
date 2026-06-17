@@ -1,16 +1,8 @@
-import { PLATFORMS } from "./platforms";
-
-function detectConfig(hostname: string) {
-	return (
-		Object.values(PLATFORMS).find(
-			({ urlPattern, enabled }) => enabled && urlPattern.test(hostname),
-		) ?? null
-	);
-}
+import { detectConfig } from "../common/platforms";
 
 document.addEventListener("keydown", (e: KeyboardEvent) => {
-	if (e.key !== "s") return;
 	const config = detectConfig(window.location.hostname);
 	if (!config) return;
+	if (e.key !== config.shortcutKey) return;
 	document.querySelector<HTMLElement>(config.skipSelector)?.click();
 });
