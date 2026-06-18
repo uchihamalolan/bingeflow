@@ -1,7 +1,9 @@
-<script lang="ts"></script>
+<script lang="ts">
+import Spinner from "../../common/components/Spinner.svelte";
+</script>
 
 <div class="loading">
-	<div class="spinner"></div>
+	<Spinner size="medium" />
 </div>
 
 <style>
@@ -10,20 +12,5 @@
 	justify-content: center;
 	align-items: center;
 	padding: 28px;
-}
-
-.spinner {
-	width: 20px;
-	height: 20px;
-	border: 2px solid var(--surface0);
-	border-top-color: var(--mauve);
-	border-radius: 50%;
-	animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-	to {
-		transform: rotate(360deg);
-	}
 }
 </style>

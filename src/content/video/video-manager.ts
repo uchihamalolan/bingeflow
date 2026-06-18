@@ -1,6 +1,10 @@
-import type { PlatformConfig } from "../common/platforms";
-import type { VideoControlsConfig } from "../common/video-controls";
-import { createOverlay, type OverlayHandle, positionOverlay } from "./overlay";
+import type { PlatformConfig } from "../../common/platforms";
+import type { VideoControlsConfig } from "../../common/video-controls";
+import {
+	createOverlay,
+	type OverlayHandle,
+	positionOverlay,
+} from "../overlay/overlay";
 
 /**
  * Manages the lifecycle of the video-controls overlay for a single page.

@@ -1,0 +1,126 @@
+<script lang="ts">
+let {
+	theme,
+	ontoggle,
+}: {
+	theme: "frappe" | "latte";
+	ontoggle: () => void;
+} = $props();
+</script>
+
+<header class="header">
+	<div class="logo-area">
+		<span class="logo-icon">⏭</span>
+		<div>
+			<h1>Skip Intro</h1>
+			<p class="subtitle">
+				Customize video controls, speeds, and keyboard shortcuts
+			</p>
+		</div>
+	</div>
+
+	<button
+		type="button"
+		class="theme-toggle"
+		onclick={ontoggle}
+		aria-label="Toggle theme"
+	>
+		{#if theme === "frappe"}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="icon"
+			>
+				<title>Dark theme</title>
+				<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+			</svg>
+		{:else}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="icon"
+			>
+				<title>Light theme</title>
+				<circle cx="12" cy="12" r="4" />
+				<path d="M12 2v2" />
+				<path d="M12 20v2" />
+				<path d="m4.93 4.93 1.41 1.41" />
+				<path d="m17.66 17.66 1.41 1.41" />
+				<path d="M2 12h2" />
+				<path d="M20 12h2" />
+				<path d="m6.34 17.66-1.41 1.41" />
+				<path d="m19.07 4.93-1.41 1.41" />
+			</svg>
+		{/if}
+	</button>
+</header>
+
+<style>
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 16px;
+	border-bottom: 1px solid var(--surface0);
+}
+
+.logo-area {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.logo-icon {
+	font-size: 36px;
+	line-height: 1;
+}
+
+.header h1 {
+	font-size: 24px;
+	font-weight: 700;
+	margin: 0;
+	color: var(--text);
+}
+
+.subtitle {
+	font-size: 13px;
+	color: var(--subtext0);
+	margin: 4px 0 0 0;
+}
+
+.theme-toggle {
+	background: var(--surface0);
+	border: 1px solid var(--surface1);
+	color: var(--text);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition:
+		background-color 0.2s,
+		border-color 0.2s;
+}
+
+.theme-toggle:hover {
+	background: var(--surface1);
+	border-color: var(--surface2);
+}
+
+.theme-toggle .icon {
+	width: 20px;
+	height: 20px;
+}
+</style>

@@ -1,8 +1,8 @@
 import { detectConfig, getPlatformBehaviors } from "../common/platforms";
 import { loadSettings } from "../common/settings";
-import { isValidPress } from "./validpress";
-import { changeSpeed, seek } from "./video-actions";
-import { VideoManager } from "./video-manager";
+import { isValidPress } from "./utils/validpress";
+import { changeSpeed, seek } from "./video/video-actions";
+import { VideoManager } from "./video/video-manager";
 
 // Bootstrap asynchronously so we can await settings from storage
 (async () => {

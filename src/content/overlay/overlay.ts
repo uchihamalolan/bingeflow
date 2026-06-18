@@ -1,6 +1,6 @@
-import type { VideoControlsConfig } from "../common/video-controls";
+import type { VideoControlsConfig } from "../../common/video-controls";
+import { changeSpeed, seek } from "../video/video-actions";
 import OVERLAY_CSS from "./overlay.css?inline";
-import { changeSpeed, seek } from "./video-actions";
 
 // ── Public API ──────────────────────────────────────────────────────────────
 
