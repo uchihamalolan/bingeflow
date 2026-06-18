@@ -53,6 +53,11 @@ export class VideoManager {
 		this.unmount();
 	}
 
+	/** Toggles the visibility of the overlay if it is mounted. */
+	toggleOverlay(): void {
+		this.overlayHandle?.toggle();
+	}
+
 	// ── Private ────────────────────────────────────────────────────────────────
 
 	private onMutation(records: MutationRecord[]): void {

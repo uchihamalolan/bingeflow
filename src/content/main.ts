@@ -30,6 +30,10 @@ import { VideoManager } from "./video-manager";
 
 		// If a key conflicts with a platform shortcut, we yield to the platform action.
 		if (video !== null && !platformShortcuts.has(e.key)) {
+			if (e.key.toLowerCase() === "v") {
+				videoManager.toggleOverlay();
+				return;
+			}
 			if (e.key === keyBindings.seekBack) {
 				seek(video, -seekSeconds);
 				return;

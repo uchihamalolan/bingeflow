@@ -24,6 +24,7 @@
 	font-family: system-ui, -apple-system, sans-serif;
 	opacity: 1;
 	transition: opacity 0.3s ease;
+	width: max-content;
 }
 
 .si-overlay.si-hidden {

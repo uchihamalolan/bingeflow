@@ -9,6 +9,8 @@ export type OverlayHandle = {
 	root: HTMLElement;
 	/** Programmatically show or hide the overlay (opacity-based, no DOM removal). */
 	setHidden: (hidden: boolean) => void;
+	/** Toggle the visibility of the overlay. */
+	toggle: () => void;
 	/** Remove the overlay from the DOM and clean up all event listeners. */
 	remove: () => void;
 };
@@ -78,57 +80,45 @@ export function createOverlay(
 	}
 	video.addEventListener("ratechange", onRateChange);
 
-	// ── Auto-hide ─────────────────────────────────────────────────────────────
-	let hideTimer: ReturnType<typeof setTimeout> | null = null;
+	// ── Visibility State & Listeners ──────────────────────────────────────────
+	const mouseTarget = getPlayerContainer(video);
+	let isHidden = config.startHidden;
 
 	function showOverlay(): void {
 		overlay.classList.remove("si-hidden");
-		if (hideTimer !== null) {
-			clearTimeout(hideTimer);
-			hideTimer = null;
-		}
 	}
 
-	function scheduleHide(): void {
-		if (hideTimer !== null) clearTimeout(hideTimer);
-		hideTimer = setTimeout(() => {
-			overlay.classList.add("si-hidden");
-			hideTimer = null;
-		}, 2000);
+	function hideOverlay(): void {
+		overlay.classList.add("si-hidden");
 	}
 
-	function onMouseEnter(): void {
+	// Initial visibility
+	if (isHidden) {
+		hideOverlay();
+	} else {
 		showOverlay();
 	}
 
-	function onMouseLeave(): void {
-		scheduleHide();
-	}
-
-	video.addEventListener("mouseenter", onMouseEnter);
-	video.addEventListener("mouseleave", onMouseLeave);
-
-	// Initial visibility
-	if (config.startHidden) {
-		overlay.classList.add("si-hidden");
-	} else {
-		scheduleHide(); // auto-hide after 2s on first mount
-	}
-
 	// ── Mount ─────────────────────────────────────────────────────────────────
-	video.parentElement?.appendChild(host);
+	mouseTarget.appendChild(host);
 
 	// ── Handle ────────────────────────────────────────────────────────────────
 	return {
 		root: host,
 
 		setHidden(hidden: boolean): void {
+			isHidden = hidden;
 			if (hidden) {
-				overlay.classList.add("si-hidden");
-				if (hideTimer !== null) {
-					clearTimeout(hideTimer);
-					hideTimer = null;
-				}
+				hideOverlay();
+			} else {
+				showOverlay();
+			}
+		},
+
+		toggle(): void {
+			isHidden = !isHidden;
+			if (isHidden) {
+				hideOverlay();
 			} else {
 				showOverlay();
 			}
@@ -136,15 +126,26 @@ export function createOverlay(
 
 		remove(): void {
 			video.removeEventListener("ratechange", onRateChange);
-			video.removeEventListener("mouseenter", onMouseEnter);
-			video.removeEventListener("mouseleave", onMouseLeave);
-			if (hideTimer !== null) {
-				clearTimeout(hideTimer);
-				hideTimer = null;
-			}
 			host.remove();
 		},
 	};
+}
+
+/**
+ * Helper to resolve the best container element for mounting the overlay.
+ * On most streaming platforms, the video grandparent is the actual player
+ * container that holds the video element and the controls overlays.
+ */
+function getPlayerContainer(video: HTMLVideoElement): HTMLElement {
+	const parent = video.parentElement;
+	if (!parent) return video;
+
+	const grandparent = parent.parentElement;
+	if (!grandparent || grandparent === document.body) {
+		return parent;
+	}
+
+	return grandparent;
 }
 
 /**
@@ -156,20 +157,23 @@ export function positionOverlay(
 	host: HTMLElement,
 	video: HTMLVideoElement,
 ): void {
-	const parent = video.parentElement;
-	if (parent) {
-		const parentPos = getComputedStyle(parent).position;
-		if (parentPos === "static") {
-			parent.style.position = "relative";
-		}
+	const container = host.parentElement ?? getPlayerContainer(video);
+	const containerPos = getComputedStyle(container).position;
+	if (containerPos === "static") {
+		container.style.position = "relative";
 	}
 
-	host.style.position = "absolute";
-	host.style.bottom = "16px";
-	host.style.left = "50%";
-	host.style.transform = "translateX(-50%)";
-	host.style.zIndex = "2147483647";
-	host.style.pointerEvents = "none";
+	host.style.setProperty("position", "absolute", "important");
+	host.style.setProperty("top", "16px", "important");
+	host.style.setProperty("left", "16px", "important");
+	host.style.setProperty("bottom", "auto", "important");
+	host.style.setProperty("transform", "none", "important");
+	host.style.setProperty("z-index", "2147483647", "important");
+	host.style.setProperty("pointer-events", "none", "important");
+	host.style.setProperty("width", "max-content", "important");
+	host.style.setProperty("display", "block", "important");
+	host.style.setProperty("align-self", "flex-start", "important");
+	host.style.setProperty("justify-self", "start", "important");
 }
 
 // ── Private helpers ──────────────────────────────────────────────────────────
