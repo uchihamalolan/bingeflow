@@ -1,0 +1,91 @@
+/* Reset scoped to the shadow root */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+/* ── Overlay container ─────────────────────────────────────── */
+.si-overlay {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 10px;
+	background: rgba(41, 44, 60, 0.88); /* Frappé mantle */
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	border: 1px solid rgba(198, 208, 245, 0.1); /* Frappé text @ 10% */
+	border-radius: 12px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+	pointer-events: auto;
+	user-select: none;
+	font-family: system-ui, -apple-system, sans-serif;
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}
+
+.si-overlay.si-hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.si-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	height: 28px;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	color: #c6d0f5; /* Frappé text */
+	background: rgba(65, 69, 89, 0.6); /* Frappé surface0 */
+	border: 1px solid rgba(198, 208, 245, 0.12);
+	border-radius: 8px;
+	cursor: pointer;
+	white-space: nowrap;
+	transition:
+		background 0.15s ease,
+		transform 0.15s ease,
+		box-shadow 0.15s ease;
+}
+
+.si-btn:hover {
+	background: rgba(81, 87, 109, 0.8); /* Frappé surface1 */
+	border-color: rgba(198, 208, 245, 0.2);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.si-btn:active,
+.si-btn.si-active {
+	transform: scale(0.91);
+	background: rgba(98, 104, 128, 0.9); /* Frappé surface2 */
+	box-shadow: 0 0 0 2px rgba(202, 158, 230, 0.4); /* mauve ring */
+}
+
+/* Speed buttons — Frappé mauve accent */
+.si-btn.si-speed-btn {
+	color: #ca9ee6; /* Frappé mauve */
+	border-color: rgba(202, 158, 230, 0.2);
+}
+
+.si-btn.si-speed-btn:active,
+.si-btn.si-speed-btn.si-active {
+	background: rgba(202, 158, 230, 0.15);
+	box-shadow: 0 0 0 2px rgba(202, 158, 230, 0.45);
+}
+
+/* ── Speed badge ───────────────────────────────────────────── */
+.si-speed {
+	font-size: 11px;
+	font-weight: 600;
+	color: #a5adce; /* Frappé subtext0 */
+	padding: 0 4px;
+	min-width: 38px;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+}
