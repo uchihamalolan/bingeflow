@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { BehaviorConfig } from "../../common/platforms";
+import type { BehaviorConfig } from "../../common/behaviors";
 
 let { behavior }: { behavior: BehaviorConfig } = $props();
 </script>

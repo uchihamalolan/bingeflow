@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PlatformConfig } from "../../common/platforms";
+import { getPlatformBehaviors, type PlatformConfig } from "../../common/platforms";
 import BehaviorCard from "../components/BehaviorCard.svelte";
 
 let { config }: { config: PlatformConfig } = $props();
@@ -11,7 +11,7 @@ let { config }: { config: PlatformConfig } = $props();
 		<span class="value">{config.label}</span>
 	</div>
 
-	{#each config.behaviors as behavior (behavior.type)}
+	{#each getPlatformBehaviors(config) as behavior (behavior.type)}
 		<BehaviorCard {behavior} />
 	{/each}
 </div>
