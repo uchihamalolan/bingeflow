@@ -1,26 +1,10 @@
+import type { BehaviorConfig } from "./behaviors";
+
 export type StreamingPlatform = "amazon_prime" | "netflix" | "hotstar";
 
-export type BehaviorType = "skip" | "next";
-
-export type BehaviorConfig = {
-	/** Unique identifier for the behavior */
-	type: BehaviorType;
-	/** Human-readable display name of the behavior */
-	label: string;
-	/** Passed to document.querySelector() on keypress */
-	selector: string;
-	/** Key that triggers the behavior (matched against KeyboardEvent.key) */
-	shortcutKey: string;
-	/** When false, the keydown listener ignores this behavior */
-	enabled: boolean;
-};
-
 export type PlatformConfig = {
-	/** Human-readable display name */
 	label: string;
-	/** Tested against window.location.hostname */
 	urlPattern: RegExp;
-	/** Array of behaviors supported by this platform */
 	behaviors: BehaviorConfig[];
 };
 
