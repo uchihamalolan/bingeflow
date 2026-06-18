@@ -38,6 +38,11 @@ export function createOverlay(
 	const overlay = document.createElement("div");
 	overlay.className = "si-overlay";
 
+	const dragHandle = document.createElement("span");
+	dragHandle.className = "si-drag-handle";
+	dragHandle.textContent = "\u22ee\u22ee"; // ⋮⋮ vertical grab dots
+	dragHandle.setAttribute("title", "Drag to reposition");
+
 	const speedDownBtn = createButton(`\u22120.25\u00d7`, "si-speed-btn");
 	const seekBackBtn = createButton(`\u2212${config.seekSeconds}s`, "");
 	const speedBadge = document.createElement("span");
@@ -48,6 +53,7 @@ export function createOverlay(
 	const resetSpeedBtn = createButton("1\u00d7", "si-speed-btn");
 
 	overlay.append(
+		dragHandle,
 		speedDownBtn,
 		seekBackBtn,
 		speedBadge,

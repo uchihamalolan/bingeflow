@@ -90,3 +90,19 @@
 	text-align: center;
 	font-variant-numeric: tabular-nums;
 }
+
+/* Drag handle style */
+.si-drag-handle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: #a5adce; /* subtext0 */
+	cursor: grab;
+	padding: 0 4px 0 2px;
+	font-size: 14px;
+	font-weight: bold;
+	user-select: none;
+}
+.si-drag-handle:active {
+	cursor: grabbing;
+}
