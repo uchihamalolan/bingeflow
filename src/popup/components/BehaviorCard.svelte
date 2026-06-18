@@ -25,8 +25,8 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 
 <style>
 .behavior-card {
-	background: rgba(255, 255, 255, 0.02);
-	border: 1px solid rgba(255, 255, 255, 0.05);
+	background: var(--surface0);
+	border: 1px solid var(--surface1);
 	border-radius: 8px;
 	margin: 8px 14px;
 	padding: 12px;
@@ -34,8 +34,8 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 }
 
 .behavior-card:hover {
-	background: rgba(255, 255, 255, 0.04);
-	border-color: rgba(255, 255, 255, 0.08);
+	background: var(--surface1);
+	border-color: var(--surface2);
 }
 
 .card-row {
@@ -51,13 +51,13 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 .behavior-title {
 	font-size: 13px;
 	font-weight: 600;
-	color: #e8e8f0;
+	color: var(--text);
 }
 
 .detail-label {
 	font-size: 11px;
 	font-weight: 500;
-	color: #7c7c9a;
+	color: var(--subtext0);
 }
 
 .badge {
@@ -69,15 +69,15 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 }
 
 .badge-on {
-	background: rgba(52, 211, 153, 0.12);
-	color: #34d399;
-	border: 1px solid rgba(52, 211, 153, 0.2);
+	background: rgba(166, 209, 137, 0.12);
+	color: var(--green);
+	border: 1px solid rgba(166, 209, 137, 0.2);
 }
 
 .badge-off {
-	background: rgba(248, 113, 113, 0.1);
-	color: #f87171;
-	border: 1px solid rgba(248, 113, 113, 0.15);
+	background: rgba(231, 130, 132, 0.12);
+	color: var(--red);
+	border: 1px solid rgba(231, 130, 132, 0.2);
 }
 
 .shortcut-wrap {
@@ -95,9 +95,9 @@ kbd {
 	font-family: inherit;
 	font-size: 11px;
 	font-weight: 700;
-	color: #c4b5fd;
-	background: rgba(139, 92, 246, 0.1);
-	border: 1px solid rgba(139, 92, 246, 0.25);
+	color: var(--mauve);
+	background: rgba(202, 158, 230, 0.1);
+	border: 1px solid rgba(202, 158, 230, 0.25);
 	border-bottom-width: 2px;
 	border-radius: 4px;
 }

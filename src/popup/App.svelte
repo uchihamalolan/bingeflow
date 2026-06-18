@@ -14,6 +14,10 @@ type State =
 let state = $state<State>({ kind: "loading" });
 
 onMount(async () => {
+	const storedTheme = await chrome.storage.local.get("skip-intro.theme");
+	const theme = storedTheme["skip-intro.theme"] === "latte" ? "latte" : "frappe";
+	document.documentElement.setAttribute("data-theme", theme);
+
 	const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 	const hostname = tab.url ? new URL(tab.url).hostname : "";
 	const config = detectConfig(hostname);
@@ -44,13 +48,15 @@ onMount(async () => {
 }
 
 :global(body) {
-	background: #0f0f13;
+	background: var(--base);
+	color: var(--text);
 	width: 280px;
+	transition: background-color 0.2s, color 0.2s;
 }
 
 .popup {
-	background: #0f0f13;
-	color: #e8e8f0;
+	background: var(--base);
+	color: var(--text);
 	width: 280px;
 	overflow: hidden;
 	border-radius: 12px;
@@ -61,8 +67,8 @@ header {
 	align-items: center;
 	gap: 8px;
 	padding: 16px 18px 14px;
-	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	background: var(--mantle);
+	border-bottom: 1px solid var(--surface0);
 }
 
 .icon {
@@ -74,6 +80,6 @@ header {
 	font-size: 15px;
 	font-weight: 600;
 	letter-spacing: 0.01em;
-	color: #f0f0fa;
+	color: var(--text);
 }
 </style>

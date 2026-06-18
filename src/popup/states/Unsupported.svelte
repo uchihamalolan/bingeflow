@@ -22,7 +22,7 @@
 
 p {
 	font-size: 13px;
-	color: #7c7c9a;
+	color: var(--subtext0);
 	line-height: 1.6;
 }
 </style>

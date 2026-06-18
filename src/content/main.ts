@@ -12,13 +12,24 @@ import { VideoManager } from "./video-manager";
 
 	const { keyBindings, seekSeconds, speedStep } = settings.videoControls;
 
+	// Pre-compute active platform shortcuts to handle conflicts
+	const platformShortcuts = new Set<string>();
+	if (platformConfig !== null) {
+		for (const behavior of getPlatformBehaviors(platformConfig)) {
+			if (behavior.enabled) {
+				platformShortcuts.add(behavior.shortcutKey);
+			}
+		}
+	}
+
 	document.addEventListener("keydown", (e: KeyboardEvent) => {
 		if (!isValidPress(e)) return;
 
 		// ── Video-control shortcuts ─────────────────────────────────────────────
 		const video = videoManager.getVideo();
 
-		if (video !== null) {
+		// If a key conflicts with a platform shortcut, we yield to the platform action.
+		if (video !== null && !platformShortcuts.has(e.key)) {
 			if (e.key === keyBindings.seekBack) {
 				seek(video, -seekSeconds);
 				return;
@@ -31,15 +42,10 @@ import { VideoManager } from "./video-manager";
 				changeSpeed(video, -speedStep);
 				return;
 			}
-			// Speed-up yields to platform behaviors when on a recognised
-			// streaming platform, in case the user has bound speedUp to a key
-			// that also triggers a platform action (e.g. skip-intro).
-			if (e.key === keyBindings.speedUp && platformConfig === null) {
+			if (e.key === keyBindings.speedUp) {
 				changeSpeed(video, speedStep);
 				return;
 			}
-			// If we are on a streaming platform and the key is speedUp, fall
-			// through to the platform-behavior handler below.
 		}
 
 		// ── Platform-behavior shortcuts (skip-intro, next-episode, …) ──────────
