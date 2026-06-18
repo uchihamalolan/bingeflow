@@ -50,6 +50,10 @@ import { VideoManager } from "./video/video-manager";
 				changeSpeed(video, speedStep);
 				return;
 			}
+			if (e.key === keyBindings.resetSpeed) {
+				video.playbackRate = 1.0;
+				return;
+			}
 		}
 
 		// ── Platform-behavior shortcuts (skip-intro, next-episode, …) ──────────

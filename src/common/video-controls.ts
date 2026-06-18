@@ -17,6 +17,12 @@ export type VideoControlsConfig = {
 		speedDown: string;
 		/** Default: "w" */
 		speedUp: string;
+		/** Default: "r" */
+		resetSpeed: string;
+	};
+	position?: {
+		x: number; // percentage from left
+		y: number; // percentage from top
 	};
 };
 
@@ -25,5 +31,11 @@ export const DEFAULT_VIDEO_CONTROLS: VideoControlsConfig = {
 	seekSeconds: 5,
 	speedStep: 0.25,
 	startHidden: false,
-	keyBindings: { seekBack: "z", seekFwd: "x", speedDown: "q", speedUp: "w" },
+	keyBindings: {
+		seekBack: "z",
+		seekFwd: "x",
+		speedDown: "q",
+		speedUp: "w",
+		resetSpeed: "r",
+	},
 };

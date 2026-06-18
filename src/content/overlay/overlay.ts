@@ -45,8 +45,16 @@ export function createOverlay(
 	speedBadge.textContent = formatRate(video.playbackRate);
 	const seekFwdBtn = createButton(`+${config.seekSeconds}s`, "");
 	const speedUpBtn = createButton(`+0.25\u00d7`, "si-speed-btn");
+	const resetSpeedBtn = createButton("1\u00d7", "si-speed-btn");
 
-	overlay.append(speedDownBtn, seekBackBtn, speedBadge, seekFwdBtn, speedUpBtn);
+	overlay.append(
+		speedDownBtn,
+		seekBackBtn,
+		speedBadge,
+		seekFwdBtn,
+		speedUpBtn,
+		resetSpeedBtn,
+	);
 	shadow.appendChild(overlay);
 
 	// ── Seek / speed helpers (imported from video-actions) ───────────────────
@@ -72,6 +80,10 @@ export function createOverlay(
 	speedUpBtn.addEventListener("click", () => {
 		changeSpeed(video, config.speedStep);
 		flash(speedUpBtn);
+	});
+	resetSpeedBtn.addEventListener("click", () => {
+		video.playbackRate = 1.0;
+		flash(resetSpeedBtn);
 	});
 
 	// ── Speed badge — live update ─────────────────────────────────────────────

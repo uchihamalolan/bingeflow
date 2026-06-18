@@ -203,6 +203,43 @@ function formatKey(key: string): string {
 			</button>
 		</div>
 	</div>
+
+	<div class="shortcut-row">
+		<span class="shortcut-label">Reset Speed</span>
+		<div class="shortcut-actions">
+			<button
+				type="button"
+				class="kbd-btn"
+				class:active={activeRebindKey === "resetSpeed"}
+				disabled={!videoControls.enabled}
+				onclick={() => startRebind("resetSpeed")}
+			>
+				{activeRebindKey === "resetSpeed" ? "Press key..." : formatKey(videoControls.keyBindings.resetSpeed)}
+			</button>
+			<button
+				type="button"
+				class="reset-btn"
+				disabled={!videoControls.enabled || videoControls.keyBindings.resetSpeed === DEFAULT_VIDEO_CONTROLS.keyBindings.resetSpeed}
+				onclick={() => resetKey("resetSpeed")}
+				title="Reset to default"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="icon"
+				>
+					<title>Reset to default</title>
+					<path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+					<path d="M3 3v5h5" />
+				</svg>
+			</button>
+		</div>
+	</div>
 </section>
 
 <style>
