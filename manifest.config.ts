@@ -18,13 +18,14 @@ export default defineManifest({
 		},
 		default_popup: "src/popup/index.html",
 	},
+	options_page: "src/options/index.html",
 	content_scripts: [
 		{
 			js: ["src/content/main.ts"],
 			matches: ["https://*/*"],
 		},
 	],
-	permissions: ["tabs"],
+	permissions: ["tabs", "storage"],
 	browser_specific_settings: {
 		gecko: {
 			id: "skip-intro@malolan.net",
