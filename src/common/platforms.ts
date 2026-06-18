@@ -19,7 +19,7 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 	amazon_prime: {
 		label: "Amazon Prime Video",
 		urlPattern: /primevideo\.com/,
-		videoSelector: ".webPlayerElement video",
+		videoSelector: "#dv-web-player video",
 		behaviors: {
 			skip: {
 				selector:
