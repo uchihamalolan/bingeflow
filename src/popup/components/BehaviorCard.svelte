@@ -35,21 +35,21 @@ let { behavior }: Props = $props();
 	margin: var(--size-2) var(--size-3);
 	padding: var(--size-3);
 	transition: all var(--duration-2) var(--ease-2);
-}
 
-.behavior-card:hover {
-	background: var(--surface1);
-	border-color: var(--surface2);
+	&:hover {
+		background: var(--surface1);
+		border-color: var(--surface2);
+	}
 }
 
 .card-row {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
 
-.card-row:not(:last-child) {
-	margin-bottom: var(--size-2);
+	&:not(:last-child) {
+		margin-bottom: var(--size-2);
+	}
 }
 
 .behavior-title {
@@ -86,22 +86,22 @@ let { behavior }: Props = $props();
 .shortcut-wrap {
 	display: flex;
 	align-items: center;
-}
 
-kbd {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: var(--size-6);
-	height: var(--size-6);
-	padding: 0 var(--size-1);
-	font-family: inherit;
-	font-size: var(--font-size-00);
-	font-weight: 700;
-	color: var(--mauve);
-	background: rgba(202, 158, 230, 0.1);
-	border: var(--border-size-1) solid rgba(202, 158, 230, 0.25);
-	border-bottom-width: var(--border-size-2);
-	border-radius: var(--radius-1);
+	kbd {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: var(--size-6);
+		height: var(--size-6);
+		padding: 0 var(--size-1);
+		font-family: inherit;
+		font-size: var(--font-size-00);
+		font-weight: 700;
+		color: var(--mauve);
+		background: rgba(202, 158, 230, 0.1);
+		border: var(--border-size-1) solid rgba(202, 158, 230, 0.25);
+		border-bottom-width: var(--border-size-2);
+		border-radius: var(--radius-1);
+	}
 }
 </style>

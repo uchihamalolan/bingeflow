@@ -74,6 +74,12 @@ let {
 	justify-content: space-between;
 	padding-bottom: var(--size-4);
 	border-bottom: var(--border-size-1) solid var(--surface0);
+
+	h1 {
+		font-size: var(--font-size-4);
+		font-weight: var(--font-weight-7);
+		margin: 0;
+	}
 }
 
 .logo-area {
@@ -85,12 +91,6 @@ let {
 .logo-icon {
 	font-size: var(--font-size-5);
 	line-height: 1;
-}
-
-.header h1 {
-	font-size: var(--font-size-4);
-	font-weight: var(--font-weight-7);
-	margin: 0;
 }
 
 .subtitle {
@@ -113,15 +113,15 @@ let {
 	transition:
 		background-color var(--duration-2) var(--ease-2),
 		border-color var(--duration-2) var(--ease-2);
-}
 
-.theme-toggle:hover {
-	background: var(--surface1);
-	border-color: var(--surface2);
-}
+	&:hover {
+		background: var(--surface1);
+		border-color: var(--surface2);
+	}
 
-.theme-toggle .icon {
-	width: 20px;
-	height: 20px;
+	.icon {
+		width: 20px;
+		height: 20px;
+	}
 }
 </style>

@@ -255,13 +255,13 @@ function formatKey(key: string): string {
 	gap: var(--size-5);
 	box-shadow: var(--shadow-2);
 	transition: opacity var(--duration-2) var(--ease-2);
-}
 
-.section h2 {
-	font-size: var(--font-size-2);
-	font-weight: var(--font-weight-6);
-	margin: 0;
-	color: var(--mauve);
+	h2 {
+		font-size: var(--font-size-2);
+		font-weight: var(--font-weight-6);
+		margin: 0;
+		color: var(--mauve);
+	}
 }
 
 .shortcut-row {
@@ -270,10 +270,10 @@ function formatKey(key: string): string {
 	justify-content: space-between;
 	padding: var(--size-2) 0;
 	border-bottom: var(--border-size-1) solid var(--surface0);
-}
 
-.shortcut-row:last-of-type {
-	border-bottom: none;
+	&:last-of-type {
+		border-bottom: none;
+	}
 }
 
 .shortcut-label {
@@ -301,19 +301,19 @@ function formatKey(key: string): string {
 	text-align: center;
 	transition: all var(--duration-2) var(--ease-2);
 	border-bottom-width: var(--border-size-2);
-}
 
-.kbd-btn:hover:not(:disabled) {
-	background: var(--surface1);
-	border-color: var(--surface2);
-	color: var(--text);
-}
+	&:hover:not(:disabled) {
+		background: var(--surface1);
+		border-color: var(--surface2);
+		color: var(--text);
+	}
 
-.kbd-btn.active {
-	background: rgba(202, 158, 230, 0.1);
-	border-color: var(--mauve);
-	color: var(--mauve);
-	animation: pulse 1.5s infinite;
+	&.active {
+		background: rgba(202, 158, 230, 0.1);
+		border-color: var(--mauve);
+		color: var(--mauve);
+		animation: pulse 1.5s infinite;
+	}
 }
 
 .reset-btn {
@@ -328,22 +328,22 @@ function formatKey(key: string): string {
 	justify-content: center;
 	cursor: pointer;
 	transition: all var(--duration-2) var(--ease-2);
-}
 
-.reset-btn:hover:not(:disabled) {
-	background: var(--surface0);
-	border-color: var(--surface1);
-	color: var(--red);
-}
+	&:hover:not(:disabled) {
+		background: var(--surface0);
+		border-color: var(--surface1);
+		color: var(--red);
+	}
 
-.reset-btn:disabled {
-	opacity: 0.3;
-	cursor: not-allowed;
-}
+	&:disabled {
+		opacity: 0.3;
+		cursor: not-allowed;
+	}
 
-.reset-btn .icon {
-	width: 16px;
-	height: 16px;
+	.icon {
+		width: 16px;
+		height: 16px;
+	}
 }
 
 @keyframes pulse {

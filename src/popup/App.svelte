@@ -82,23 +82,23 @@ header {
 	padding: var(--size-3) var(--size-4);
 	background: var(--mantle);
 	border-bottom: var(--border-size-1) solid var(--surface0);
-}
 
-.logo-area {
-	display: flex;
-	align-items: center;
-	gap: var(--size-2);
-}
+	.logo-area {
+		display: flex;
+		align-items: center;
+		gap: var(--size-2);
 
-.icon {
-	font-size: var(--font-size-2);
-	line-height: 1;
-}
+		.icon {
+			font-size: var(--font-size-2);
+			line-height: 1;
+		}
 
-.title {
-	font-size: var(--font-size-1);
-	font-weight: var(--font-weight-6);
-	letter-spacing: 0.01em;
+		.title {
+			font-size: var(--font-size-1);
+			font-weight: var(--font-weight-6);
+			letter-spacing: 0.01em;
+		}
+	}
 }
 
 .settings-btn {
@@ -114,15 +114,15 @@ header {
 	transition:
 		background-color var(--duration-2) var(--ease-2),
 		color var(--duration-2) var(--ease-2);
-}
 
-.settings-btn:hover {
-	background: var(--surface0);
-	color: var(--text);
-}
+	&:hover {
+		background: var(--surface0);
+		color: var(--text);
+	}
 
-.settings-icon {
-	width: var(--size-4);
-	height: var(--size-4);
+	.settings-icon {
+		width: var(--size-4);
+		height: var(--size-4);
+	}
 }
 </style>

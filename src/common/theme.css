@@ -1,10 +1,29 @@
-@import "open-props/normalize";
-
-@import "open-props/colors";
 @import "open-props/sizes";
-@import "open-props/shadows";
-@import "open-props/easings";
 @import "open-props/fonts";
+
+/* Reset and Baseline Styles */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:where(html) {
+	background-color: var(--base);
+	color: var(--text);
+	font-family: var(--font-sans);
+}
+
+:where(a) {
+	color: var(--blue);
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
 
 :root {
 	--base: #303446;
@@ -21,6 +40,18 @@
 	--green: #a6d189;
 	--red: #e78284;
 	--peach: #ef9f76;
+
+	/* Core Animations */
+	--duration-2: 200ms;
+	--duration-3: 250ms;
+	--ease-2: cubic-bezier(0.25, 0, 0.4, 1);
+	--ease-out-3: cubic-bezier(0, 0, 0.3, 1);
+
+	/* Core Shadows */
+	--shadow-2:
+		0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+	--shadow-3:
+		0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
 :root[data-theme="frappe"] {
@@ -55,16 +86,4 @@
 	--green: #40a02b;
 	--red: #d20f39;
 	--peach: #fe640b;
-}
-
-:root {
-	/* Semantic mappings for Open Props Normalize */
-	--text-1: var(--text);
-	--text-2: var(--subtext0);
-	--surface-1: var(--base);
-	--surface-2: var(--mantle);
-	--surface-3: var(--surface0);
-	--surface-4: var(--surface1);
-	--link: var(--blue);
-	--link-visited: var(--mauve);
 }

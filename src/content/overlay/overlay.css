@@ -82,11 +82,11 @@
 	opacity: 1;
 	transition: opacity var(--duration-2) var(--ease-2);
 	width: max-content;
-}
 
-.si-overlay.si-hidden {
-	opacity: 0;
-	pointer-events: none;
+	&.si-hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
 }
 
 /* ── Buttons ───────────────────────────────────────────────── */
@@ -107,31 +107,31 @@
 		background var(--duration-2) var(--ease-2),
 		transform var(--duration-2) var(--ease-2),
 		box-shadow var(--duration-2) var(--ease-2);
-}
 
-.si-btn:hover {
-	background: var(--color-btn-hover);
-	border-color: var(--color-border-hover);
-	box-shadow: var(--shadow-1);
-}
+	&:hover {
+		background: var(--color-btn-hover);
+		border-color: var(--color-border-hover);
+		box-shadow: var(--shadow-1);
+	}
 
-.si-btn:active,
-.si-btn.si-active {
-	transform: scale(var(--active-scale));
-	background: var(--color-btn-active);
-	box-shadow: 0 0 0 var(--border-size-2) var(--color-ring);
-}
+	&:active,
+	&.si-active {
+		transform: scale(var(--active-scale));
+		background: var(--color-btn-active);
+		box-shadow: 0 0 0 var(--border-size-2) var(--color-ring);
+	}
 
-/* Speed buttons — accent theme */
-.si-btn.si-speed-btn {
-	color: var(--color-accent);
-	border-color: var(--color-accent-border);
-}
+	/* Speed buttons — accent theme */
+	&.si-speed-btn {
+		color: var(--color-accent);
+		border-color: var(--color-accent-border);
 
-.si-btn.si-speed-btn:active,
-.si-btn.si-speed-btn.si-active {
-	background: var(--color-accent-active);
-	box-shadow: 0 0 0 var(--border-size-2) var(--color-ring-speed);
+		&:active,
+		&.si-active {
+			background: var(--color-accent-active);
+			box-shadow: 0 0 0 var(--border-size-2) var(--color-ring-speed);
+		}
+	}
 }
 
 /* ── Speed badge ───────────────────────────────────────────── */
@@ -152,7 +152,8 @@
 	font-size: var(--font-size-0);
 	font-weight: var(--font-weight-7);
 	user-select: none;
-}
-.si-drag-handle:active {
-	cursor: grabbing;
+
+	&:active {
+		cursor: grabbing;
+	}
 }
