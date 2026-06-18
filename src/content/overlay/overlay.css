@@ -13,10 +13,9 @@
 	align-items: center;
 	gap: 6px;
 	padding: 6px 10px;
-	background: rgba(41, 44, 60, 0.88); /* Frappé mantle */
-	backdrop-filter: blur(14px);
-	-webkit-backdrop-filter: blur(14px);
-	border: 1px solid rgba(198, 208, 245, 0.1); /* Frappé text @ 10% */
+	background: rgba(41, 44, 60, 0.8); /* More transparent Frappé mantle */
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(198, 208, 245, 0.08); /* More transparent border */
 	border-radius: 12px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 	pointer-events: auto;
@@ -37,15 +36,15 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 10px;
+	width: 28px;
 	height: 28px;
 	font-family: inherit;
 	font-size: 12px;
 	font-weight: 600;
 	letter-spacing: 0.01em;
 	color: #c6d0f5; /* Frappé text */
-	background: rgba(65, 69, 89, 0.6); /* Frappé surface0 */
-	border: 1px solid rgba(198, 208, 245, 0.12);
+	background: rgba(65, 69, 89, 0.45); /* More transparent surface0 */
+	border: 1px solid rgba(198, 208, 245, 0.08);
 	border-radius: 8px;
 	cursor: pointer;
 	white-space: nowrap;
@@ -56,8 +55,8 @@
 }
 
 .si-btn:hover {
-	background: rgba(81, 87, 109, 0.8); /* Frappé surface1 */
-	border-color: rgba(198, 208, 245, 0.2);
+	background: rgba(98, 104, 128, 0.65); /* More visible on hover */
+	border-color: rgba(198, 208, 245, 0.15);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 

@@ -19,15 +19,7 @@ let {
 </script>
 
 <div class="number-input-wrapper">
-	<input
-		type="number"
-		bind:value={value}
-		{disabled}
-		{min}
-		{max}
-		{step}
-		{onchange}
-	>
+	<input type="number" bind:value {disabled} {min} {max} {step} {onchange}>
 	{#if unit}
 		<span class="unit">{unit}</span>
 	{/if}

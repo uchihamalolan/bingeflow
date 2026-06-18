@@ -44,22 +44,32 @@ export function createOverlay(
 	dragHandle.textContent = "\u22ee\u22ee"; // ⋮⋮ vertical grab dots
 	dragHandle.setAttribute("title", "Drag to reposition");
 
-	const speedDownBtn = createButton(`\u22120.25\u00d7`, "si-speed-btn");
-	const seekBackBtn = createButton(`\u2212${config.seekSeconds}s`, "");
 	const speedBadge = document.createElement("span");
 	speedBadge.className = "si-speed";
 	speedBadge.textContent = formatRate(video.playbackRate);
-	const seekFwdBtn = createButton(`+${config.seekSeconds}s`, "");
-	const speedUpBtn = createButton(`+0.25\u00d7`, "si-speed-btn");
-	const resetSpeedBtn = createButton("1\u00d7", "si-speed-btn");
+
+	const seekBackBtn = createButton("\u00ab", "");
+	seekBackBtn.setAttribute("title", `Seek back ${config.seekSeconds}s`);
+
+	const speedDownBtn = createButton("\u2212", "si-speed-btn");
+	speedDownBtn.setAttribute("title", `Decrease speed by ${config.speedStep}`);
+
+	const speedUpBtn = createButton("+", "si-speed-btn");
+	speedUpBtn.setAttribute("title", `Increase speed by ${config.speedStep}`);
+
+	const seekFwdBtn = createButton("\u00bb", "");
+	seekFwdBtn.setAttribute("title", `Seek forward ${config.seekSeconds}s`);
+
+	const resetSpeedBtn = createButton("x", "si-speed-btn");
+	resetSpeedBtn.setAttribute("title", "Reset speed to 1.0");
 
 	overlay.append(
 		dragHandle,
-		speedDownBtn,
-		seekBackBtn,
 		speedBadge,
-		seekFwdBtn,
+		seekBackBtn,
+		speedDownBtn,
 		speedUpBtn,
+		seekFwdBtn,
 		resetSpeedBtn,
 	);
 	shadow.appendChild(overlay);
@@ -299,5 +309,5 @@ function createButton(label: string, extraClass: string): HTMLButtonElement {
 }
 
 function formatRate(rate: number): string {
-	return `${rate.toFixed(2)}\u00d7`;
+	return rate.toFixed(2);
 }
