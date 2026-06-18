@@ -75,7 +75,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-	transform: translateX(var(--size-6));
+	transform: translateX(calc(var(--size-9) - var(--size-4) - 6px));
 	background-color: var(--base);
 }
 

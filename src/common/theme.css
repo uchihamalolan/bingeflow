@@ -25,6 +25,11 @@
 	}
 }
 
+:where(input, button, select, textarea) {
+	font: inherit;
+	color: inherit;
+}
+
 :root {
 	--base: #303446;
 	--mantle: #292c3c;
@@ -40,6 +45,15 @@
 	--green: #a6d189;
 	--red: #e78284;
 	--peach: #ef9f76;
+
+	/* Core Borders & Radii */
+	--border-size-1: 1px;
+	--border-size-2: 2px;
+	--radius-1: 2px;
+	--radius-2: 8px;
+	--radius-3: 12px;
+	--radius-4: 16px;
+	--radius-round: 9999px;
 
 	/* Core Animations */
 	--duration-2: 200ms;
