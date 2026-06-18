@@ -22,10 +22,11 @@ export type OverlayHandle = {
 export function createOverlay(
 	video: HTMLVideoElement,
 	config: VideoControlsConfig,
+	onPositionChange?: (pos: { x: number; y: number }) => void,
 ): OverlayHandle {
 	// ── Host element ──────────────────────────────────────────────────────────
 	const host = document.createElement("div");
-	positionOverlay(host, video);
+	positionOverlay(host, video, config);
 
 	// ── Shadow DOM ────────────────────────────────────────────────────────────
 	const shadow = host.attachShadow({ mode: "open" });
@@ -97,6 +98,94 @@ export function createOverlay(
 		speedBadge.textContent = formatRate(video.playbackRate);
 	}
 	video.addEventListener("ratechange", onRateChange);
+
+	// ── Drag handle event handlers ────────────────────────────────────────────
+	let isDragging = false;
+	let startX = 0;
+	let startY = 0;
+	let startLeft = 0;
+	let startTop = 0;
+
+	dragHandle.addEventListener("pointerdown", (e) => {
+		if (e.button !== 0) return;
+
+		const container = host.parentElement ?? getPlayerContainer(video);
+		if (!container) return;
+
+		isDragging = true;
+		dragHandle.setPointerCapture(e.pointerId);
+
+		const containerRect = container.getBoundingClientRect();
+		const hostRect = host.getBoundingClientRect();
+
+		startLeft = hostRect.left - containerRect.left;
+		startTop = hostRect.top - containerRect.top;
+
+		startX = e.clientX;
+		startY = e.clientY;
+
+		e.preventDefault();
+	});
+
+	dragHandle.addEventListener("pointermove", (e) => {
+		if (!isDragging) return;
+
+		const container = host.parentElement ?? getPlayerContainer(video);
+		if (!container) return;
+
+		const containerRect = container.getBoundingClientRect();
+		const hostRect = host.getBoundingClientRect();
+
+		const deltaX = e.clientX - startX;
+		const deltaY = e.clientY - startY;
+
+		let newLeft = startLeft + deltaX;
+		let newTop = startTop + deltaY;
+
+		const maxLeft = Math.max(0, containerRect.width - hostRect.width);
+		const maxTop = Math.max(0, containerRect.height - hostRect.height);
+
+		newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+		newTop = Math.max(0, Math.min(newTop, maxTop));
+
+		host.style.setProperty("left", `${newLeft}px`, "important");
+		host.style.setProperty("top", `${newTop}px`, "important");
+	});
+
+	dragHandle.addEventListener("pointerup", (e) => {
+		if (!isDragging) return;
+		isDragging = false;
+		dragHandle.releasePointerCapture(e.pointerId);
+
+		const container = host.parentElement ?? getPlayerContainer(video);
+		if (!container) return;
+
+		const containerRect = container.getBoundingClientRect();
+		const hostRect = host.getBoundingClientRect();
+
+		const leftPx = hostRect.left - containerRect.left;
+		const topPx = hostRect.top - containerRect.top;
+
+		const pctX =
+			containerRect.width > 0 ? (leftPx / containerRect.width) * 100 : 0;
+		const pctY =
+			containerRect.height > 0 ? (topPx / containerRect.height) * 100 : 0;
+
+		config.position = { x: pctX, y: pctY };
+
+		host.style.setProperty("left", `${pctX}%`, "important");
+		host.style.setProperty("top", `${pctY}%`, "important");
+
+		if (onPositionChange) {
+			onPositionChange({ x: pctX, y: pctY });
+		}
+	});
+
+	dragHandle.addEventListener("pointercancel", (e) => {
+		if (!isDragging) return;
+		isDragging = false;
+		dragHandle.releasePointerCapture(e.pointerId);
+	});
 
 	// ── Visibility State & Listeners ──────────────────────────────────────────
 	const mouseTarget = getPlayerContainer(video);
@@ -174,6 +263,7 @@ function getPlayerContainer(video: HTMLVideoElement): HTMLElement {
 export function positionOverlay(
 	host: HTMLElement,
 	video: HTMLVideoElement,
+	config: VideoControlsConfig,
 ): void {
 	const container = host.parentElement ?? getPlayerContainer(video);
 	const containerPos = getComputedStyle(container).position;
@@ -182,8 +272,13 @@ export function positionOverlay(
 	}
 
 	host.style.setProperty("position", "absolute", "important");
-	host.style.setProperty("top", "16px", "important");
-	host.style.setProperty("left", "16px", "important");
+	if (config.position) {
+		host.style.setProperty("left", `${config.position.x}%`, "important");
+		host.style.setProperty("top", `${config.position.y}%`, "important");
+	} else {
+		host.style.setProperty("left", "16px", "important");
+		host.style.setProperty("top", "16px", "important");
+	}
 	host.style.setProperty("bottom", "auto", "important");
 	host.style.setProperty("transform", "none", "important");
 	host.style.setProperty("z-index", "2147483647", "important");

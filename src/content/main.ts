@@ -1,5 +1,5 @@
 import { detectConfig, getPlatformBehaviors } from "../common/platforms";
-import { loadSettings } from "../common/settings";
+import { loadSettings, saveSettings } from "../common/settings";
 import { isValidPress } from "./utils/validpress";
 import { changeSpeed, seek } from "./video/video-actions";
 import { VideoManager } from "./video/video-manager";
@@ -8,7 +8,14 @@ import { VideoManager } from "./video/video-manager";
 (async () => {
 	const settings = await loadSettings();
 	const platformConfig = detectConfig(window.location.hostname);
-	const videoManager = new VideoManager(settings.videoControls, platformConfig);
+	const videoManager = new VideoManager(
+		settings.videoControls,
+		platformConfig,
+		async (pos) => {
+			settings.videoControls.position = pos;
+			await saveSettings(settings);
+		},
+	);
 
 	const { keyBindings, seekSeconds, speedStep } = settings.videoControls;
 

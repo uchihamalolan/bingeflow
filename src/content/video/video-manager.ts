@@ -18,6 +18,7 @@ import {
 export class VideoManager {
 	private readonly config: VideoControlsConfig;
 	private readonly platformConfig: PlatformConfig | null;
+	private readonly onPositionChange?: (pos: { x: number; y: number }) => void;
 
 	private activeVideo: HTMLVideoElement | null = null;
 	private overlayHandle: OverlayHandle | null = null;
@@ -28,9 +29,11 @@ export class VideoManager {
 	constructor(
 		config: VideoControlsConfig,
 		platformConfig: PlatformConfig | null,
+		onPositionChange?: (pos: { x: number; y: number }) => void,
 	) {
 		this.config = config;
 		this.platformConfig = platformConfig;
+		this.onPositionChange = onPositionChange;
 
 		this.mutationObserver = new MutationObserver(this.onMutation.bind(this));
 		this.resizeObserver = new ResizeObserver(this.onResize.bind(this));
@@ -97,7 +100,7 @@ export class VideoManager {
 
 	private onResize(): void {
 		if (this.overlayHandle !== null && this.activeVideo !== null) {
-			positionOverlay(this.overlayHandle.root, this.activeVideo);
+			positionOverlay(this.overlayHandle.root, this.activeVideo, this.config);
 		}
 	}
 
@@ -138,7 +141,11 @@ export class VideoManager {
 	}
 
 	private mount(video: HTMLVideoElement): void {
-		this.overlayHandle = createOverlay(video, this.config);
+		this.overlayHandle = createOverlay(
+			video,
+			this.config,
+			this.onPositionChange,
+		);
 		this.resizeObserver.observe(video);
 	}
 
