@@ -18,31 +18,31 @@ let { config }: { config: PlatformConfig } = $props();
 
 <style>
 .body {
-	padding: 8px 0;
+	padding: var(--size-2) 0;
 }
 
 .row {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 8px 18px;
+	padding: var(--size-2) var(--size-4);
 }
 
 .platform-row {
-	margin-bottom: 4px;
+	margin-bottom: var(--size-1);
 }
 
 .label {
-	font-size: 11px;
+	font-size: var(--font-size-00);
 	font-weight: 600;
-	color: #7c7c9a;
+	color: var(--subtext0);
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
 
 .value {
-	font-size: 13px;
+	font-size: var(--font-size-0);
 	font-weight: 600;
-	color: #e8e8f0;
+	color: var(--text);
 }
 </style>

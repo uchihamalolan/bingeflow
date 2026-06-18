@@ -245,19 +245,19 @@ function formatKey(key: string): string {
 <style>
 .section {
 	background: var(--mantle);
-	border: 1px solid var(--surface0);
-	border-radius: 16px;
-	padding: 24px;
+	border: var(--border-size-1) solid var(--surface0);
+	border-radius: var(--radius-4);
+	padding: var(--size-6);
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-	transition: opacity 0.2s;
+	gap: var(--size-5);
+	box-shadow: var(--shadow-2);
+	transition: opacity var(--duration-2) var(--ease-2);
 }
 
 .section h2 {
-	font-size: 18px;
-	font-weight: 600;
+	font-size: var(--font-size-2);
+	font-weight: var(--font-weight-6);
 	margin: 0;
 	color: var(--mauve);
 }
@@ -266,8 +266,8 @@ function formatKey(key: string): string {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 8px 0;
-	border-bottom: 1px solid var(--surface0);
+	padding: var(--size-2) 0;
+	border-bottom: var(--border-size-1) solid var(--surface0);
 }
 
 .shortcut-row:last-of-type {
@@ -275,31 +275,31 @@ function formatKey(key: string): string {
 }
 
 .shortcut-label {
-	font-size: 14px;
-	font-weight: 500;
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-5);
 	color: var(--text);
 }
 
 .shortcut-actions {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--size-3);
 }
 
 .kbd-btn {
 	background: var(--surface0);
-	border: 1px solid var(--surface1);
+	border: var(--border-size-1) solid var(--surface1);
 	color: var(--blue);
 	font-family: inherit;
-	font-size: 13px;
-	font-weight: 700;
-	padding: 6px 16px;
-	border-radius: 8px;
+	font-size: var(--font-size-0);
+	font-weight: var(--font-weight-7);
+	padding: var(--size-1) var(--size-4);
+	border-radius: var(--radius-2);
 	cursor: pointer;
 	min-width: 80px;
 	text-align: center;
-	transition: all 0.2s ease;
-	border-bottom-width: 3px;
+	transition: all var(--duration-2) var(--ease-2);
+	border-bottom-width: var(--border-size-2);
 }
 
 .kbd-btn:hover:not(:disabled) {
@@ -317,16 +317,16 @@ function formatKey(key: string): string {
 
 .reset-btn {
 	background: transparent;
-	border: 1px solid transparent;
+	border: var(--border-size-1) solid transparent;
 	color: var(--subtext0);
-	width: 32px;
-	height: 32px;
-	border-radius: 8px;
+	width: var(--size-7);
+	height: var(--size-7);
+	border-radius: var(--radius-2);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	transition: all 0.2s;
+	transition: all var(--duration-2) var(--ease-2);
 }
 
 .reset-btn:hover:not(:disabled) {

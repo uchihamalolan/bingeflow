@@ -11,6 +11,6 @@ import Spinner from "../../common/components/Spinner.svelte";
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 28px;
+	padding: var(--size-7);
 }
 </style>

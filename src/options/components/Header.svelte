@@ -70,48 +70,48 @@ let {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding-bottom: 16px;
-	border-bottom: 1px solid var(--surface0);
+	padding-bottom: var(--size-4);
+	border-bottom: var(--border-size-1) solid var(--surface0);
 }
 
 .logo-area {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: var(--size-4);
 }
 
 .logo-icon {
-	font-size: 36px;
+	font-size: var(--font-size-5);
 	line-height: 1;
 }
 
 .header h1 {
-	font-size: 24px;
-	font-weight: 700;
+	font-size: var(--font-size-4);
+	font-weight: var(--font-weight-7);
 	margin: 0;
 	color: var(--text);
 }
 
 .subtitle {
-	font-size: 13px;
+	font-size: var(--font-size-0);
 	color: var(--subtext0);
-	margin: 4px 0 0 0;
+	margin: var(--size-1) 0 0 0;
 }
 
 .theme-toggle {
 	background: var(--surface0);
-	border: 1px solid var(--surface1);
+	border: var(--border-size-1) solid var(--surface1);
 	color: var(--text);
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
+	width: var(--size-8);
+	height: var(--size-8);
+	border-radius: var(--radius-round);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
 	transition:
-		background-color 0.2s,
-		border-color 0.2s;
+		background-color var(--duration-2) var(--ease-2),
+		border-color var(--duration-2) var(--ease-2);
 }
 
 .theme-toggle:hover {

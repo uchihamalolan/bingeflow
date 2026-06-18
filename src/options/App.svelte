@@ -73,11 +73,11 @@ function triggerSave() {
 		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
 		sans-serif;
 	transition:
-		background-color 0.2s,
-		color 0.2s;
+		background-color var(--duration-2) var(--ease-2),
+		color var(--duration-2) var(--ease-2);
 	display: flex;
 	justify-content: center;
-	padding: 40px 20px;
+	padding: var(--size-8) var(--size-5);
 	box-sizing: border-box;
 	min-height: 100%;
 }
@@ -93,12 +93,12 @@ function triggerSave() {
 	max-width: 560px;
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: var(--size-6);
 }
 
 .main-content {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: var(--size-6);
 }
 </style>

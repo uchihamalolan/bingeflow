@@ -97,19 +97,19 @@ let {
 <style>
 .section {
 	background: var(--mantle);
-	border: 1px solid var(--surface0);
-	border-radius: 16px;
-	padding: 24px;
+	border: var(--border-size-1) solid var(--surface0);
+	border-radius: var(--radius-4);
+	padding: var(--size-6);
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-	transition: opacity 0.2s;
+	gap: var(--size-5);
+	box-shadow: var(--shadow-2);
+	transition: opacity var(--duration-2) var(--ease-2);
 }
 
 .section h2 {
-	font-size: 18px;
-	font-weight: 600;
+	font-size: var(--font-size-2);
+	font-weight: var(--font-weight-6);
 	margin: 0;
 	color: var(--mauve);
 }
@@ -118,24 +118,24 @@ let {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 20px;
+	gap: var(--size-5);
 }
 
 .setting-info {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: var(--size-1);
 	flex: 1;
 }
 
 .setting-label {
-	font-size: 15px;
-	font-weight: 600;
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-6);
 	color: var(--text);
 }
 
 .setting-desc {
-	font-size: 13px;
+	font-size: var(--font-size-0);
 	color: var(--subtext0);
 }
 

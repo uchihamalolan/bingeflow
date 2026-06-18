@@ -10,6 +10,7 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
 - **Framework**: [Svelte 5](https://svelte.dev/) (uses Svelte 5 runes like `$state` and `$props` for reactivity).
 - **Bundler**: [Vite](https://vite.dev/) with [@crxjs/vite-plugin](https://crxjs.dev/) (Manifest V3 support).
 - **Linter & Formatter**: [Biome](https://biomejs.dev/) (configured via [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json)).
+- **Styling**: [Open Props](https://open-props.style/) (design tokens for CSS variables, such as spacing, shadows, easing, and borders).
 - **Language**: TypeScript.
 
 ---
@@ -56,6 +57,13 @@ To add support for a new streaming platform:
 - To request new permissions or adjust matching URL patterns, modify [manifest.config.ts](file:///Users/malolan/Projects/skip-intro/manifest.config.ts) instead of creating or editing a raw `manifest.json`.
 - Current permissions: `["contentSettings", "tabs"]`.
 - Currently matching content scripts on: `["https://*/*"]`.
+
+### 5. Styling & Design Tokens (Open Props)
+- Do **not** hardcode values for margins, padding, gap, border radii, border thickness, transition timings, or animations.
+- Always use the **Open Props** CSS variable tokens (e.g., `var(--size-2)`, `var(--radius-2)`, `var(--border-size-1)`, `var(--duration-2)`).
+- **Scoping in Extension Pages vs. Content Scripts:**
+  - Standard variables are imported globally in popup/options pages via [theme.css](file:///Users/malolan/Projects/skip-intro/src/common/theme.css) and attach to `:where(html)`.
+  - For injected components (like the overlay), define the exact Open Props variables used directly on the `:host` selector in the component's stylesheet (see [overlay.css](file:///Users/malolan/Projects/skip-intro/src/content/overlay/overlay.css) as a reference). This prevents stylesheet size bloat and avoids polluting the host website's styles.
 
 ---
 

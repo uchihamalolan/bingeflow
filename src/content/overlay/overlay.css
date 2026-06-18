@@ -1,3 +1,28 @@
+:host {
+	/* Spacing */
+	--size-1: 0.25rem;
+	--size-2: 0.5rem;
+	--size-6: 1.5rem;
+	--size-8: 2.5rem;
+
+	/* Borders */
+	--border-size-1: 1px;
+	--border-size-2: 2px;
+
+	/* Radii */
+	--radius-2: 8px;
+	--radius-3: 12px;
+
+	/* Shadows */
+	--shadow-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--shadow-3:
+		0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+	/* Animations */
+	--ease-2: cubic-bezier(0.25, 0, 0.3, 1);
+	--duration-2: 200ms;
+}
+
 /* Reset scoped to the shadow root */
 *,
 *::before,
@@ -15,15 +40,15 @@
 	padding: 4px;
 	background: rgba(41, 44, 60, 0.5); /* More transparent Frappé mantle */
 	backdrop-filter: blur(8px);
-	border: 1px solid rgba(198, 208, 245, 0.08); /* More transparent border */
-	border-radius: 12px;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+	border: var(--border-size-1) solid rgba(198, 208, 245, 0.08); /* More transparent border */
+	border-radius: var(--radius-3);
+	box-shadow: var(--shadow-3);
 	pointer-events: auto;
 	user-select: none;
 	font-size: 12px;
 	font-family: system-ui, -apple-system, sans-serif;
 	opacity: 1;
-	transition: opacity 0.3s ease;
+	transition: opacity var(--duration-2) var(--ease-2);
 	width: max-content;
 }
 
@@ -42,27 +67,27 @@
 	font-weight: 600;
 	color: #c6d0f5; /* Frappé text */
 	background: rgba(65, 69, 89, 0.45); /* More transparent surface0 */
-	border: 1px solid rgba(198, 208, 245, 0.08);
-	border-radius: 8px;
+	border: var(--border-size-1) solid rgba(198, 208, 245, 0.08);
+	border-radius: var(--radius-2);
 	cursor: pointer;
 	white-space: nowrap;
 	transition:
-		background 0.15s ease,
-		transform 0.15s ease,
-		box-shadow 0.15s ease;
+		background var(--duration-2) var(--ease-2),
+		transform var(--duration-2) var(--ease-2),
+		box-shadow var(--duration-2) var(--ease-2);
 }
 
 .si-btn:hover {
 	background: rgba(98, 104, 128, 0.65); /* More visible on hover */
 	border-color: rgba(198, 208, 245, 0.15);
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: var(--shadow-1);
 }
 
 .si-btn:active,
 .si-btn.si-active {
 	transform: scale(0.91);
 	background: rgba(98, 104, 128, 0.9); /* Frappé surface2 */
-	box-shadow: 0 0 0 2px rgba(202, 158, 230, 0.4); /* mauve ring */
+	box-shadow: 0 0 0 var(--border-size-2) rgba(202, 158, 230, 0.4); /* mauve ring */
 }
 
 /* Speed buttons — Frappé mauve accent */
@@ -74,7 +99,7 @@
 .si-btn.si-speed-btn:active,
 .si-btn.si-speed-btn.si-active {
 	background: rgba(202, 158, 230, 0.15);
-	box-shadow: 0 0 0 2px rgba(202, 158, 230, 0.45);
+	box-shadow: 0 0 0 var(--border-size-2) rgba(202, 158, 230, 0.45);
 }
 
 /* ── Speed badge ───────────────────────────────────────────── */
@@ -91,8 +116,8 @@
 	justify-content: center;
 	color: #a5adce; /* subtext0 */
 	cursor: grab;
-	padding: 0 4px 0 2px;
-	font-size: 14px;
+	padding: 0 var(--size-1);
+	font-size: var(--font-size-0);
 	font-weight: bold;
 	user-select: none;
 }

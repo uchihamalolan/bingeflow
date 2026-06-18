@@ -6,30 +6,30 @@ let { size = "medium" }: { size?: "small" | "medium" | "large" } = $props();
 
 <style>
 .spinner {
-	border: 2px solid var(--surface2);
+	border: var(--border-size-2) solid var(--surface2);
 	border-top-color: var(--mauve);
-	border-radius: 50%;
+	border-radius: var(--radius-round);
 	animation: spin 0.8s linear infinite;
 	display: inline-block;
 	box-sizing: border-box;
 }
 
 .spinner.small {
-	width: 16px;
-	height: 16px;
-	border-width: 2px;
+	width: var(--size-4);
+	height: var(--size-4);
+	border-width: var(--border-size-2);
 }
 
 .spinner.medium {
-	width: 20px;
-	height: 20px;
-	border-width: 2px;
+	width: var(--size-5);
+	height: var(--size-5);
+	border-width: var(--border-size-2);
 }
 
 .spinner.large {
-	width: 32px;
-	height: 32px;
-	border-width: 3px;
+	width: var(--size-7);
+	height: var(--size-7);
+	border-width: var(--border-size-3);
 }
 
 @keyframes spin {

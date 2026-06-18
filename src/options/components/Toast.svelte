@@ -22,21 +22,21 @@ let {
 <style>
 .toast {
 	position: fixed;
-	top: 20px;
-	right: 20px;
+	top: var(--size-5);
+	right: var(--size-5);
 	background: var(--surface0);
-	border: 1px solid var(--surface1);
+	border: var(--border-size-1) solid var(--surface1);
 	color: var(--text);
-	padding: 12px 20px;
-	border-radius: 12px;
-	font-size: 14px;
-	font-weight: 600;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+	padding: var(--size-3) var(--size-5);
+	border-radius: var(--radius-3);
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-6);
+	box-shadow: var(--shadow-3);
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: var(--size-2);
 	z-index: 9999;
-	animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	animation: slideIn var(--duration-3) var(--ease-out-3);
 }
 
 .toast.saved {

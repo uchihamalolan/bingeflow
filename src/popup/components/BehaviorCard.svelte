@@ -26,11 +26,11 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 <style>
 .behavior-card {
 	background: var(--surface0);
-	border: 1px solid var(--surface1);
-	border-radius: 8px;
-	margin: 8px 14px;
-	padding: 12px;
-	transition: all 0.2s ease;
+	border: var(--border-size-1) solid var(--surface1);
+	border-radius: var(--radius-2);
+	margin: var(--size-2) var(--size-3);
+	padding: var(--size-3);
+	transition: all var(--duration-2) var(--ease-2);
 }
 
 .behavior-card:hover {
@@ -45,7 +45,7 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 }
 
 .card-row:not(:last-child) {
-	margin-bottom: 10px;
+	margin-bottom: var(--size-2);
 }
 
 .behavior-title {
@@ -61,23 +61,23 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 }
 
 .badge {
-	font-size: 11px;
+	font-size: var(--font-size-00);
 	font-weight: 600;
-	padding: 2px 8px;
-	border-radius: 999px;
+	padding: var(--size-1) var(--size-2);
+	border-radius: var(--radius-round);
 	letter-spacing: 0.02em;
 }
 
 .badge-on {
 	background: rgba(166, 209, 137, 0.12);
 	color: var(--green);
-	border: 1px solid rgba(166, 209, 137, 0.2);
+	border: var(--border-size-1) solid rgba(166, 209, 137, 0.2);
 }
 
 .badge-off {
 	background: rgba(231, 130, 132, 0.12);
 	color: var(--red);
-	border: 1px solid rgba(231, 130, 132, 0.2);
+	border: var(--border-size-1) solid rgba(231, 130, 132, 0.2);
 }
 
 .shortcut-wrap {
@@ -89,16 +89,16 @@ kbd {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 24px;
-	height: 22px;
-	padding: 0 6px;
+	min-width: var(--size-6);
+	height: var(--size-6);
+	padding: 0 var(--size-1);
 	font-family: inherit;
-	font-size: 11px;
+	font-size: var(--font-size-00);
 	font-weight: 700;
 	color: var(--mauve);
 	background: rgba(202, 158, 230, 0.1);
-	border: 1px solid rgba(202, 158, 230, 0.25);
-	border-bottom-width: 2px;
-	border-radius: 4px;
+	border: var(--border-size-1) solid rgba(202, 158, 230, 0.25);
+	border-bottom-width: var(--border-size-2);
+	border-radius: var(--radius-1);
 }
 </style>

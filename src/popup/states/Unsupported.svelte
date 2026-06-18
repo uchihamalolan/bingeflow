@@ -10,18 +10,18 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 10px;
-	padding: 28px 18px;
+	gap: var(--size-2);
+	padding: var(--size-7) var(--size-4);
 	text-align: center;
 }
 
 .icon {
-	font-size: 28px;
+	font-size: var(--font-size-4);
 	opacity: 0.5;
 }
 
 p {
-	font-size: 13px;
+	font-size: var(--font-size-0);
 	color: var(--subtext0);
 	line-height: 1.6;
 }

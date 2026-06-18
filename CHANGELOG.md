@@ -3,6 +3,9 @@
 ## Version 1.0.0 - 2026-06-18
 
 ### Added
+- **Speed Reset Control**: Added a new `1×` button to the video controls overlay to quickly reset the video playback rate to normal (`1.0x`).
+- **Reset Speed Keybinding**: Configured `r` as the default keyboard shortcut for resetting the playback rate.
+- **Rebinding Support**: Added "Reset Speed" configuration row in options keyboard shortcut settings.
 - **Options Settings Page**: Created a dedicated options page (`src/options/`) for customizing extension preferences.
   - Choose between Catppuccin **Frappe** (dark) and **Latte** (light) color themes.
   - Toggle the floating video controls overlay.
@@ -34,12 +37,12 @@
 3. **Settings Customization**:
    - Change the theme toggle (sun/moon icon) to switch between **Frappe** and **Latte** Catppuccin modes.
    - Adjust "Seek Duration" or "Playback Speed Step" and verify the green "Saved ✓" toast notification displays.
-   - Click a keyboard shortcut key button, press a new key to rebind it, and check that the key updates.
+   - Click a keyboard shortcut key button, press a new key to rebind it (including the new "Reset Speed" shortcut), and check that the key updates.
    - Click the reset button to restore a keybind to its default key.
 4. **Video Playback & Controls Overlay**:
    - Open a playback page on any supported streaming site.
    - The floating controls overlay will appear (or remain hidden if "Start Hidden" is checked).
-   - Use the buttons on the overlay or the customized keyboard shortcuts to control seeking and playback speeds.
+   - Use the buttons on the overlay (including the new `1×` button) or the customized keyboard shortcuts (press `r` to reset speed to 1x) to control seeking and playback speeds.
 
 ### Permission Justifications
 - `storage`: Essential to persist user-configured keybindings, overlay preferences (enabled, seek duration, speed steps, default visibility), and preferred color theme.

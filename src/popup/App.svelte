@@ -80,7 +80,9 @@ function openOptions() {
 	background: var(--base);
 	color: var(--text);
 	width: 280px;
-	transition: background-color 0.2s, color 0.2s;
+	transition:
+		background-color var(--duration-2) var(--ease-2),
+		color var(--duration-2) var(--ease-2);
 }
 
 .popup {
@@ -88,32 +90,32 @@ function openOptions() {
 	color: var(--text);
 	width: 280px;
 	overflow: hidden;
-	border-radius: 12px;
+	border-radius: var(--radius-3);
 }
 
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 14px 18px;
+	padding: var(--size-3) var(--size-4);
 	background: var(--mantle);
-	border-bottom: 1px solid var(--surface0);
+	border-bottom: var(--border-size-1) solid var(--surface0);
 }
 
 .logo-area {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: var(--size-2);
 }
 
 .icon {
-	font-size: 18px;
+	font-size: var(--font-size-2);
 	line-height: 1;
 }
 
 .title {
-	font-size: 15px;
-	font-weight: 600;
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-6);
 	letter-spacing: 0.01em;
 	color: var(--text);
 }
@@ -123,14 +125,14 @@ header {
 	border: none;
 	color: var(--subtext0);
 	cursor: pointer;
-	padding: 4px;
+	padding: var(--size-1);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 4px;
+	border-radius: var(--radius-1);
 	transition:
-		background-color 0.2s,
-		color 0.2s;
+		background-color var(--duration-2) var(--ease-2),
+		color var(--duration-2) var(--ease-2);
 }
 
 .settings-btn:hover {
@@ -139,7 +141,7 @@ header {
 }
 
 .settings-icon {
-	width: 16px;
-	height: 16px;
+	width: var(--size-4);
+	height: var(--size-4);
 }
 </style>

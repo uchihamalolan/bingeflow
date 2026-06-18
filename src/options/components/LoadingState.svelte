@@ -13,13 +13,13 @@ import Spinner from "../../common/components/Spinner.svelte";
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-height: 200px;
+	min-height: var(--size-14);
 	color: var(--subtext0);
 }
 
 .loading-container p {
-	margin: 16px 0 0 0;
-	font-size: 14px;
-	font-weight: 500;
+	margin: var(--size-4) 0 0 0;
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-5);
 }
 </style>

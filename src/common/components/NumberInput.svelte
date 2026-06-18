@@ -30,20 +30,20 @@ let {
 	display: flex;
 	align-items: center;
 	background: var(--surface0);
-	border: 1px solid var(--surface1);
-	border-radius: 8px;
-	padding: 0 10px;
-	height: 38px;
-	width: 90px;
+	border: var(--border-size-1) solid var(--surface1);
+	border-radius: var(--radius-2);
+	padding: 0 var(--size-2);
+	height: var(--size-8);
+	width: var(--size-11);
 	box-sizing: border-box;
 	transition:
-		border-color 0.2s,
-		box-shadow 0.2s;
+		border-color var(--duration-2) var(--ease-2),
+		box-shadow var(--duration-2) var(--ease-2);
 }
 
 .number-input-wrapper:focus-within {
 	border-color: var(--mauve);
-	box-shadow: 0 0 0 2px rgba(202, 158, 230, 0.2);
+	box-shadow: 0 0 0 var(--border-size-2) rgba(202, 158, 230, 0.2);
 }
 
 .number-input-wrapper input {
@@ -51,8 +51,8 @@ let {
 	border: none;
 	color: var(--text);
 	font-family: inherit;
-	font-size: 14px;
-	font-weight: 600;
+	font-size: var(--font-size-1);
+	font-weight: var(--font-weight-6);
 	width: 100%;
 	padding: 0;
 	text-align: right;
@@ -69,9 +69,9 @@ let {
 }
 
 .unit {
-	font-size: 13px;
+	font-size: var(--font-size-0);
 	color: var(--subtext0);
-	margin-left: 6px;
-	font-weight: 600;
+	margin-left: var(--size-1);
+	font-weight: var(--font-weight-6);
 }
 </style>

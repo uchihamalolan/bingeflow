@@ -31,8 +31,8 @@ let {
 .switch {
 	position: relative;
 	display: inline-block;
-	width: 46px;
-	height: 26px;
+	width: var(--size-9);
+	height: var(--size-6);
 	flex-shrink: 0;
 }
 
@@ -50,21 +50,21 @@ let {
 	right: 0;
 	bottom: 0;
 	background-color: var(--surface0);
-	transition: 0.2s;
-	border-radius: 34px;
-	border: 1px solid var(--surface1);
+	transition: var(--duration-2);
+	border-radius: var(--radius-round);
+	border: var(--border-size-1) solid var(--surface1);
 }
 
 .slider:before {
 	position: absolute;
 	content: "";
-	height: 18px;
-	width: 18px;
+	height: var(--size-4);
+	width: var(--size-4);
 	left: 3px;
 	bottom: 3px;
 	background-color: var(--text);
-	transition: 0.2s;
-	border-radius: 50%;
+	transition: var(--duration-2);
+	border-radius: var(--radius-round);
 }
 
 input:checked + .slider {
@@ -73,7 +73,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-	transform: translateX(20px);
+	transform: translateX(var(--size-6));
 	background-color: var(--base);
 }
 
