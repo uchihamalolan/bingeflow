@@ -70,25 +70,7 @@ function openOptions() {
 </div>
 
 <style>
-:global(*) {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-:global(body) {
-	background: var(--base);
-	color: var(--text);
-	width: 280px;
-	transition:
-		background-color var(--duration-2) var(--ease-2),
-		color var(--duration-2) var(--ease-2);
-}
-
 .popup {
-	background: var(--base);
-	color: var(--text);
-	width: 280px;
 	overflow: hidden;
 	border-radius: var(--radius-3);
 }
@@ -117,7 +99,6 @@ header {
 	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-6);
 	letter-spacing: 0.01em;
-	color: var(--text);
 }
 
 .settings-btn {

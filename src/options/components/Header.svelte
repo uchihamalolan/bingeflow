@@ -1,11 +1,13 @@
 <script lang="ts">
+interface Props {
+	theme: "frappe" | "latte";
+	ontoggle: () => void;
+}
+
 let {
 	theme,
 	ontoggle,
-}: {
-	theme: "frappe" | "latte";
-	ontoggle: () => void;
-} = $props();
+}: Props = $props();
 </script>
 
 <header class="header">
@@ -89,7 +91,6 @@ let {
 	font-size: var(--font-size-4);
 	font-weight: var(--font-weight-7);
 	margin: 0;
-	color: var(--text);
 }
 
 .subtitle {

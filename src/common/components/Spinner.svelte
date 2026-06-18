@@ -1,5 +1,9 @@
 <script lang="ts">
-let { size = "medium" }: { size?: "small" | "medium" | "large" } = $props();
+interface Props {
+	size?: "small" | "medium" | "large";
+}
+
+let { size = "medium" }: Props = $props();
 </script>
 
 <span class="spinner" class:small={size === "small"} class:medium={size === "medium"} class:large={size === "large"}></span>

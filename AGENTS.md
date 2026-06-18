@@ -36,10 +36,21 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
   ```
 - **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json).
 
-### 2. Svelte 5 Runes
+### 2. Svelte 5 Runes & Props Typing
 - This project uses Svelte 5. Do **not** use the legacy Svelte 4 reactivity syntax (`let count = 0;` paired with `export let prop;`).
 - Use `$state` for component reactive state.
-- Use `$props` for component props (e.g., `let { config }: { config: PlatformConfig } = $props();`).
+- Use `$props` for component props. **Always declare a separate `interface Props` or `type Props`** instead of typing them inline.
+  - *Correct:*
+    ```typescript
+    interface Props {
+      config: PlatformConfig;
+    }
+    let { config }: Props = $props();
+    ```
+  - *Incorrect:*
+    ```typescript
+    let { config }: { config: PlatformConfig } = $props();
+    ```
 - Make sure components reside in `.svelte` files and modules in `.ts` or `.svelte.ts` files.
 
 ### 3. Adding a New Platform

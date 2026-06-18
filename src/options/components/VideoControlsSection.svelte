@@ -3,13 +3,15 @@ import NumberInput from "../../common/components/NumberInput.svelte";
 import Switch from "../../common/components/Switch.svelte";
 import type { VideoControlsConfig } from "../../common/video-controls";
 
+interface Props {
+	videoControls: VideoControlsConfig;
+	onchange: () => void;
+}
+
 let {
 	videoControls = $bindable(),
 	onchange,
-}: {
-	videoControls: VideoControlsConfig;
-	onchange: () => void;
-} = $props();
+}: Props = $props();
 </script>
 
 <section class="section">
@@ -131,7 +133,6 @@ let {
 .setting-label {
 	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-6);
-	color: var(--text);
 }
 
 .setting-desc {

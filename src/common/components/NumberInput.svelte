@@ -1,4 +1,14 @@
 <script lang="ts">
+interface Props {
+	value?: number;
+	disabled?: boolean;
+	min?: number;
+	max?: number;
+	step?: number;
+	unit?: string;
+	onchange?: () => void;
+}
+
 let {
 	value = $bindable(0),
 	disabled = false,
@@ -7,15 +17,7 @@ let {
 	step = 1,
 	unit,
 	onchange,
-}: {
-	value?: number;
-	disabled?: boolean;
-	min?: number;
-	max?: number;
-	step?: number;
-	unit?: string;
-	onchange?: () => void;
-} = $props();
+}: Props = $props();
 </script>
 
 <div class="number-input-wrapper">
@@ -49,7 +51,6 @@ let {
 .number-input-wrapper input {
 	background: transparent;
 	border: none;
-	color: var(--text);
 	font-family: inherit;
 	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-6);

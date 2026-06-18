@@ -1,17 +1,19 @@
 <script lang="ts">
+interface Props {
+	checked?: boolean;
+	disabled?: boolean;
+	id: string;
+	ariaLabel: string;
+	onchange?: () => void;
+}
+
 let {
 	checked = $bindable(false),
 	disabled = false,
 	id,
 	ariaLabel,
 	onchange,
-}: {
-	checked?: boolean;
-	disabled?: boolean;
-	id: string;
-	ariaLabel: string;
-	onchange?: () => void;
-} = $props();
+}: Props = $props();
 </script>
 
 <!-- biome-ignore lint/a11y/noLabelWithoutControl: label wraps the dynamic input and contains sr-only text -->

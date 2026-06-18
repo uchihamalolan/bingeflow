@@ -2,13 +2,15 @@
 import type { VideoControlsConfig } from "../../common/video-controls";
 import { DEFAULT_VIDEO_CONTROLS } from "../../common/video-controls";
 
+interface Props {
+	videoControls: VideoControlsConfig;
+	onchange: () => void;
+}
+
 let {
 	videoControls = $bindable(),
 	onchange,
-}: {
-	videoControls: VideoControlsConfig;
-	onchange: () => void;
-} = $props();
+}: Props = $props();
 
 let activeRebindKey = $state<keyof VideoControlsConfig["keyBindings"] | null>(
 	null,
@@ -277,7 +279,6 @@ function formatKey(key: string): string {
 .shortcut-label {
 	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-5);
-	color: var(--text);
 }
 
 .shortcut-actions {

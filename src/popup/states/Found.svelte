@@ -2,7 +2,11 @@
 import { getPlatformBehaviors, type PlatformConfig } from "../../common/platforms";
 import BehaviorCard from "../components/BehaviorCard.svelte";
 
-let { config }: { config: PlatformConfig } = $props();
+interface Props {
+	config: PlatformConfig;
+}
+
+let { config }: Props = $props();
 </script>
 
 <div class="body">
@@ -43,6 +47,5 @@ let { config }: { config: PlatformConfig } = $props();
 .value {
 	font-size: var(--font-size-0);
 	font-weight: 600;
-	color: var(--text);
 }
 </style>

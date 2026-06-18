@@ -1,7 +1,11 @@
 <script lang="ts">
 import type { BehaviorConfig } from "../../common/behaviors";
 
-let { behavior }: { behavior: BehaviorConfig } = $props();
+interface Props {
+	behavior: BehaviorConfig;
+}
+
+let { behavior }: Props = $props();
 </script>
 
 <div class="behavior-card">
@@ -51,7 +55,6 @@ let { behavior }: { behavior: BehaviorConfig } = $props();
 .behavior-title {
 	font-size: 13px;
 	font-weight: 600;
-	color: var(--text);
 }
 
 .detail-label {

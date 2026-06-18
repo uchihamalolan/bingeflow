@@ -1,7 +1,10 @@
+@import "open-props/normalize";
+
 @import "open-props/colors";
 @import "open-props/sizes";
 @import "open-props/shadows";
 @import "open-props/easings";
+@import "open-props/fonts";
 
 :root {
 	--base: #303446;
@@ -52,4 +55,16 @@
 	--green: #40a02b;
 	--red: #d20f39;
 	--peach: #fe640b;
+}
+
+:root {
+	/* Semantic mappings for Open Props Normalize */
+	--text-1: var(--text);
+	--text-2: var(--subtext0);
+	--surface-1: var(--base);
+	--surface-2: var(--mantle);
+	--surface-3: var(--surface0);
+	--surface-4: var(--surface1);
+	--link: var(--blue);
+	--link-visited: var(--mauve);
 }

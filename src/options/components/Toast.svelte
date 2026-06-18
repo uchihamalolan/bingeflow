@@ -1,11 +1,13 @@
 <script lang="ts">
 import Spinner from "../../common/components/Spinner.svelte";
 
+interface Props {
+	saveStatus: "idle" | "saving" | "saved";
+}
+
 let {
 	saveStatus,
-}: {
-	saveStatus: "idle" | "saving" | "saved";
-} = $props();
+}: Props = $props();
 </script>
 
 {#if saveStatus !== "idle"}
@@ -26,7 +28,6 @@ let {
 	right: var(--size-5);
 	background: var(--surface0);
 	border: var(--border-size-1) solid var(--surface1);
-	color: var(--text);
 	padding: var(--size-3) var(--size-5);
 	border-radius: var(--radius-3);
 	font-size: var(--font-size-1);

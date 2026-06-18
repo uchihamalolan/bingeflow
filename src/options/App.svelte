@@ -66,28 +66,6 @@ function triggerSave() {
 {/if}
 
 <style>
-:global(html) {
-	background-color: var(--base);
-	color: var(--text);
-	font-family:
-		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-		sans-serif;
-	transition:
-		background-color var(--duration-2) var(--ease-2),
-		color var(--duration-2) var(--ease-2);
-	display: flex;
-	justify-content: center;
-	padding: var(--size-8) var(--size-5);
-	box-sizing: border-box;
-	min-height: 100%;
-}
-
-:global(body) {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-}
-
 .container {
 	width: 100%;
 	max-width: 560px;
