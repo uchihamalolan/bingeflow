@@ -13,9 +13,9 @@ export type VideoControlsConfig = {
 		seekBack: string;
 		/** Default: "x" */
 		seekFwd: string;
-		/** Default: "a" */
+		/** Default: "q" */
 		speedDown: string;
-		/** Default: "s" */
+		/** Default: "w" */
 		speedUp: string;
 	};
 };
@@ -25,5 +25,5 @@ export const DEFAULT_VIDEO_CONTROLS: VideoControlsConfig = {
 	seekSeconds: 5,
 	speedStep: 0.25,
 	startHidden: false,
-	keyBindings: { seekBack: "z", seekFwd: "x", speedDown: "a", speedUp: "s" },
+	keyBindings: { seekBack: "z", seekFwd: "x", speedDown: "q", speedUp: "w" },
 };

@@ -1,5 +1,6 @@
 import type { VideoControlsConfig } from "../common/video-controls";
 import OVERLAY_CSS from "./overlay.css?inline";
+import { changeSpeed, seek } from "./video-actions";
 
 // ── Public API ──────────────────────────────────────────────────────────────
 
@@ -46,18 +47,7 @@ export function createOverlay(
 	overlay.append(speedDownBtn, seekBackBtn, speedBadge, seekFwdBtn, speedUpBtn);
 	shadow.appendChild(overlay);
 
-	// ── Seek / speed helpers ──────────────────────────────────────────────────
-	function seek(delta: number): void {
-		video.currentTime = Math.max(
-			0,
-			Math.min(video.duration || 0, video.currentTime + delta),
-		);
-	}
-
-	function changeSpeed(delta: number): void {
-		const next = Math.round((video.playbackRate + delta) * 100) / 100;
-		video.playbackRate = Math.max(0.1, Math.min(16, next));
-	}
+	// ── Seek / speed helpers (imported from video-actions) ───────────────────
 
 	function flash(btn: HTMLButtonElement): void {
 		btn.classList.add("si-active");
@@ -66,19 +56,19 @@ export function createOverlay(
 
 	// ── Button click handlers ─────────────────────────────────────────────────
 	speedDownBtn.addEventListener("click", () => {
-		changeSpeed(-config.speedStep);
+		changeSpeed(video, -config.speedStep);
 		flash(speedDownBtn);
 	});
 	seekBackBtn.addEventListener("click", () => {
-		seek(-config.seekSeconds);
+		seek(video, -config.seekSeconds);
 		flash(seekBackBtn);
 	});
 	seekFwdBtn.addEventListener("click", () => {
-		seek(config.seekSeconds);
+		seek(video, config.seekSeconds);
 		flash(seekFwdBtn);
 	});
 	speedUpBtn.addEventListener("click", () => {
-		changeSpeed(config.speedStep);
+		changeSpeed(video, config.speedStep);
 		flash(speedUpBtn);
 	});
 
