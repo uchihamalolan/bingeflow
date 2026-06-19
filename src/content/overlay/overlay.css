@@ -11,15 +11,16 @@
 .si-overlay {
 	display: flex;
 	align-items: center;
-	gap: 6px;
-	padding: 6px 10px;
-	background: rgba(41, 44, 60, 0.8); /* More transparent Frappé mantle */
+	gap: 4px;
+	padding: 4px;
+	background: rgba(41, 44, 60, 0.5); /* More transparent Frappé mantle */
 	backdrop-filter: blur(8px);
 	border: 1px solid rgba(198, 208, 245, 0.08); /* More transparent border */
 	border-radius: 12px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 	pointer-events: auto;
 	user-select: none;
+	font-size: 12px;
 	font-family: system-ui, -apple-system, sans-serif;
 	opacity: 1;
 	transition: opacity 0.3s ease;
@@ -36,12 +37,9 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 28px;
-	height: 28px;
-	font-family: inherit;
-	font-size: 12px;
+	width: 24px;
+	height: 24px;
 	font-weight: 600;
-	letter-spacing: 0.01em;
 	color: #c6d0f5; /* Frappé text */
 	background: rgba(65, 69, 89, 0.45); /* More transparent surface0 */
 	border: 1px solid rgba(198, 208, 245, 0.08);
@@ -82,12 +80,8 @@
 /* ── Speed badge ───────────────────────────────────────────── */
 .si-speed {
 	font-size: 11px;
-	font-weight: 600;
 	color: #a5adce; /* Frappé subtext0 */
 	padding: 0 4px;
-	min-width: 38px;
-	text-align: center;
-	font-variant-numeric: tabular-nums;
 }
 
 /* Drag handle style */
