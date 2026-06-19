@@ -7,7 +7,7 @@ import Header from "./components/Header.svelte";
 import KeyboardShortcuts from "./components/KeyboardShortcuts.svelte";
 import LoadingState from "./components/LoadingState.svelte";
 import VideoControls from "./components/VideoControls.svelte";
-import { settings } from "./settings.svelte";
+import { settings } from "./store/settings.svelte";
 
 let saveStatus = $state<"idle" | "success" | "error">("idle");
 
@@ -56,15 +56,21 @@ async function triggerSave() {
 <style>
 .container {
 	width: 100%;
-	max-width: 560px;
 	display: flex;
 	flex-direction: column;
 	gap: var(--size-6);
 }
 
 .main-content {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr;
 	gap: var(--size-6);
+	align-items: start;
+}
+
+@media (min-width: 768px) {
+	.main-content {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 </style>

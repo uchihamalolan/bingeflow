@@ -15,19 +15,16 @@ let { size = "medium" }: Props = $props();
 	border-radius: var(--radius-round);
 	animation: spin 0.8s linear infinite;
 	display: inline-block;
-	box-sizing: border-box;
 }
 
 .spinner.small {
 	width: var(--size-4);
 	height: var(--size-4);
-	border-width: var(--border-size-2);
 }
 
 .spinner.medium {
 	width: var(--size-5);
 	height: var(--size-5);
-	border-width: var(--border-size-2);
 }
 
 .spinner.large {

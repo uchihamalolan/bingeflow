@@ -21,14 +21,11 @@ let { active, disabled = false, value, onclick }: Props = $props();
 .kbd-btn {
 	background: var(--surface0);
 	border: var(--border-size-1) solid var(--surface1);
-	color: var(--blue);
-	font-size: var(--font-size-0);
-	font-weight: var(--font-weight-7);
-	padding: var(--size-1) var(--size-4);
+	color: var(--mauve);
+	font-size: var(--font-size-1);
 	border-radius: var(--radius-2);
 	cursor: pointer;
 	min-width: 80px;
-	text-align: center;
 	border-bottom-width: var(--border-size-2);
 
 	&:hover:not(:disabled) {

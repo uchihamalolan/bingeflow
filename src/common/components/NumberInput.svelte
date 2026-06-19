@@ -21,7 +21,7 @@ let {
 </script>
 
 <div class="number-input-wrapper">
-	<input type="number" bind:value {disabled} {min} {max} {step} {onchange}>
+	<input type="number" class="input-field" bind:value {disabled} {min} {max} {step} {onchange}>
 	{#if unit}
 		<span class="unit">{unit}</span>
 	{/if}
@@ -34,26 +34,18 @@ let {
 	background: var(--surface0);
 	border: var(--border-size-1) solid var(--surface1);
 	border-radius: var(--radius-2);
-	padding: 0 var(--size-2);
+	padding-inline: var(--size-2);
 	height: var(--size-8);
 	width: var(--size-11);
-	box-sizing: border-box;
-	transition:
-		border-color var(--duration-2) var(--ease-2),
-		box-shadow var(--duration-2) var(--ease-2);
 }
 
 .number-input-wrapper:focus-within {
 	border-color: var(--mauve);
-	box-shadow: 0 0 0 var(--border-size-2) rgba(202, 158, 230, 0.2);
 }
 
-.number-input-wrapper input {
+.input-field {
 	background: transparent;
 	border: none;
-	font-family: inherit;
-	font-size: var(--font-size-1);
-	font-weight: var(--font-weight-6);
 	width: 100%;
 	padding: 0;
 	text-align: right;
@@ -62,8 +54,8 @@ let {
 	appearance: textfield;
 }
 
-.number-input-wrapper input::-webkit-outer-spin-button,
-.number-input-wrapper input::-webkit-inner-spin-button {
+.input-field::-webkit-outer-spin-button,
+.input-field::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	appearance: none;
 	margin: 0;
@@ -72,7 +64,6 @@ let {
 .unit {
 	font-size: var(--font-size-0);
 	color: var(--subtext0);
-	margin-left: var(--size-1);
-	font-weight: var(--font-weight-6);
+	margin-inline-start: var(--size-1);
 }
 </style>
