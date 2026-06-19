@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { VideoControlsConfig } from "../../common/video-controls";
-import { DEFAULT_VIDEO_CONTROLS } from "../../common/video-controls";
+import type { VideoControlsConfig } from "~/common/video-controls";
+import { DEFAULT_VIDEO_CONTROLS } from "~/common/video-controls";
 import KbdButton from "./KbdButton.svelte";
 import ResetButton from "./ResetButton.svelte";
 

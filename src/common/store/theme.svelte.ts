@@ -1,4 +1,4 @@
-import { getStoredTheme, setStoredTheme } from "../chrome";
+import { getStoredTheme, setStoredTheme } from "~/common/chrome";
 
 type Theme = "frappe" | "latte";
 

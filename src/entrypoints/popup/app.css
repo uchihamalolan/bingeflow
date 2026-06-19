@@ -1,4 +1,4 @@
-@import "../common/styles/theme.css";
+@import "~/common/styles/theme.css";
 
 body {
 	width: 280px;

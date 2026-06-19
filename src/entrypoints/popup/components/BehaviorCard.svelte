@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { BehaviorConfig } from "../../common/behaviors";
+import type { BehaviorConfig } from "~/common/behaviors";
 
 interface Props {
 	behavior: BehaviorConfig;

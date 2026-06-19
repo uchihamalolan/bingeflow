@@ -1,3 +1,4 @@
+import { storage } from "wxt/utils/storage";
 import {
 	DEFAULT_VIDEO_CONTROLS,
 	type VideoControlsConfig,
@@ -8,21 +9,22 @@ export type Settings = {
 	// Future: per-platform behavior enable/disable overrides go here
 };
 
-const STORAGE_KEY = "skip-intro.settings";
+export const settingsItem = storage.defineItem<Settings>(
+	"sync:skip-intro.settings",
+	{
+		defaultValue: {
+			videoControls: DEFAULT_VIDEO_CONTROLS,
+		},
+	},
+);
 
 /**
- * Loads settings from `chrome.storage.sync`, deep-merging any stored values
+ * Loads settings from storage, deep-merging any stored values
  * with the current defaults so that new keys are always present even after an
  * extension update adds them.
  */
 export async function loadSettings(): Promise<Settings> {
-	const stored = await chrome.storage.sync.get(STORAGE_KEY);
-	const raw = stored[STORAGE_KEY] as Partial<Settings> | undefined;
-
-	if (!raw) {
-		return { videoControls: DEFAULT_VIDEO_CONTROLS };
-	}
-
+	const raw = await settingsItem.getValue();
 	return {
 		videoControls: {
 			...DEFAULT_VIDEO_CONTROLS,
@@ -36,7 +38,7 @@ export async function loadSettings(): Promise<Settings> {
 	};
 }
 
-/** Persists settings to `chrome.storage.sync`. */
+/** Persists settings to storage. */
 export async function saveSettings(s: Settings): Promise<void> {
-	await chrome.storage.sync.set({ [STORAGE_KEY]: s });
+	await settingsItem.setValue(s);
 }

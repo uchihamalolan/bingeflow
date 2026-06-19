@@ -1,7 +1,7 @@
 <script lang="ts">
-import NumberInput from "../../common/components/NumberInput.svelte";
-import Switch from "../../common/components/Switch.svelte";
-import type { VideoControlsConfig } from "../../common/video-controls";
+import NumberInput from "~/common/components/NumberInput.svelte";
+import Switch from "~/common/components/Switch.svelte";
+import type { VideoControlsConfig } from "~/common/video-controls";
 
 interface Props {
 	videoControls: VideoControlsConfig;
