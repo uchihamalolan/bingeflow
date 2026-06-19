@@ -1,8 +1,6 @@
 <script lang="ts">
-import Spinner from "../../common/components/Spinner.svelte";
-
 interface Props {
-	saveStatus: "idle" | "saving" | "saved";
+	saveStatus: "idle" | "success" | "error";
 }
 
 let {
@@ -11,12 +9,11 @@ let {
 </script>
 
 {#if saveStatus !== "idle"}
-	<div class="toast" class:saved={saveStatus === "saved"}>
-		{#if saveStatus === "saving"}
-			<Spinner size="small" />
-			Saving...
-		{:else}
+	<div class="toast" class:success={saveStatus === "success"} class:error={saveStatus === "error"}>
+		{#if saveStatus === "success"}
 			Saved ✓
+		{:else}
+			Failed to save ✗
 		{/if}
 	</div>
 {/if}
@@ -40,10 +37,16 @@ let {
 	animation: slideIn var(--duration-3) var(--ease-out-3);
 }
 
-.toast.saved {
+.toast.success {
 	border-color: var(--green);
 	color: var(--green);
 	background: rgba(166, 209, 137, 0.08);
+}
+
+.toast.error {
+	border-color: var(--red);
+	color: var(--red);
+	background: rgba(231, 130, 132, 0.08);
 }
 
 @keyframes slideIn {

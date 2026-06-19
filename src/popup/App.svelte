@@ -1,11 +1,8 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import {
-	getCurrentTab,
-	getStoredTheme,
-	openOptionsPage,
-} from "../common/chrome";
+import { getCurrentTab, openOptionsPage } from "../common/chrome";
 import { detectConfig, type PlatformConfig } from "../common/platforms";
+import { theme } from "../common/store/theme.svelte";
 
 import SettingsButton from "./components/SettingsButton.svelte";
 import Found from "./states/Found.svelte";
@@ -20,10 +17,7 @@ type State =
 let state = $state<State>({ kind: "loading" });
 
 onMount(async () => {
-	// setting theme
-	const storedTheme = await getStoredTheme();
-	const theme = storedTheme === "latte" ? "latte" : "frappe";
-	document.documentElement.setAttribute("data-theme", theme);
+	await theme.init();
 
 	// setting config
 	const tab = await getCurrentTab();

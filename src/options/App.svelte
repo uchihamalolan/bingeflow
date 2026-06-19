@@ -1,62 +1,50 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import type { Settings } from "../common/settings";
-import { loadSettings, saveSettings } from "../common/settings";
-
+import Toast from "../common/components/Toast.svelte";
+import { saveSettings } from "../common/settings";
+import { theme } from "../common/store/theme.svelte";
 import Header from "./components/Header.svelte";
 import KeyboardShortcutsSection from "./components/KeyboardShortcutsSection.svelte";
 import LoadingState from "./components/LoadingState.svelte";
-import Toast from "./components/Toast.svelte";
 import VideoControlsSection from "./components/VideoControlsSection.svelte";
+import { settings } from "./settings.svelte";
 
-let settings = $state<Settings | null>(null);
-let theme = $state<"frappe" | "latte">("frappe");
-let saveStatus = $state<"idle" | "saving" | "saved">("idle");
-
-let saveTimeout: number;
-let toastTimeout: number;
+let saveStatus = $state<"idle" | "success" | "error">("idle");
 
 onMount(async () => {
-	settings = await loadSettings();
-
-	const storedTheme = await chrome.storage.local.get("skip-intro.theme");
-	if (storedTheme["skip-intro.theme"] === "latte") {
-		theme = "latte";
-	} else {
-		theme = "frappe";
-	}
-	document.documentElement.setAttribute("data-theme", theme);
+	await Promise.all([theme.init(), settings.init()]);
 });
 
-function toggleTheme() {
-	theme = theme === "frappe" ? "latte" : "frappe";
-	document.documentElement.setAttribute("data-theme", theme);
-	chrome.storage.local.set({ "skip-intro.theme": theme });
-}
+async function triggerSave() {
+	if (!settings.current) return;
 
-function triggerSave() {
-	if (!settings) return;
-	const currentSettings = settings;
-	saveStatus = "saving";
-	window.clearTimeout(saveTimeout);
-	saveTimeout = window.setTimeout(async () => {
-		await saveSettings($state.snapshot(currentSettings));
-		saveStatus = "saved";
-		window.clearTimeout(toastTimeout);
-		toastTimeout = window.setTimeout(() => {
-			saveStatus = "idle";
-		}, 2000);
-	}, 500);
+	try {
+		await saveSettings($state.snapshot(settings.current));
+		saveStatus = "success";
+	} catch (error) {
+		console.error("Failed to save settings:", error);
+		saveStatus = "error";
+	}
+
+	setTimeout(() => {
+		saveStatus = "idle";
+	}, 2000);
 }
 </script>
 
-{#if settings}
+{#if settings.current}
 	<div class="container">
-		<Header {theme} ontoggle={toggleTheme} />
+		<Header />
 
 		<main class="main-content">
-			<VideoControlsSection bind:videoControls={settings.videoControls} onchange={triggerSave} />
-			<KeyboardShortcutsSection bind:videoControls={settings.videoControls} onchange={triggerSave} />
+			<VideoControlsSection
+				bind:videoControls={settings.current.videoControls}
+				onchange={triggerSave}
+			/>
+			<KeyboardShortcutsSection
+				bind:videoControls={settings.current.videoControls}
+				onchange={triggerSave}
+			/>
 		</main>
 	</div>
 
