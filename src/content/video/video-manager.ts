@@ -132,9 +132,13 @@ export class VideoManager {
 	 */
 	private findVideo(): HTMLVideoElement | null {
 		const selector = this.platformConfig?.videoSelector;
+
 		if (selector) {
 			const el = document.querySelector<HTMLVideoElement>(selector);
-			if (el !== null) return el;
+
+			if (el !== null && el instanceof HTMLVideoElement) {
+				return el;
+			}
 		}
 
 		return findLargestVideo();
