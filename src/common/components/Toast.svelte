@@ -9,7 +9,7 @@ let {
 </script>
 
 {#if saveStatus !== "idle"}
-	<div class="toast" class:success={saveStatus === "success"} class:error={saveStatus === "error"}>
+	<div class="toast" class:success={saveStatus === "success"} class:error={saveStatus === "error"} role="status">
 		{#if saveStatus === "success"}
 			Saved ✓
 		{:else}

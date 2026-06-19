@@ -14,17 +14,16 @@ let {
 }: Props = $props();
 </script>
 
-<section class="section">
-	<h2>Video Controls</h2>
+<article class="section">
+	<h2 class="section-title">Video Controls</h2>
 
 	<div class="setting-row">
-		<div class="setting-info">
-			<span class="setting-label">Enable Overlay</span>
-			<span class="setting-desc"
-				>Show the floating video controls overlay on pages with video
-				elements</span
-			>
-		</div>
+		<dl class="setting-info">
+			<dt class="setting-label">Enable Overlay</dt>
+			<dd class="setting-desc">
+				Show the floating video controls overlay on pages with video elements
+			</dd>
+		</dl>
 		<Switch
 			id="enabled-toggle"
 			ariaLabel="Enable Overlay"
@@ -37,12 +36,12 @@ let {
 		class="setting-row"
 		class:disabled={!videoControls.enabled}
 	>
-		<div class="setting-info">
-			<span class="setting-label">Seek Duration</span>
-			<span class="setting-desc"
-				>Seconds to seek forward or backward</span
-			>
-		</div>
+		<dl class="setting-info">
+			<dt class="setting-label">Seek Duration</dt>
+			<dd class="setting-desc">
+				Seconds to seek forward or backward
+			</dd>
+		</dl>
 		<NumberInput
 			bind:value={videoControls.seekSeconds}
 			disabled={!videoControls.enabled}
@@ -58,12 +57,12 @@ let {
 		class="setting-row"
 		class:disabled={!videoControls.enabled}
 	>
-		<div class="setting-info">
-			<span class="setting-label">Playback Speed Step</span>
-			<span class="setting-desc"
-				>Playback-rate increment or decrement per button click</span
-			>
-		</div>
+		<dl class="setting-info">
+			<dt class="setting-label">Playback Speed Step</dt>
+			<dd class="setting-desc">
+				Playback-rate increment or decrement per button click
+			</dd>
+		</dl>
 		<NumberInput
 			bind:value={videoControls.speedStep}
 			disabled={!videoControls.enabled}
@@ -79,13 +78,12 @@ let {
 		class="setting-row"
 		class:disabled={!videoControls.enabled}
 	>
-		<div class="setting-info">
-			<span class="setting-label">Start Hidden</span>
-			<span class="setting-desc"
-				>Hide the overlay by default until mouse activity is detected near
-				the video</span
-			>
-		</div>
+		<dl class="setting-info">
+			<dt class="setting-label">Start Hidden</dt>
+			<dd class="setting-desc">
+				Hide the overlay by default until mouse activity is detected near the video
+			</dd>
+		</dl>
 		<Switch
 			id="start-hidden-toggle"
 			ariaLabel="Start Hidden"
@@ -94,7 +92,7 @@ let {
 			{onchange}
 		/>
 	</div>
-</section>
+</article>
 
 <style>
 .section {
@@ -106,10 +104,9 @@ let {
 	flex-direction: column;
 	gap: var(--size-5);
 	box-shadow: var(--shadow-2);
-	transition: opacity var(--duration-2) var(--ease-2);
 }
 
-.section h2 {
+.section-title {
 	font-size: var(--font-size-2);
 	font-weight: var(--font-weight-6);
 	margin: 0;

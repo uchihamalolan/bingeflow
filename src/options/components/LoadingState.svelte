@@ -2,9 +2,9 @@
 import Spinner from "../../common/components/Spinner.svelte";
 </script>
 
-<div class="loading-container">
+<div class="loading-container" role="status">
 	<Spinner size="large" />
-	<p>Loading settings...</p>
+	<p class="loading-text">Loading settings...</p>
 </div>
 
 <style>
@@ -17,9 +17,9 @@ import Spinner from "../../common/components/Spinner.svelte";
 	color: var(--subtext0);
 }
 
-.loading-container p {
-	margin: var(--size-4) 0 0 0;
-	font-size: var(--font-size-1);
-	font-weight: var(--font-weight-5);
+.loading-text {
+	margin-block-start: var(--size-4);
+	margin-block-end: 0;
+	margin-inline: 0;
 }
 </style>
