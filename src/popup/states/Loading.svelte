@@ -2,7 +2,7 @@
 import Spinner from "../../common/components/Spinner.svelte";
 </script>
 
-<div class="loading">
+<div class="loading" role="status" aria-label="Loading">
 	<Spinner size="medium" />
 </div>
 

@@ -1,9 +1,9 @@
 <script lang="ts"></script>
 
-<div class="unsupported">
-	<span class="icon">📺</span>
-	<p>Not on a supported<br>streaming platform</p>
-</div>
+<section class="unsupported" aria-label="Unsupported platform">
+	<p class="unsupported-icon" aria-hidden="true">📺</p>
+	<p class="unsupported-message">Not on a supported<br>streaming platform</p>
+</section>
 
 <style>
 .unsupported {
@@ -15,14 +15,13 @@
 	text-align: center;
 }
 
-.icon {
-	font-size: var(--font-size-4);
+.unsupported-icon {
 	opacity: 0.5;
+	margin: 0;
 }
 
-p {
-	font-size: var(--font-size-0);
+.unsupported-message {
 	color: var(--subtext0);
-	line-height: 1.6;
+	margin: 0;
 }
 </style>

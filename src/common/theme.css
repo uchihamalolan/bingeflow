@@ -1,5 +1,5 @@
-@import "open-props/sizes";
-@import "open-props/fonts";
+@import "open-props/style";
+@import "open-props/normalize";
 
 /* Reset and Baseline Styles */
 *,
@@ -31,6 +31,7 @@
 }
 
 :root {
+	/* base colors */
 	--base: #303446;
 	--mantle: #292c3c;
 	--crust: #232634;
@@ -45,27 +46,6 @@
 	--green: #a6d189;
 	--red: #e78284;
 	--peach: #ef9f76;
-
-	/* Core Borders & Radii */
-	--border-size-1: 1px;
-	--border-size-2: 2px;
-	--radius-1: 2px;
-	--radius-2: 8px;
-	--radius-3: 12px;
-	--radius-4: 16px;
-	--radius-round: 9999px;
-
-	/* Core Animations */
-	--duration-2: 200ms;
-	--duration-3: 250ms;
-	--ease-2: cubic-bezier(0.25, 0, 0.4, 1);
-	--ease-out-3: cubic-bezier(0, 0, 0.3, 1);
-
-	/* Core Shadows */
-	--shadow-2:
-		0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-	--shadow-3:
-		0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
 :root[data-theme="frappe"] {

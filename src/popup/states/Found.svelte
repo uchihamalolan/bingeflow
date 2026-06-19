@@ -1,5 +1,8 @@
 <script lang="ts">
-import { getPlatformBehaviors, type PlatformConfig } from "../../common/platforms";
+import {
+	getPlatformBehaviors,
+	type PlatformConfig,
+} from "../../common/platforms";
 import BehaviorCard from "../components/BehaviorCard.svelte";
 
 interface Props {
@@ -9,43 +12,34 @@ interface Props {
 let { config }: Props = $props();
 </script>
 
-<div class="body">
-	<div class="row platform-row">
-		<span class="label">Platform</span>
-		<span class="value">{config.label}</span>
-	</div>
+<section class="found">
+	<dl class="platform">
+		<dt class="platform-label">Platform</dt>
+		<dd class="platform-value">{config.label}</dd>
+	</dl>
 
 	{#each getPlatformBehaviors(config) as behavior (behavior.type)}
 		<BehaviorCard {behavior} />
 	{/each}
-</div>
+</section>
 
 <style>
-.body {
+.found {
 	padding: var(--size-2) 0;
 }
 
-.row {
+.platform {
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
 	padding: var(--size-2) var(--size-4);
+	margin: 0 0 var(--size-1);
 }
 
-.platform-row {
-	margin-bottom: var(--size-1);
-}
-
-.label {
-	font-size: var(--font-size-00);
-	font-weight: 600;
+.platform-label {
 	color: var(--subtext0);
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
 }
 
-.value {
-	font-size: var(--font-size-0);
-	font-weight: 600;
+.platform-value {
+	margin: 0;
 }
 </style>

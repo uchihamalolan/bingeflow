@@ -10,7 +10,7 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
 - **Framework**: [Svelte 5](https://svelte.dev/) (uses Svelte 5 runes like `$state` and `$props` for reactivity).
 - **Bundler**: [Vite](https://vite.dev/) with [@crxjs/vite-plugin](https://crxjs.dev/) (Manifest V3 support).
 - **Linter & Formatter**: [Biome](https://biomejs.dev/) (configured via [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json)).
-- **Styling**: [Open Props](https://open-props.style/) (design tokens for CSS variables, such as spacing, shadows, easing, and borders).
+- **Styling**: [Open Props](https://open-props.style/) (design tokens for CSS variables) + [Catppuccin](https://catppuccin.com/) colour theme.
 - **Language**: TypeScript.
 
 ---
@@ -23,6 +23,8 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
 - **`src/popup/`**: Contains the popup interface shown when the extension icon is clicked.
   - `App.svelte`: The main entry point.
   - `states/`: Includes state sub-components (`Loading.svelte`, `Found.svelte`, `Unsupported.svelte`).
+- **`src/options/`**: The extension options page.
+- **`src/common/components/`**: Shared Svelte components (e.g. `Switch.svelte`, `Spinner.svelte`, `SettingsIcon.svelte`).
 
 ---
 
@@ -36,22 +38,9 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
   ```
 - **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json).
 
-### 2. Svelte 5 Runes & Props Typing
-- This project uses Svelte 5. Do **not** use the legacy Svelte 4 reactivity syntax (`let count = 0;` paired with `export let prop;`).
-- Use `$state` for component reactive state.
-- Use `$props` for component props. **Always declare a separate `interface Props` or `type Props`** instead of typing them inline.
-  - *Correct:*
-    ```typescript
-    interface Props {
-      config: PlatformConfig;
-    }
-    let { config }: Props = $props();
-    ```
-  - *Incorrect:*
-    ```typescript
-    let { config }: { config: PlatformConfig } = $props();
-    ```
-- Make sure components reside in `.svelte` files and modules in `.ts` or `.svelte.ts` files.
+### 2. Svelte Components & Styling
+- For Svelte 5 runes, props typing, and file conventions → see skill **`svelte-conventions`**.
+- For semantic HTML element choices, CSS class rules, and minimal styling → see skill **`svelte-styling`**.
 
 ### 3. Adding a New Platform
 To add support for a new streaming platform:
@@ -69,12 +58,9 @@ To add support for a new streaming platform:
 - Current permissions: `["contentSettings", "tabs"]`.
 - Currently matching content scripts on: `["https://*/*"]`.
 
-### 5. Styling & Design Tokens (Open Props)
-- Do **not** hardcode values for margins, padding, gap, border radii, border thickness, transition timings, or animations.
-- Always use the **Open Props** CSS variable tokens (e.g., `var(--size-2)`, `var(--radius-2)`, `var(--border-size-1)`, `var(--duration-2)`).
-- **Scoping in Extension Pages vs. Content Scripts:**
-  - Standard variables are imported globally in popup/options pages via [theme.css](file:///Users/malolan/Projects/skip-intro/src/common/theme.css) and attach to `:where(html)`.
-  - For injected components (like the overlay), define the exact Open Props variables used directly on the `:host` selector in the component's stylesheet (see [overlay.css](file:///Users/malolan/Projects/skip-intro/src/content/overlay/overlay.css) as a reference). This prevents stylesheet size bloat and avoids polluting the host website's styles.
+### 5. Open Props Scoping
+- Popup/options pages import tokens globally via [theme.css](file:///Users/malolan/Projects/skip-intro/src/common/theme.css) (attaches to `:where(html)`).
+- Injected Shadow DOM components (e.g. the overlay) must define only the tokens they use directly on `:host` — see [overlay.css](file:///Users/malolan/Projects/skip-intro/src/content/overlay/overlay.css) as a reference.
 
 ---
 
