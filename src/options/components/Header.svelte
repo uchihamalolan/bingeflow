@@ -25,7 +25,6 @@ import ThemeToggle from "./ThemeToggle.svelte";
 
 .logo-title {
 	font-size: var(--font-size-4);
-	font-weight: var(--font-weight-7);
 	margin: 0;
 }
 

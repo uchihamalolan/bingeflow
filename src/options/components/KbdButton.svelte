@@ -6,21 +6,10 @@ interface Props {
 	onclick: () => void;
 }
 
-let {
-	active,
-	disabled = false,
-	value,
-	onclick,
-}: Props = $props();
+let { active, disabled = false, value, onclick }: Props = $props();
 </script>
 
-<button
-	type="button"
-	class="kbd-btn"
-	class:active
-	{disabled}
-	{onclick}
->
+<button type="button" class="kbd-btn" class:active {disabled} {onclick}>
 	{#if active}
 		Press key...
 	{:else}
@@ -33,7 +22,6 @@ let {
 	background: var(--surface0);
 	border: var(--border-size-1) solid var(--surface1);
 	color: var(--blue);
-	font-family: inherit;
 	font-size: var(--font-size-0);
 	font-weight: var(--font-weight-7);
 	padding: var(--size-1) var(--size-4);
@@ -58,13 +46,9 @@ let {
 }
 
 .key-display {
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
 	background: transparent;
 	border: none;
 	padding: 0;
-	color: inherit;
 }
 
 @keyframes pulse {

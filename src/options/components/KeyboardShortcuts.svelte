@@ -70,11 +70,11 @@ const shortcutConfigs: { id: BindingKey; label: string }[] = [
 <article class="section" class:disabled={!videoControls.enabled}>
 	<h2 class="section-title">Keyboard Shortcuts</h2>
 
-	<ul class="shortcut-list">
+	<dl class="shortcut-list">
 		{#each shortcutConfigs as { id, label }}
-			<li class="shortcut-item">
-				<span class="shortcut-label">{label}</span>
-				<div class="shortcut-actions">
+			<div class="shortcut-item">
+				<dt class="shortcut-label">{label}</dt>
+				<dd class="shortcut-actions">
 					<KbdButton
 						active={activeRebindKey === id}
 						disabled={!videoControls.enabled}
@@ -85,10 +85,10 @@ const shortcutConfigs: { id: BindingKey; label: string }[] = [
 						disabled={!videoControls.enabled || videoControls.keyBindings[id] === DEFAULT_VIDEO_CONTROLS.keyBindings[id]}
 						onclick={() => resetKey(id)}
 					/>
-				</div>
-			</li>
+				</dd>
+			</div>
 		{/each}
-	</ul>
+	</dl>
 </article>
 
 <style>
@@ -104,16 +104,11 @@ const shortcutConfigs: { id: BindingKey; label: string }[] = [
 }
 
 .section-title {
-	font-size: var(--font-size-2);
-	font-weight: var(--font-weight-6);
 	margin: 0;
 	color: var(--mauve);
 }
 
 .shortcut-list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
 	display: flex;
 	flex-direction: column;
 	gap: var(--size-3);
@@ -132,7 +127,6 @@ const shortcutConfigs: { id: BindingKey; label: string }[] = [
 }
 
 .shortcut-label {
-	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-5);
 }
 

@@ -107,8 +107,6 @@ let {
 }
 
 .section-title {
-	font-size: var(--font-size-2);
-	font-weight: var(--font-weight-6);
 	margin: 0;
 	color: var(--mauve);
 }
@@ -128,7 +126,6 @@ let {
 }
 
 .setting-label {
-	font-size: var(--font-size-1);
 	font-weight: var(--font-weight-6);
 }
 

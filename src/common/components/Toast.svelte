@@ -3,13 +3,16 @@ interface Props {
 	saveStatus: "idle" | "success" | "error";
 }
 
-let {
-	saveStatus,
-}: Props = $props();
+let { saveStatus }: Props = $props();
 </script>
 
 {#if saveStatus !== "idle"}
-	<div class="toast" class:success={saveStatus === "success"} class:error={saveStatus === "error"} role="status">
+	<div
+		class="toast"
+		class:success={saveStatus === "success"}
+		class:error={saveStatus === "error"}
+		role="status"
+	>
 		{#if saveStatus === "success"}
 			Saved ✓
 		{:else}
@@ -27,9 +30,6 @@ let {
 	border: var(--border-size-1) solid var(--surface1);
 	padding: var(--size-3) var(--size-5);
 	border-radius: var(--radius-3);
-	font-size: var(--font-size-1);
-	font-weight: var(--font-weight-6);
-	box-shadow: var(--shadow-3);
 	display: flex;
 	align-items: center;
 	gap: var(--size-2);
