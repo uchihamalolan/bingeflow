@@ -5,15 +5,13 @@
 	"private": true,
 	"scripts": {
 		"dev": "wxt",
-		"dev:firefox": "wxt -b firefox",
 		"build": "wxt build",
-		"build:firefox": "wxt build -b firefox",
 		"zip": "wxt zip",
-		"zip:firefox": "wxt zip -b firefox",
 		"postinstall": "wxt prepare",
 		"lint": "biome lint",
 		"fmt": "biome format --write",
 		"check": "biome check",
+		"typecheck": "tsc --noEmit",
 		"fix": "biome check --write"
 	},
 	"dependencies": {
@@ -22,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.0",
+		"@types/chrome": "^0.1.43",
 		"@wxt-dev/module-svelte": "^2.0.4",
 		"open-props": "^1.7.23",
 		"typescript": "~5.9.3",

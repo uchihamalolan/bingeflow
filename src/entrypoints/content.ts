@@ -1,3 +1,5 @@
+import { defineContentScript } from "wxt/utils/define-content-script";
+
 import { detectConfig, getPlatformBehaviors } from "~/common/platforms";
 import { loadSettings, saveSettings } from "~/common/settings";
 import { isValidPress } from "~/content/utils/validpress";
