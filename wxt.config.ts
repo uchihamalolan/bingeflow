@@ -18,6 +18,9 @@ export default defineConfig({
 			gecko: {
 				id: "skip-intro@malolan.net",
 				strict_min_version: "109.0",
+				data_collection_permissions: {
+					required: ["none"],
+				},
 			},
 		},
 		action: {
