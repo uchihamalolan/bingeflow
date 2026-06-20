@@ -1,6 +1,6 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { getCurrentTab, openOptionsPage } from "@/common/chrome";
+import { getCurrentTab } from "@/common/browser";
 import { detectConfig, type PlatformConfig } from "@/common/platforms";
 import { theme } from "@/common/store/theme.svelte";
 

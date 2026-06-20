@@ -1,5 +1,5 @@
 <script lang="ts">
-import { openOptionsPage } from "@/common/chrome";
+import { openOptionsPage } from "@/common/browser";
 </script>
 
 <button

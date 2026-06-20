@@ -35,10 +35,5 @@
 		"formatter": {
 			"indentScriptAndStyle": false
 		}
-	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
-		}
 	}
 }
