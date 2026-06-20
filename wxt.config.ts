@@ -35,7 +35,9 @@ export default defineConfig({
 		},
 		action: {
 			default_icon: {
-				48: "logo.png",
+				48: "icons/icon-48.png",
+				96: "icons/icon-96.png",
+				128: "icons/icon-128.png",
 			},
 		},
 	},
