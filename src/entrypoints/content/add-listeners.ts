@@ -1,7 +1,6 @@
 import { getPlatformBehaviors, type PlatformConfig } from "@/common/platforms";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { isValidPress } from "./utils/validpress";
-import { changeSpeed, seek } from "./video/video-actions";
 import type { VideoManager } from "./video/video-manager";
 
 interface Props {
@@ -23,32 +22,34 @@ export function addEventListeners({
 		if (!isValidPress(e)) return;
 
 		// ── Video-control shortcuts ─────────────────────────────────────────────
-		const video = videoManager.getVideo();
+		const controller = videoManager.getController();
 
 		// If a key conflicts with a platform shortcut, we yield to the platform action.
-		if (video !== null && !platformShortcuts.has(e.key)) {
+		if (controller !== null && !platformShortcuts.has(e.key)) {
 			if (e.key.toLowerCase() === "v") {
 				videoManager.toggleOverlay();
 				return;
 			}
 			if (e.key === keyBindings.seekBack) {
-				seek(video, -seekSeconds);
+				controller.seek(-seekSeconds);
 				return;
 			}
 			if (e.key === keyBindings.seekFwd) {
-				seek(video, seekSeconds);
+				controller.seek(seekSeconds);
 				return;
 			}
 			if (e.key === keyBindings.speedDown) {
-				changeSpeed(video, -speedStep);
+				const current = controller.getPlaybackRate();
+				controller.setPlaybackRate(current - speedStep);
 				return;
 			}
 			if (e.key === keyBindings.speedUp) {
-				changeSpeed(video, speedStep);
+				const current = controller.getPlaybackRate();
+				controller.setPlaybackRate(current + speedStep);
 				return;
 			}
 			if (e.key === keyBindings.resetSpeed) {
-				video.playbackRate = 1.0;
+				controller.setPlaybackRate(1.0);
 				return;
 			}
 		}

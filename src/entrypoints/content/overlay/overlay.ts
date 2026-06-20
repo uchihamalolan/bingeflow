@@ -1,5 +1,5 @@
 import type { VideoControlsConfig } from "@/common/video-controls";
-import { changeSpeed, seek } from "../video/video-actions";
+import type { VideoController } from "../video-controller/video-controller";
 import OVERLAY_CSS from "./overlay.css?inline";
 
 // ── Public API ──────────────────────────────────────────────────────────────
@@ -8,11 +8,11 @@ export type OverlayHandle = {
 	/** The host element inserted as a sibling of the video inside its parent. */
 	root: HTMLElement;
 	/** Programmatically show or hide the overlay (opacity-based, no DOM removal). */
-	setHidden: (hidden: boolean) => void;
+	setHidden(hidden: boolean): void;
 	/** Toggle the visibility of the overlay. */
-	toggle: () => void;
+	toggle(): void;
 	/** Remove the overlay from the DOM and clean up all event listeners. */
-	remove: () => void;
+	remove(): void;
 };
 
 /**
@@ -21,6 +21,7 @@ export type OverlayHandle = {
  */
 export function createOverlay(
 	video: HTMLVideoElement,
+	controller: VideoController,
 	config: VideoControlsConfig,
 	onPositionChange?: (pos: { x: number; y: number }) => void,
 ): OverlayHandle {
@@ -46,7 +47,7 @@ export function createOverlay(
 
 	const speedBadge = document.createElement("span");
 	speedBadge.className = "si-speed";
-	speedBadge.textContent = formatRate(video.playbackRate);
+	speedBadge.textContent = formatRate(controller.getPlaybackRate());
 
 	const seekBackBtn = createButton("\u00ab", "");
 	seekBackBtn.setAttribute("title", `Seek back ${config.seekSeconds}s`);
@@ -74,7 +75,7 @@ export function createOverlay(
 	);
 	shadow.appendChild(overlay);
 
-	// ── Seek / speed helpers (imported from video-actions) ───────────────────
+	// ── Seek / speed helpers ──────────────────────────────────────────────────
 
 	function flash(btn: HTMLButtonElement): void {
 		btn.classList.add("si-active");
@@ -83,31 +84,32 @@ export function createOverlay(
 
 	// ── Button click handlers ─────────────────────────────────────────────────
 	speedDownBtn.addEventListener("click", () => {
-		changeSpeed(video, -config.speedStep);
+		const current = controller.getPlaybackRate();
+		controller.setPlaybackRate(current - config.speedStep);
 		flash(speedDownBtn);
 	});
 	seekBackBtn.addEventListener("click", () => {
-		seek(video, -config.seekSeconds);
+		controller.seek(-config.seekSeconds);
 		flash(seekBackBtn);
 	});
 	seekFwdBtn.addEventListener("click", () => {
-		seek(video, config.seekSeconds);
+		controller.seek(config.seekSeconds);
 		flash(seekFwdBtn);
 	});
 	speedUpBtn.addEventListener("click", () => {
-		changeSpeed(video, config.speedStep);
+		const current = controller.getPlaybackRate();
+		controller.setPlaybackRate(current + config.speedStep);
 		flash(speedUpBtn);
 	});
 	resetSpeedBtn.addEventListener("click", () => {
-		video.playbackRate = 1.0;
+		controller.setPlaybackRate(1.0);
 		flash(resetSpeedBtn);
 	});
 
 	// ── Speed badge — live update ─────────────────────────────────────────────
-	function onRateChange(): void {
-		speedBadge.textContent = formatRate(video.playbackRate);
-	}
-	video.addEventListener("ratechange", onRateChange);
+	const unsubscribeRateChange = controller.onPlaybackRateChange((rate) => {
+		speedBadge.textContent = formatRate(rate);
+	});
 
 	// ── Drag handle event handlers ────────────────────────────────────────────
 	let isDragging = false;
@@ -240,7 +242,7 @@ export function createOverlay(
 		},
 
 		remove(): void {
-			video.removeEventListener("ratechange", onRateChange);
+			unsubscribeRateChange();
 			host.remove();
 		},
 	};

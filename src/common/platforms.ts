@@ -4,6 +4,7 @@ export type StreamingPlatform = "amazon_prime" | "netflix" | "hotstar";
 
 export type PlatformConfig = {
 	label: string;
+	platform: StreamingPlatform;
 	urlPattern: RegExp;
 	/** CSS selector to find the correct <video> on this platform. Falls back to largest-video heuristic if omitted. */
 	videoSelector?: string;
@@ -14,6 +15,7 @@ export type PlatformConfig = {
 export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 	amazon_prime: {
 		label: "Amazon Prime Video",
+		platform: "amazon_prime",
 		urlPattern: /primevideo\.com/,
 		videoSelector: "#dv-web-player video",
 		behaviors: {
@@ -27,7 +29,9 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 	},
 	netflix: {
 		label: "Netflix",
+		platform: "netflix",
 		urlPattern: /netflix\.com/,
+		videoSelector: ".watch-video--player-view video",
 		behaviors: {
 			skip: { selector: ".skip-credits button" },
 			next: {
@@ -38,6 +42,7 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 	},
 	hotstar: {
 		label: "Disney+ Hotstar",
+		platform: "hotstar",
 		urlPattern: /hotstar\.com/,
 		behaviors: {
 			skip: { selector: 'button[data-testid="skip-intro"]' },

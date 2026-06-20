@@ -1,6 +1,8 @@
 import type { PlatformConfig } from "@/common/platforms";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { createOverlay, type OverlayHandle, positionOverlay } from "../overlay/overlay";
+import { createVideoController } from "../video-controller/create-video-controller";
+import type { VideoController } from "../video-controller/video-controller";
 import { findVideo } from "./video-utils";
 
 /**
@@ -18,6 +20,7 @@ export class VideoManager {
 	private readonly onPositionChange?: (pos: { x: number; y: number }) => void;
 
 	private activeVideo: HTMLVideoElement | null = null;
+	private activeController: VideoController | null = null;
 	private overlayHandle: OverlayHandle | null = null;
 
 	private readonly mutationObserver: MutationObserver;
@@ -48,6 +51,11 @@ export class VideoManager {
 	/** Returns the currently tracked video element, or `null` if none. */
 	getVideo(): HTMLVideoElement | null {
 		return this.activeVideo;
+	}
+
+	/** Returns the video controller wrapping the active video, or `null` if none. */
+	getController(): VideoController | null {
+		return this.activeController;
 	}
 
 	/** Tears down all observers and removes the overlay from the DOM. */
@@ -119,13 +127,18 @@ export class VideoManager {
 	}
 
 	private mount(video: HTMLVideoElement): void {
-		this.overlayHandle = createOverlay(video, this.config, this.onPositionChange);
+		const controller = createVideoController(video, this.platformConfig);
+		this.activeController = controller;
+		this.overlayHandle = createOverlay(video, controller, this.config, this.onPositionChange);
 		this.resizeObserver.observe(video);
 	}
 
 	private unmount(): void {
 		this.overlayHandle?.remove();
 		this.overlayHandle = null;
+
+		this.activeController?.destroy();
+		this.activeController = null;
 
 		if (this.activeVideo !== null) {
 			this.resizeObserver.unobserve(this.activeVideo);
