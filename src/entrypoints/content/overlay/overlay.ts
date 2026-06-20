@@ -256,8 +256,8 @@ export function positionOverlay(host: HTMLElement, video: HTMLVideoElement): voi
 	host.style.setProperty("position", "absolute", "important");
 	// Only apply default left/top if they have not been set (e.g. by dragging)
 	if (!host.style.left) {
-		host.style.setProperty("left", "16px", "important");
-		host.style.setProperty("top", "16px", "important");
+		host.style.setProperty("left", "8px", "important");
+		host.style.setProperty("top", "8px", "important");
 	}
 	host.style.setProperty("bottom", "auto", "important");
 	host.style.setProperty("transform", "none", "important");
