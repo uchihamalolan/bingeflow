@@ -1,4 +1,4 @@
-import { storage } from "wxt/utils/storage";
+import { getSyncStorage, setSyncStorage } from "./browser";
 import { DEFAULT_VIDEO_CONTROLS, type VideoControlsConfig } from "./video-controls";
 
 export type Settings = {
@@ -6,11 +6,7 @@ export type Settings = {
 	// Future: per-platform behavior enable/disable overrides go here
 };
 
-export const settingsItem = storage.defineItem<Settings>("sync:skip-intro.settings", {
-	defaultValue: {
-		videoControls: DEFAULT_VIDEO_CONTROLS,
-	},
-});
+const STORAGE_KEY = "skip-intro.settings";
 
 /**
  * Loads settings from storage, deep-merging any stored values
@@ -18,15 +14,16 @@ export const settingsItem = storage.defineItem<Settings>("sync:skip-intro.settin
  * extension update adds them.
  */
 export async function loadSettings(): Promise<Settings> {
-	const raw = await settingsItem.getValue();
+	const raw = await getSyncStorage<Settings>(STORAGE_KEY);
+
 	return {
 		videoControls: {
 			...DEFAULT_VIDEO_CONTROLS,
-			...raw.videoControls,
+			...raw?.videoControls,
 			// keyBindings is a nested object so it needs its own spread
 			keyBindings: {
 				...DEFAULT_VIDEO_CONTROLS.keyBindings,
-				...raw.videoControls?.keyBindings,
+				...raw?.videoControls?.keyBindings,
 			},
 		},
 	};
@@ -34,5 +31,5 @@ export async function loadSettings(): Promise<Settings> {
 
 /** Persists settings to storage. */
 export async function saveSettings(s: Settings): Promise<void> {
-	await settingsItem.setValue(s);
+	await setSyncStorage(STORAGE_KEY, s);
 }

@@ -16,3 +16,12 @@ export const getCurrentTab = async () => {
 export const openOptionsPage = () => {
 	browser.runtime.openOptionsPage();
 };
+
+export const getSyncStorage = async <T>(key: string): Promise<T | undefined> => {
+	const res = await browser.storage.sync.get(key);
+	return res[key] as T | undefined;
+};
+
+export const setSyncStorage = async <T>(key: string, value: T): Promise<void> => {
+	await browser.storage.sync.set({ [key]: value });
+};
