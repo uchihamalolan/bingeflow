@@ -1,6 +1,7 @@
 import type { PlatformConfig } from "@/common/platforms";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { createOverlay, type OverlayHandle, positionOverlay } from "../overlay/overlay";
+import { findVideo } from "./video-utils";
 
 /**
  * Manages the lifecycle of the video-controls overlay for a single page.
@@ -103,7 +104,7 @@ export class VideoManager {
 	 * needed. A no-op if the best candidate has not changed.
 	 */
 	private scan(): void {
-		const found = this.findVideo();
+		const found = findVideo(this.platformConfig?.videoSelector);
 
 		// Nothing changed — skip
 		if (found === this.activeVideo) return;
@@ -115,27 +116,6 @@ export class VideoManager {
 			this.activeVideo = found;
 			this.mount(found);
 		}
-	}
-
-	/**
-	 * Finds the best `<video>` element on the page.
-	 *
-	 * Priority:
-	 * 1. Platform-specific `videoSelector` (if the platform config provides one).
-	 * 2. Largest visible video heuristic (by bounding-box area).
-	 */
-	private findVideo(): HTMLVideoElement | null {
-		const selector = this.platformConfig?.videoSelector;
-
-		if (selector) {
-			const el = document.querySelector<HTMLVideoElement>(selector);
-
-			if (el !== null && el instanceof HTMLVideoElement) {
-				return el;
-			}
-		}
-
-		return findLargestVideo();
 	}
 
 	private mount(video: HTMLVideoElement): void {
@@ -152,28 +132,4 @@ export class VideoManager {
 			this.activeVideo = null;
 		}
 	}
-}
-
-// ── Module-private helpers ───────────────────────────────────────────────────
-
-/**
- * Returns the visible `<video>` element with the largest bounding-box area,
- * or `null` if there are no visible videos on the page.
- */
-function findLargestVideo(): HTMLVideoElement | null {
-	const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
-
-	let best: HTMLVideoElement | null = null;
-	let bestArea = 0;
-
-	for (const video of videos) {
-		const { width, height } = video.getBoundingClientRect();
-		const area = width * height;
-		if (area > bestArea) {
-			bestArea = area;
-			best = video;
-		}
-	}
-
-	return best;
 }

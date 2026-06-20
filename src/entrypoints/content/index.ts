@@ -2,9 +2,7 @@ import { defineContentScript } from "wxt/utils/define-content-script";
 
 import { detectConfig, getPlatformBehaviors } from "@/common/platforms";
 import { loadSettings, saveSettings } from "@/common/settings";
-
-import { isValidPress } from "./utils/validpress";
-import { changeSpeed, seek } from "./video/video-actions";
+import { addEventListeners } from "./add-listeners";
 import { VideoManager } from "./video/video-manager";
 
 export default defineContentScript({
@@ -12,12 +10,12 @@ export default defineContentScript({
 	async main() {
 		const settings = await loadSettings();
 		const platformConfig = detectConfig(window.location.hostname);
-		const videoManager = new VideoManager(settings.videoControls, platformConfig, async (pos) => {
-			settings.videoControls.position = pos;
+		const { videoControls } = settings;
+
+		const videoManager = new VideoManager(videoControls, platformConfig, async (pos) => {
+			videoControls.position = pos;
 			await saveSettings(settings);
 		});
-
-		const { keyBindings, seekSeconds, speedStep } = settings.videoControls;
 
 		// Pre-compute active platform shortcuts to handle conflicts
 		const platformShortcuts = new Set<string>();
@@ -29,49 +27,11 @@ export default defineContentScript({
 			}
 		}
 
-		document.addEventListener("keydown", (e: KeyboardEvent) => {
-			if (!isValidPress(e)) return;
-
-			// ── Video-control shortcuts ─────────────────────────────────────────────
-			const video = videoManager.getVideo();
-
-			// If a key conflicts with a platform shortcut, we yield to the platform action.
-			if (video !== null && !platformShortcuts.has(e.key)) {
-				if (e.key.toLowerCase() === "v") {
-					videoManager.toggleOverlay();
-					return;
-				}
-				if (e.key === keyBindings.seekBack) {
-					seek(video, -seekSeconds);
-					return;
-				}
-				if (e.key === keyBindings.seekFwd) {
-					seek(video, seekSeconds);
-					return;
-				}
-				if (e.key === keyBindings.speedDown) {
-					changeSpeed(video, -speedStep);
-					return;
-				}
-				if (e.key === keyBindings.speedUp) {
-					changeSpeed(video, speedStep);
-					return;
-				}
-				if (e.key === keyBindings.resetSpeed) {
-					video.playbackRate = 1.0;
-					return;
-				}
-			}
-
-			// ── Platform-behavior shortcuts (skip-intro, next-episode, …) ──────────
-			if (platformConfig === null) return;
-
-			for (const behavior of getPlatformBehaviors(platformConfig)) {
-				if (behavior.enabled && e.key === behavior.shortcutKey) {
-					document.querySelector<HTMLElement>(behavior.selector)?.click();
-					break;
-				}
-			}
+		addEventListeners({
+			videoManager,
+			platformConfig,
+			videoControls,
+			platformShortcuts,
 		});
 	},
 });

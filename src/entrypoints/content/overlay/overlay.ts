@@ -247,23 +247,6 @@ export function createOverlay(
 }
 
 /**
- * Helper to resolve the best container element for mounting the overlay.
- * On most streaming platforms, the video grandparent is the actual player
- * container that holds the video element and the controls overlays.
- */
-function getPlayerContainer(video: HTMLVideoElement): HTMLElement {
-	const parent = video.parentElement;
-	if (!parent) return video;
-
-	const grandparent = parent.parentElement;
-	if (!grandparent || grandparent === document.body) {
-		return parent;
-	}
-
-	return grandparent;
-}
-
-/**
  * Applies the absolute-positioning styles to `host` and ensures the video's
  * parent container is positioned (so `position: absolute` on `host` works).
  * Safe to call multiple times (idempotent).
@@ -308,4 +291,21 @@ function createButton(label: string, extraClass: string): HTMLButtonElement {
 
 function formatRate(rate: number): string {
 	return rate.toFixed(2);
+}
+
+/**
+ * Helper to resolve the best container element for mounting the overlay.
+ * On most streaming platforms, the video grandparent is the actual player
+ * container that holds the video element and the controls overlays.
+ */
+function getPlayerContainer(video: HTMLVideoElement): HTMLElement {
+	const parent = video.parentElement;
+	if (!parent) return video;
+
+	const grandparent = parent.parentElement;
+	if (!grandparent || grandparent === document.body) {
+		return parent;
+	}
+
+	return grandparent;
 }
