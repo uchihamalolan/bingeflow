@@ -1,8 +1,8 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import Toast from "~/common/components/Toast.svelte";
-import { saveSettings } from "~/common/settings";
-import { theme } from "~/common/store/theme.svelte";
+import Toast from "@/common/components/Toast.svelte";
+import { saveSettings } from "@/common/settings";
+import { theme } from "@/common/store/theme.svelte";
 import Header from "./components/Header.svelte";
 import KeyboardShortcuts from "./components/KeyboardShortcuts.svelte";
 import LoadingState from "./components/LoadingState.svelte";

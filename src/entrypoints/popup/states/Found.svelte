@@ -1,8 +1,5 @@
 <script lang="ts">
-import {
-	getPlatformBehaviors,
-	type PlatformConfig,
-} from "~/common/platforms";
+import { getPlatformBehaviors, type PlatformConfig } from "@/common/platforms";
 import BehaviorCard from "../components/BehaviorCard.svelte";
 
 interface Props {

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { BehaviorConfig } from "~/common/behaviors";
+import type { BehaviorConfig } from "@/common/behaviors";
 
 interface Props {
 	behavior: BehaviorConfig;
@@ -10,12 +10,18 @@ let { behavior }: Props = $props();
 
 <article class="card">
 	<h3 class="title">{behavior.label}</h3>
-	<mark class:badge-on={behavior.enabled} class:badge-off={!behavior.enabled} class="badge">
+	<mark
+		class:badge-on={behavior.enabled}
+		class:badge-off={!behavior.enabled}
+		class="badge"
+	>
 		{behavior.enabled ? "Active" : "Inactive"}
 	</mark>
 	<dl class="shortcut">
 		<dt class="shortcut-label">Shortcut Key</dt>
-		<dd class="shortcut-value"><kbd>{behavior.shortcutKey.toUpperCase()}</kbd></dd>
+		<dd class="shortcut-value">
+			<kbd>{behavior.shortcutKey.toUpperCase()}</kbd>
+		</dd>
 	</dl>
 </article>
 

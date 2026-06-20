@@ -1,17 +1,14 @@
 <script lang="ts">
-import NumberInput from "~/common/components/NumberInput.svelte";
-import Switch from "~/common/components/Switch.svelte";
-import type { VideoControlsConfig } from "~/common/video-controls";
+import NumberInput from "@/common/components/NumberInput.svelte";
+import Switch from "@/common/components/Switch.svelte";
+import type { VideoControlsConfig } from "@/common/video-controls";
 
 interface Props {
 	videoControls: VideoControlsConfig;
 	onchange: () => void;
 }
 
-let {
-	videoControls = $bindable(),
-	onchange,
-}: Props = $props();
+let { videoControls = $bindable(), onchange }: Props = $props();
 </script>
 
 <article class="section">
@@ -32,15 +29,10 @@ let {
 		/>
 	</div>
 
-	<div
-		class="setting-row"
-		class:disabled={!videoControls.enabled}
-	>
+	<div class="setting-row" class:disabled={!videoControls.enabled}>
 		<dl class="setting-info">
 			<dt class="setting-label">Seek Duration</dt>
-			<dd class="setting-desc">
-				Seconds to seek forward or backward
-			</dd>
+			<dd class="setting-desc">Seconds to seek forward or backward</dd>
 		</dl>
 		<NumberInput
 			bind:value={videoControls.seekSeconds}
@@ -53,10 +45,7 @@ let {
 		/>
 	</div>
 
-	<div
-		class="setting-row"
-		class:disabled={!videoControls.enabled}
-	>
+	<div class="setting-row" class:disabled={!videoControls.enabled}>
 		<dl class="setting-info">
 			<dt class="setting-label">Playback Speed Step</dt>
 			<dd class="setting-desc">
@@ -74,14 +63,12 @@ let {
 		/>
 	</div>
 
-	<div
-		class="setting-row"
-		class:disabled={!videoControls.enabled}
-	>
+	<div class="setting-row" class:disabled={!videoControls.enabled}>
 		<dl class="setting-info">
 			<dt class="setting-label">Start Hidden</dt>
 			<dd class="setting-desc">
-				Hide the overlay by default until mouse activity is detected near the video
+				Hide the overlay by default until mouse activity is detected near the
+				video
 			</dd>
 		</dl>
 		<Switch

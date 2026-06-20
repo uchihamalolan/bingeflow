@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { VideoControlsConfig } from "~/common/video-controls";
-import { DEFAULT_VIDEO_CONTROLS } from "~/common/video-controls";
+import type { VideoControlsConfig } from "@/common/video-controls";
+import { DEFAULT_VIDEO_CONTROLS } from "@/common/video-controls";
 import KbdButton from "./KbdButton.svelte";
 import ResetButton from "./ResetButton.svelte";
 
@@ -9,10 +9,7 @@ interface Props {
 	onchange: () => void;
 }
 
-let {
-	videoControls = $bindable(),
-	onchange,
-}: Props = $props();
+let { videoControls = $bindable(), onchange }: Props = $props();
 
 let activeRebindKey = $state<keyof VideoControlsConfig["keyBindings"] | null>(
 	null,

@@ -1,4 +1,4 @@
-import { loadSettings, type Settings } from "~/common/settings";
+import { loadSettings, type Settings } from "@/common/settings";
 
 function createSettingsStore() {
 	let current = $state<Settings | null>(null);

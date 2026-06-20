@@ -1,5 +1,5 @@
 <script lang="ts">
-import { theme } from "~/common/store/theme.svelte";
+import { theme } from "@/common/store/theme.svelte";
 </script>
 
 <button
