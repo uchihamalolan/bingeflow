@@ -5,9 +5,9 @@ import { detectConfig, type PlatformConfig } from "@/common/platforms";
 import { theme } from "@/common/store/theme.svelte";
 
 import SettingsButton from "./components/SettingsButton.svelte";
-import Found from "./states/Found.svelte";
-import Loading from "./states/Loading.svelte";
-import Unsupported from "./states/Unsupported.svelte";
+import Found from "./views/Found.svelte";
+import Loading from "./views/Loading.svelte";
+import Unsupported from "./views/Unsupported.svelte";
 
 type State =
 	| { kind: "loading" }
