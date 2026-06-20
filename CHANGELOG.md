@@ -1,30 +1,86 @@
 # Release Notes
 
-## Version 1.0.0 - 2026-06-18
+## v1.0.0 - 2026-06-21
 
-### Added
-- **Speed Reset Control**: Added a new `1×` button to the video controls overlay to quickly reset the video playback rate to normal (`1.0x`).
-- **Reset Speed Keybinding**: Configured `r` as the default keyboard shortcut for resetting the playback rate.
-- **Rebinding Support**: Added "Reset Speed" configuration row in options keyboard shortcut settings.
-- **Options Settings Page**: Created a dedicated options page (`src/options/`) for customizing extension preferences.
-  - Choose between Catppuccin **Frappe** (dark) and **Latte** (light) color themes.
-  - Toggle the floating video controls overlay.
-  - Set custom seek durations (1 to 60 seconds).
-  - Set custom playback speed step increments (0.05× to 2.0×).
-  - Configure options to start the video control overlay in a hidden state.
-  - Rebind and reset default keyboard shortcut keybindings for seek back/forward and speed up/down controls.
-- **Settings Navigation**: Added a direct shortcut button in the popup header to easily launch the settings options page.
-- **Extended Platform Support**: Supported platforms now include:
-  - Netflix (`netflix.com`)
-  - Disney+ Hotstar (`hotstar.com`)
-  - Amazon Prime Video (`primevideo.com`)
-- **Shared Components**: Extracted clean, reusable Svelte 5 component UI structures (`Spinner`, `Switch`, `NumberInput`) under `src/common/components/`.
+### 🚀 Enhancements
 
-### Refactored
-- Modularized options layout by refactoring the monolithic `App.svelte` options file into separate, single-responsibility components (`Header`, `VideoControlsSection`, `KeyboardShortcutsSection`, `Toast`, `LoadingState`).
-- Standardized the popup loader to reuse the new common `Spinner.svelte`.
+- Define platforms configuration and set up content script base (e3c92fb)
+- Implement extension popup and loading/unsupported states (10fedce)
+- Add settings behaviors, license, and ignore keystrokes in input elements (4f4ec14)
+- Add configurable video skip and auto-skip behaviors (9fd6a12)
+- Allow platform configurations to override behaviors from settings (adc4be2)
+- Add keyboard shortcut settings and video controls options (f005e18)
+- Add UI overlay for active platform indicators (e1d53b7)
+- Implement video manager to handle HTML5 video playback actions (7d55cf9)
+- Add options page and bootstrap layout styling (87899d0)
+- Integrate Catppuccin color theme and theme state store (26a0d52)
+- Add video settings controls for speed, skip time, and mute on skip (2035f06)
+- Add setting to reset playback speed when skip occurs (63fc50b)
+- Add drag handle to overlay for custom positioning (b86f312)
+- Save custom overlay position to local storage when moved (2c72204)
+- Integrate Open Props for CSS custom properties styling (a084549)
+- Enhance popup aesthetics with consistent margins and status indicators (0d07334)
+- Enable theme switching on options page (ac42bd6)
+- Add support for Netflix with dedicated bridge and controller injection (7004481)
 
----
+### 🩹 Fixes
+
+- Resolve overlay layout, position, and styling issues (6af9f63)
+- Resolve overlay visibility and mouse event propagation issues (d45327c)
+- Correct layout spacing, alignment, and hover effects in popup (a30d2a5)
+- Fix type check and layout errors in settings page (dd1ddf4)
+- Prevent playback rate modification on Netflix video player (2f3d190)
+- Adjust overlay positioning and clean up platforms config (fb563fe)
+
+### 💅 Refactors
+
+- Add logger utility and clean up input validation (1d2b88b)
+- Restructure files and clean up popup styling (68c8ba7)
+- Convert UI colors and spacing to Open Props CSS variables (f9ad9e1)
+- Clean up options page layout and remove redundant styles (86910e2)
+- Optimize popup components and simplify state management (011110a)
+- Reorganize folder structure under src/entrypoints (75abf00)
+- Simplify theme storage and configure Biome linter (40bc9c1)
+- Rename popup state views directory to views (926d7df)
+- Wrap extension storage calls with browser namespace utility (c6ed9a7)
+- Optimize browser storage helpers for options and settings (0ec770b)
+- Standardize local storage calls across theme and extension APIs (eed2c75)
+- Restructure content scripts, listener management, and video utilities (0a64db4)
+- Move logger utility to common/utils (c39b12d)
+- Remove persistent overlay position storage (8f10956)
+
+### 📖 Documentation
+
+- Add coding guidelines in AGENTS.md and update README (4136cc9)
+- Update changelog and extension manifest version (8a0d929)
+- Update development guidelines in AGENTS.md (0f1fb17)
+
+### 🏡 Chore
+
+- Initialize repository with Vite, Svelte, and Biome (3a199c7)
+- Adjust tsconfig and entrypoints for popup compilation (c525615)
+- Add extension icons and update manifest configuration (9e8a8cd)
+- Clean up dependencies and typescript configurations (ce58adb)
+- Update extension manifest with background, options, and content script permissions (0d1d982)
+- Add build output directory and update typescript configuration (8120324)
+- Migrate project build and bundling toolchain to WXT (ad75359)
+- Update dependencies and typescript definition for WXT (1aa4989)
+- Update package dependencies and content script messaging (7a89dd4)
+- Add Firefox telemetry metadata configuration (eeefb58)
+- Configure PostCSS with custom media queries in WXT (50ff608)
+- Use defu for merging default settings configuration (e6c92d4)
+
+### 🎨 Styles
+
+- Format popup codebase using Biome (88ed857)
+- Make overlay semi-transparent and apply glassmorphism style (a764abc)
+- Adopt CSS nesting format in stylesheets (b0e7354)
+- Remove unused CSS rules from layout and options (d2fe1b7)
+- Format sources and update formatting rules in biome.json (951899f)
+
+### ❤️ Contributors
+
+- Malolan B ([@uchihamalolan](https://github.com/uchihamalolan))
 
 ## Notes to Reviewer
 
