@@ -23,11 +23,10 @@ export function createOverlay(
 	video: HTMLVideoElement,
 	controller: VideoController,
 	config: VideoControlsConfig,
-	onPositionChange?: (pos: { x: number; y: number }) => void,
 ): OverlayHandle {
 	// ── Host element ──────────────────────────────────────────────────────────
 	const host = document.createElement("div");
-	positionOverlay(host, video, config);
+	positionOverlay(host, video);
 
 	// ── Shadow DOM ────────────────────────────────────────────────────────────
 	const shadow = host.attachShadow({ mode: "open" });
@@ -181,14 +180,8 @@ export function createOverlay(
 		const pctX = containerRect.width > 0 ? (leftPx / containerRect.width) * 100 : 0;
 		const pctY = containerRect.height > 0 ? (topPx / containerRect.height) * 100 : 0;
 
-		config.position = { x: pctX, y: pctY };
-
 		host.style.setProperty("left", `${pctX}%`, "important");
 		host.style.setProperty("top", `${pctY}%`, "important");
-
-		if (onPositionChange) {
-			onPositionChange({ x: pctX, y: pctY });
-		}
 	});
 
 	dragHandle.addEventListener("pointercancel", (e) => {
@@ -253,11 +246,7 @@ export function createOverlay(
  * parent container is positioned (so `position: absolute` on `host` works).
  * Safe to call multiple times (idempotent).
  */
-export function positionOverlay(
-	host: HTMLElement,
-	video: HTMLVideoElement,
-	config: VideoControlsConfig,
-): void {
+export function positionOverlay(host: HTMLElement, video: HTMLVideoElement): void {
 	const container = host.parentElement ?? getPlayerContainer(video);
 	const containerPos = getComputedStyle(container).position;
 	if (containerPos === "static") {
@@ -265,10 +254,8 @@ export function positionOverlay(
 	}
 
 	host.style.setProperty("position", "absolute", "important");
-	if (config.position) {
-		host.style.setProperty("left", `${config.position.x}%`, "important");
-		host.style.setProperty("top", `${config.position.y}%`, "important");
-	} else {
+	// Only apply default left/top if they have not been set (e.g. by dragging)
+	if (!host.style.left) {
 		host.style.setProperty("left", "16px", "important");
 		host.style.setProperty("top", "16px", "important");
 	}

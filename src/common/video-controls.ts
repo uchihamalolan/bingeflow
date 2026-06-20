@@ -20,10 +20,6 @@ export type VideoControlsConfig = {
 		/** Default: "r" */
 		resetSpeed: string;
 	};
-	position?: {
-		x: number; // percentage from left
-		y: number; // percentage from top
-	};
 };
 
 export const DEFAULT_VIDEO_CONTROLS: VideoControlsConfig = {

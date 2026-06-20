@@ -1,7 +1,7 @@
 import { defineContentScript } from "wxt/utils/define-content-script";
 
 import { detectConfig, getPlatformBehaviors } from "@/common/platforms";
-import { loadSettings, saveSettings } from "@/common/settings";
+import { loadSettings } from "@/common/settings";
 import { addEventListeners } from "./add-listeners";
 import { VideoManager } from "./video/video-manager";
 
@@ -12,10 +12,7 @@ export default defineContentScript({
 		const platformConfig = detectConfig(window.location.hostname);
 		const { videoControls } = settings;
 
-		const videoManager = new VideoManager(videoControls, platformConfig, async (pos) => {
-			videoControls.position = pos;
-			await saveSettings(settings);
-		});
+		const videoManager = new VideoManager(videoControls, platformConfig);
 
 		// Pre-compute active platform shortcuts to handle conflicts
 		const platformShortcuts = new Set<string>();

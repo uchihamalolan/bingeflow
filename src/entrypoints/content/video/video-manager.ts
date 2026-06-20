@@ -17,7 +17,6 @@ import { findVideo } from "./video-utils";
 export class VideoManager {
 	private readonly config: VideoControlsConfig;
 	private readonly platformConfig: PlatformConfig | null;
-	private readonly onPositionChange?: (pos: { x: number; y: number }) => void;
 
 	private activeVideo: HTMLVideoElement | null = null;
 	private activeController: VideoController | null = null;
@@ -26,14 +25,9 @@ export class VideoManager {
 	private readonly mutationObserver: MutationObserver;
 	private readonly resizeObserver: ResizeObserver;
 
-	constructor(
-		config: VideoControlsConfig,
-		platformConfig: PlatformConfig | null,
-		onPositionChange?: (pos: { x: number; y: number }) => void,
-	) {
+	constructor(config: VideoControlsConfig, platformConfig: PlatformConfig | null) {
 		this.config = config;
 		this.platformConfig = platformConfig;
-		this.onPositionChange = onPositionChange;
 
 		this.mutationObserver = new MutationObserver(this.onMutation.bind(this));
 		this.resizeObserver = new ResizeObserver(this.onResize.bind(this));
@@ -103,7 +97,7 @@ export class VideoManager {
 
 	private onResize(): void {
 		if (this.overlayHandle !== null && this.activeVideo !== null) {
-			positionOverlay(this.overlayHandle.root, this.activeVideo, this.config);
+			positionOverlay(this.overlayHandle.root, this.activeVideo);
 		}
 	}
 
@@ -129,7 +123,7 @@ export class VideoManager {
 	private mount(video: HTMLVideoElement): void {
 		const controller = createVideoController(video, this.platformConfig);
 		this.activeController = controller;
-		this.overlayHandle = createOverlay(video, controller, this.config, this.onPositionChange);
+		this.overlayHandle = createOverlay(video, controller, this.config);
 		this.resizeObserver.observe(video);
 	}
 
