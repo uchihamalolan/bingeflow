@@ -9,12 +9,12 @@
 
 			return videoPlayer.getVideoPlayerBySessionId(sessionId);
 		} catch (err) {
-			console.error("[Skip Intro Bridge] Failed to access Netflix player:", err);
+			console.error("[BingeFlow Bridge] Failed to access Netflix player:", err);
 			return null;
 		}
 	}
 
-	window.addEventListener("skip-intro:netflix:seek", (e) => {
+	window.addEventListener("bingeflow:netflix:seek", (e) => {
 		const player = getNetflixPlayer();
 		if (!player) return;
 
@@ -22,7 +22,7 @@
 			const { targetTimeMs } = JSON.parse(e.detail);
 			player.seek(targetTimeMs);
 		} catch (err) {
-			console.error("[Skip Intro Bridge] Failed to seek:", err);
+			console.error("[BingeFlow Bridge] Failed to seek:", err);
 		}
 	});
 })();

@@ -36,7 +36,7 @@ onMount(async () => {
 	<header class="toolbar">
 		<p class="logo">
 			<span class="logo-icon" aria-hidden="true">⏭</span>
-			<strong class="logo-name">Skip Intro</strong>
+			<strong class="logo-name">BingeFlow</strong>
 		</p>
 		<SettingsButton />
 	</header>

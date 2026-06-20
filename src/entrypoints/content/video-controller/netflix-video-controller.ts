@@ -14,14 +14,14 @@ export class NetflixVideoController extends Html5VideoController {
 		);
 
 		window.dispatchEvent(
-			new CustomEvent("skip-intro:netflix:seek", {
+			new CustomEvent("bingeflow:netflix:seek", {
 				detail: JSON.stringify({ targetTimeMs: targetSeconds * 1000 }),
 			}),
 		);
 	}
 
 	private injectBridge(): void {
-		const BRIDGE_ID = "skip-intro-netflix-bridge";
+		const BRIDGE_ID = "bingeflow-netflix-bridge";
 		if (document.getElementById(BRIDGE_ID)) return;
 
 		const script = document.createElement("script");

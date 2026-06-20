@@ -7,7 +7,7 @@ export type Settings = {
 	// Future: per-platform behavior enable/disable overrides go here
 };
 
-const STORAGE_KEY = "skip-intro.settings";
+const STORAGE_KEY = "bingeflow.settings";
 
 /**
  * Loads settings from storage, deep-merging any stored values

@@ -15,6 +15,7 @@ export default defineConfig({
 		},
 	}),
 	manifest: {
+		name: "BingeFlow",
 		permissions: ["tabs", "storage"],
 		icons: {
 			16: "icons/icon-16.png",
@@ -25,7 +26,7 @@ export default defineConfig({
 		},
 		browser_specific_settings: {
 			gecko: {
-				id: "skip-intro@malolan.net",
+				id: "bingeflow@malolan.net",
 				strict_min_version: "109.0",
 				data_collection_permissions: {
 					required: ["none"],

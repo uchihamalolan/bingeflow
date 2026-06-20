@@ -1,4 +1,4 @@
-# Skip Intro ⏭️
+# BingeFlow ⏭️
 
 A lightweight web extension built with **Svelte 5**, **TypeScript**, and **WXT** (Next-gen Web Extension Framework) that allows you to quickly skip intros, recaps, and credits, as well as control video playback on popular streaming platforms.
 
@@ -57,12 +57,12 @@ If you wish to load the unpacked extension manually in your regular browser prof
 
 ## How It Works
 
-1. **Content Script**: [src/entrypoints/content.ts](file:///Users/malolan/Projects/skip-intro/src/entrypoints/content.ts) runs on all matching pages (`matches: ["https://*/*"]`).
-2. **Platform Registry**: When a page loads, the content script detects if the hostname matches any of the registered patterns in [src/common/platforms.ts](file:///Users/malolan/Projects/skip-intro/src/common/platforms.ts).
+1. **Content Script**: [src/entrypoints/content.ts](file:///Users/malolan/Projects/bingeflow/src/entrypoints/content.ts) runs on all matching pages (`matches: ["https://*/*"]`).
+2. **Platform Registry**: When a page loads, the content script detects if the hostname matches any of the registered patterns in [src/common/platforms.ts](file:///Users/malolan/Projects/bingeflow/src/common/platforms.ts).
 3. **Video Controls Overlay**: If enabled, the content script injects a floating controls overlay on the active video container. It listens to hover events and exposes buttons for playback adjustments.
 4. **Event Listener**: When keyboard shortcuts or overlay buttons are pressed, the script updates the video's properties (like `currentTime` and `playbackRate`) or queries/clicks the page's specific skip/next buttons.
 5. **Popup UI**: Clicking the extension icon displays a Svelte-based popup showing the current page's status and quick settings.
-6. **Storage API**: Configuration preferences are loaded and persisted using `browser.storage.sync` (via [src/common/settings.ts](file:///Users/malolan/Projects/skip-intro/src/common/settings.ts)), while UI theme settings are saved locally using `browser.storage.local` (via [src/common/store/theme.svelte.ts](file:///Users/malolan/Projects/skip-intro/src/common/store/theme.svelte.ts)).
+6. **Storage API**: Configuration preferences are loaded and persisted using `browser.storage.sync` (via [src/common/settings.ts](file:///Users/malolan/Projects/bingeflow/src/common/settings.ts)), while UI theme settings are saved locally using `browser.storage.local` (via [src/common/store/theme.svelte.ts](file:///Users/malolan/Projects/bingeflow/src/common/store/theme.svelte.ts)).
 
 ---
 

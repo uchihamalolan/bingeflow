@@ -9,7 +9,7 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
 - **Runtime & Package Manager**: [Bun](https://bun.sh/) (utilizes `bun.lock` for lockfiles, run all scripts with `bun`).
 - **Framework**: [Svelte 5](https://svelte.dev/) (uses Svelte 5 runes like `$state` and `$props` for reactivity).
 - **Bundler**: [WXT](https://wxt.dev/) (Next-gen Web Extension Framework built on Vite).
-- **Linter & Formatter**: [Biome](https://biomejs.dev/) (configured via [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json)).
+- **Linter & Formatter**: [Biome](https://biomejs.dev/) (configured via [biome.json](file:///Users/malolan/Projects/bingeflow/biome.json)).
 - **Styling**: [Open Props](https://open-props.style/) (design tokens for CSS variables) + [Catppuccin](https://catppuccin.com/) colour theme.
 - **Language**: TypeScript.
 
@@ -40,7 +40,7 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
   ```bash
   bun run typecheck  # Performs TypeScript compilation checks without emit
   ```
-- **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json).
+- **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/bingeflow/biome.json).
 
 ### 2. Svelte Components & Styling
 - For Svelte 5 runes, props typing, and file conventions → see skill **`svelte-conventions`**.
@@ -48,7 +48,7 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
 
 ### 3. Adding a New Platform
 To add support for a new streaming platform:
-1. Open [src/common/platforms.ts](file:///Users/malolan/Projects/skip-intro/src/common/platforms.ts).
+1. Open [src/common/platforms.ts](file:///Users/malolan/Projects/bingeflow/src/common/platforms.ts).
 2. Append a new key to the `PLATFORMS` object implementing the `PlatformConfig` type:
    - `label`: Display name of the service.
    - `urlPattern`: Regular expression targeting the streaming site's domain.
@@ -58,17 +58,17 @@ To add support for a new streaming platform:
 3. If necessary, register the platform type in the `StreamingPlatform` union type.
 
 ### 4. Extension Manifest Updates
-- To request new permissions or adjust matching URL patterns, modify [wxt.config.ts](file:///Users/malolan/Projects/skip-intro/wxt.config.ts) or specific entrypoint configuration objects (such as matching rules inside `src/entrypoints/content.ts`) instead of writing a raw `manifest.json`.
+- To request new permissions or adjust matching URL patterns, modify [wxt.config.ts](file:///Users/malolan/Projects/bingeflow/wxt.config.ts) or specific entrypoint configuration objects (such as matching rules inside `src/entrypoints/content.ts`) instead of writing a raw `manifest.json`.
 - Current permissions: `["storage", "tabs"]`.
 - Currently matching content scripts on: `["https://*/*"]`.
 
 ### 5. Open Props Scoping
-- Popup/options pages import tokens globally via [theme.css](file:///Users/malolan/Projects/skip-intro/src/common/theme.css) (attaches to `:where(html)`).
-- Injected Shadow DOM components (e.g. the overlay) must define only the tokens they use directly on `:host` — see [overlay.css](file:///Users/malolan/Projects/skip-intro/src/content/overlay/overlay.css) as a reference.
+- Popup/options pages import tokens globally via [theme.css](file:///Users/malolan/Projects/bingeflow/src/common/theme.css) (attaches to `:where(html)`).
+- Injected Shadow DOM components (e.g. the overlay) must define only the tokens they use directly on `:host` — see [overlay.css](file:///Users/malolan/Projects/bingeflow/src/content/overlay/overlay.css) as a reference.
 
 ### 6. Browser Extension API Usage
 - Avoid calling browser extension APIs (like `browser.storage.*` or `browser.tabs.*`) directly inside Svelte components or business stores.
-- Instead, define reusable wrapper/helper functions in [src/common/browser.ts](file:///Users/malolan/Projects/skip-intro/src/common/browser.ts) (e.g., `getLocalStorage`, `setLocalStorage`, `getCurrentTab`) and import them where needed.
+- Instead, define reusable wrapper/helper functions in [src/common/browser.ts](file:///Users/malolan/Projects/bingeflow/src/common/browser.ts) (e.g., `getLocalStorage`, `setLocalStorage`, `getCurrentTab`) and import them where needed.
 
 ---
 

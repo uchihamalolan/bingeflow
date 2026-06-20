@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle.svelte";
 	<div class="logo-area">
 		<span class="logo-icon" aria-hidden="true">⏭</span>
 		<div>
-			<h1 class="logo-title">Skip Intro</h1>
+			<h1 class="logo-title">BingeFlow</h1>
 			<p class="subtitle">Customize video controls, speeds, and keyboard shortcuts</p>
 		</div>
 	</div>

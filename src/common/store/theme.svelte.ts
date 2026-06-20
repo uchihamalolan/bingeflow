@@ -4,7 +4,7 @@ type Theme = "frappe" | "latte";
 
 function createThemeStore() {
 	let current = $state<Theme>("frappe");
-	const THEME_KEY = "skip-intro.theme";
+	const THEME_KEY = "bingeflow.theme";
 
 	return {
 		get current() {
