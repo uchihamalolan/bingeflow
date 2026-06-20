@@ -20,10 +20,7 @@ export type BehaviorConfig = {
  * Each platform only needs to supply a `selector` override; everything else
  * is inherited from here.
  */
-export const GLOBAL_BEHAVIORS: Record<
-	BehaviorType,
-	Omit<BehaviorConfig, "selector">
-> = {
+export const GLOBAL_BEHAVIORS: Record<BehaviorType, Omit<BehaviorConfig, "selector">> = {
 	skip: { type: "skip", label: "Skip Intro", shortcutKey: "s", enabled: true },
 	next: { type: "next", label: "Next Video", shortcutKey: "n", enabled: true },
 };

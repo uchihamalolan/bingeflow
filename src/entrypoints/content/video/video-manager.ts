@@ -1,10 +1,6 @@
 import type { PlatformConfig } from "@/common/platforms";
 import type { VideoControlsConfig } from "@/common/video-controls";
-import {
-	createOverlay,
-	type OverlayHandle,
-	positionOverlay,
-} from "../overlay/overlay";
+import { createOverlay, type OverlayHandle, positionOverlay } from "../overlay/overlay";
 
 /**
  * Manages the lifecycle of the video-controls overlay for a single page.
@@ -85,9 +81,7 @@ export class VideoManager {
 			for (const node of record.removedNodes) {
 				if (
 					node === this.activeVideo ||
-					(node instanceof Element &&
-						this.activeVideo !== null &&
-						node.contains(this.activeVideo))
+					(node instanceof Element && this.activeVideo !== null && node.contains(this.activeVideo))
 				) {
 					needsScan = true;
 					break outer;
@@ -145,11 +139,7 @@ export class VideoManager {
 	}
 
 	private mount(video: HTMLVideoElement): void {
-		this.overlayHandle = createOverlay(
-			video,
-			this.config,
-			this.onPositionChange,
-		);
+		this.overlayHandle = createOverlay(video, this.config, this.onPositionChange);
 		this.resizeObserver.observe(video);
 	}
 
@@ -171,9 +161,7 @@ export class VideoManager {
  * or `null` if there are no visible videos on the page.
  */
 function findLargestVideo(): HTMLVideoElement | null {
-	const videos = Array.from(
-		document.querySelectorAll<HTMLVideoElement>("video"),
-	);
+	const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
 
 	let best: HTMLVideoElement | null = null;
 	let bestArea = 0;

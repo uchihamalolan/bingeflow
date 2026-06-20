@@ -1,22 +1,16 @@
 import { storage } from "wxt/utils/storage";
-import {
-	DEFAULT_VIDEO_CONTROLS,
-	type VideoControlsConfig,
-} from "./video-controls";
+import { DEFAULT_VIDEO_CONTROLS, type VideoControlsConfig } from "./video-controls";
 
 export type Settings = {
 	videoControls: VideoControlsConfig;
 	// Future: per-platform behavior enable/disable overrides go here
 };
 
-export const settingsItem = storage.defineItem<Settings>(
-	"sync:skip-intro.settings",
-	{
-		defaultValue: {
-			videoControls: DEFAULT_VIDEO_CONTROLS,
-		},
+export const settingsItem = storage.defineItem<Settings>("sync:skip-intro.settings", {
+	defaultValue: {
+		videoControls: DEFAULT_VIDEO_CONTROLS,
 	},
-);
+});
 
 /**
  * Loads settings from storage, deep-merging any stored values

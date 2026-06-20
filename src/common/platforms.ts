@@ -1,8 +1,4 @@
-import {
-	type BehaviorConfig,
-	type BehaviorType,
-	GLOBAL_BEHAVIORS,
-} from "./behaviors";
+import { type BehaviorConfig, type BehaviorType, GLOBAL_BEHAVIORS } from "./behaviors";
 
 export type StreamingPlatform = "amazon_prime" | "netflix" | "hotstar";
 
@@ -22,12 +18,10 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 		videoSelector: "#dv-web-player video",
 		behaviors: {
 			skip: {
-				selector:
-					".atvwebplayersdk-action-buttons button.atvwebplayersdk-skipelement-button",
+				selector: ".atvwebplayersdk-action-buttons button.atvwebplayersdk-skipelement-button",
 			},
 			next: {
-				selector:
-					".atvwebplayersdk-nextupcard-button, button.atvwebplayersdk-next-up-card",
+				selector: ".atvwebplayersdk-nextupcard-button, button.atvwebplayersdk-next-up-card",
 			},
 		},
 	},
@@ -48,8 +42,7 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 		behaviors: {
 			skip: { selector: 'button[data-testid="skip-intro"]' },
 			next: {
-				selector:
-					'button[data-testid="next-episode"], button.player-control-next',
+				selector: 'button[data-testid="next-episode"], button.player-control-next',
 			},
 		},
 	},
@@ -69,9 +62,5 @@ export function getPlatformBehaviors(config: PlatformConfig): BehaviorConfig[] {
 }
 
 export function detectConfig(hostname: string): PlatformConfig | null {
-	return (
-		Object.values(PLATFORMS).find(({ urlPattern }) =>
-			urlPattern.test(hostname),
-		) ?? null
-	);
+	return Object.values(PLATFORMS).find(({ urlPattern }) => urlPattern.test(hostname)) ?? null;
 }

@@ -12,14 +12,10 @@ export default defineContentScript({
 	async main() {
 		const settings = await loadSettings();
 		const platformConfig = detectConfig(window.location.hostname);
-		const videoManager = new VideoManager(
-			settings.videoControls,
-			platformConfig,
-			async (pos) => {
-				settings.videoControls.position = pos;
-				await saveSettings(settings);
-			},
-		);
+		const videoManager = new VideoManager(settings.videoControls, platformConfig, async (pos) => {
+			settings.videoControls.position = pos;
+			await saveSettings(settings);
+		});
 
 		const { keyBindings, seekSeconds, speedStep } = settings.videoControls;
 

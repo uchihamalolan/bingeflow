@@ -176,10 +176,8 @@ export function createOverlay(
 		const leftPx = hostRect.left - containerRect.left;
 		const topPx = hostRect.top - containerRect.top;
 
-		const pctX =
-			containerRect.width > 0 ? (leftPx / containerRect.width) * 100 : 0;
-		const pctY =
-			containerRect.height > 0 ? (topPx / containerRect.height) * 100 : 0;
+		const pctX = containerRect.width > 0 ? (leftPx / containerRect.width) * 100 : 0;
+		const pctY = containerRect.height > 0 ? (topPx / containerRect.height) * 100 : 0;
 
 		config.position = { x: pctX, y: pctY };
 
