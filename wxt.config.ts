@@ -1,3 +1,5 @@
+import OpenProps from "open-props";
+import postcssJitProps from "postcss-jit-props";
 import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/config.html
@@ -5,6 +7,13 @@ export default defineConfig({
 	imports: false,
 	srcDir: "src",
 	modules: ["@wxt-dev/module-svelte"],
+	vite: () => ({
+		css: {
+			postcss: {
+				plugins: [postcssJitProps(OpenProps)],
+			},
+		},
+	}),
 	manifest: {
 		permissions: ["tabs", "storage"],
 		icons: {

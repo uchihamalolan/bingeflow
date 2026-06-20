@@ -26,6 +26,7 @@
 		"@types/chrome": "^0.1.43",
 		"@wxt-dev/module-svelte": "^2.0.4",
 		"open-props": "^1.7.23",
+		"postcss-jit-props": "^1.0.16",
 		"typescript": "~5.9.3",
 		"wxt": "^0.20.26"
 	}
