@@ -1,9 +1,11 @@
 import { defineContentScript } from "wxt/utils/define-content-script";
+
 import { detectConfig, getPlatformBehaviors } from "@/common/platforms";
 import { loadSettings, saveSettings } from "@/common/settings";
-import { isValidPress } from "@/entrypoints/content/utils/validpress";
-import { changeSpeed, seek } from "@/entrypoints/content/video/video-actions";
-import { VideoManager } from "@/entrypoints/content/video/video-manager";
+
+import { isValidPress } from "./utils/validpress";
+import { changeSpeed, seek } from "./video/video-actions";
+import { VideoManager } from "./video/video-manager";
 
 export default defineContentScript({
 	matches: ["https://*/*"],

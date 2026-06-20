@@ -1,5 +1,5 @@
 import type { VideoControlsConfig } from "@/common/video-controls";
-import { changeSpeed, seek } from "@/entrypoints/content/video/video-actions";
+import { changeSpeed, seek } from "../video/video-actions";
 import OVERLAY_CSS from "./overlay.css?inline";
 
 // ── Public API ──────────────────────────────────────────────────────────────

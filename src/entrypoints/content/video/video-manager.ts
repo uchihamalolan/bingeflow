@@ -4,7 +4,7 @@ import {
 	createOverlay,
 	type OverlayHandle,
 	positionOverlay,
-} from "@/entrypoints/content/overlay/overlay";
+} from "../overlay/overlay";
 
 /**
  * Manages the lifecycle of the video-controls overlay for a single page.
