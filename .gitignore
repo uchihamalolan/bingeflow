@@ -25,6 +25,10 @@ web-ext.config.ts
 *.sln
 *.sw?
 
+# Build outputs
+dist
+release
+
 # ai generated
 docs
 TODO.md

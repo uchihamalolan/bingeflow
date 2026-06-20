@@ -1,6 +1,6 @@
 # Coding Agent Guidelines (`AGENTS.md`)
 
-This repository is a Google Chrome extension named **Skip Intro**, designed to skip intros/recaps on streaming platforms. This document contains guidelines, architecture details, and commands for AI coding agents working on this codebase.
+This repository is a Google Chrome and Firefox extension named **Skip Intro**, designed to skip intros/recaps on streaming platforms. This document contains guidelines, architecture details, and commands for AI coding agents working on this codebase.
 
 ---
 
@@ -8,7 +8,7 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
 
 - **Runtime & Package Manager**: [Bun](https://bun.sh/) (utilizes `bun.lock` for lockfiles, run all scripts with `bun`).
 - **Framework**: [Svelte 5](https://svelte.dev/) (uses Svelte 5 runes like `$state` and `$props` for reactivity).
-- **Bundler**: [Vite](https://vite.dev/) with [@crxjs/vite-plugin](https://crxjs.dev/) (Manifest V3 support).
+- **Bundler**: [WXT](https://wxt.dev/) (Next-gen Web Extension Framework built on Vite).
 - **Linter & Formatter**: [Biome](https://biomejs.dev/) (configured via [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json)).
 - **Styling**: [Open Props](https://open-props.style/) (design tokens for CSS variables) + [Catppuccin](https://catppuccin.com/) colour theme.
 - **Language**: TypeScript.
@@ -17,24 +17,28 @@ This repository is a Google Chrome extension named **Skip Intro**, designed to s
 
 ## 📁 Key Directories & Architecture
 
-- **`manifest.config.ts`**: The source of truth for the Chrome extension manifest. CRXJS reads this to build the `manifest.json`.
+- **`wxt.config.ts`**: The source of truth for WXT configuration and shared extension manifest options.
 - **`src/common/platforms.ts`**: Defines the supported streaming platforms, their URL patterns, CSS selectors for skip buttons, enablement status, and shortcuts.
-- **`src/content/main.ts`**: The content script that runs on all web pages. It listens to keyboard shortcuts and simulates clicking the skip buttons.
-- **`src/popup/`**: Contains the popup interface shown when the extension icon is clicked.
+- **`src/entrypoints/content.ts`**: The entrypoint content script that runs on all web pages. It listens to keyboard shortcuts and simulates clicking the skip buttons.
+- **`src/entrypoints/popup/`**: Contains the popup interface shown when the extension icon is clicked.
   - `App.svelte`: The main entry point.
   - `states/`: Includes state sub-components (`Loading.svelte`, `Found.svelte`, `Unsupported.svelte`).
-- **`src/options/`**: The extension options page.
+- **`src/entrypoints/options/`**: The extension options page.
 - **`src/common/components/`**: Shared Svelte components (e.g. `Switch.svelte`, `Spinner.svelte`, `SettingsIcon.svelte`).
 
 ---
 
 ## 🚦 Developer & Agent Instructions
 
-### 1. Code Style and Linters
+### 1. Code Style, Linters & Typechecking
 - **Biome Checks**: Always run Biome check/format before declaring a task complete.
   ```bash
   bun run check  # Runs biome lint and format checks
   bun run fix    # Automatically applies biome fixes and formats
+  ```
+- **Typechecking**: Always run TypeScript typechecking to verify there are no compilation errors before declaring a task complete.
+  ```bash
+  bun run typecheck  # Performs TypeScript compilation checks without emit
   ```
 - **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/skip-intro/biome.json).
 
@@ -53,9 +57,9 @@ To add support for a new streaming platform:
    - `shortcutKey`: Keyboard button (e.g., `"s"`).
 3. If necessary, register the platform type in the `StreamingPlatform` union type.
 
-### 4. Chrome Extension Manifest Updates
-- To request new permissions or adjust matching URL patterns, modify [manifest.config.ts](file:///Users/malolan/Projects/skip-intro/manifest.config.ts) instead of creating or editing a raw `manifest.json`.
-- Current permissions: `["contentSettings", "tabs"]`.
+### 4. Extension Manifest Updates
+- To request new permissions or adjust matching URL patterns, modify [wxt.config.ts](file:///Users/malolan/Projects/skip-intro/wxt.config.ts) or specific entrypoint configuration objects (such as matching rules inside `src/entrypoints/content.ts`) instead of writing a raw `manifest.json`.
+- Current permissions: `["storage", "tabs"]`.
 - Currently matching content scripts on: `["https://*/*"]`.
 
 ### 5. Open Props Scoping
@@ -69,7 +73,10 @@ To add support for a new streaming platform:
 | Command | Action |
 |---|---|
 | `bun install` | Installs dependencies |
-| `bun run dev` | Starts Vite dev server with CRXJS hot-reloading |
-| `bun run build` | Builds the production package under `/dist` |
+| `bun run dev` | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
+| `bun run dev:firefox` | Starts WXT dev server targeting Firefox MV3 |
+| `bun run build` | Builds the production package under `.output/chrome-mv3` |
+| `bun run build:firefox` | Builds the production package under `.output/firefox-mv3` |
 | `bun run check` | Checks formatting and code quality with Biome |
 | `bun run fix` | Resolves auto-fixable Biome issues |
+| `bun run typecheck` | Checks TypeScript type correctness without emitting files |
