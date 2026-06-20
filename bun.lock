@@ -6,6 +6,7 @@
       "name": "skip-intro",
       "dependencies": {
         "consola": "^3.4.2",
+        "defu": "^6.1.7",
         "svelte": "^5.53.12",
       },
       "devDependencies": {

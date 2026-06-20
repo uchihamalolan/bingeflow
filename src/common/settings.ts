@@ -1,3 +1,4 @@
+import { defu } from "defu";
 import { getSyncStorage, setSyncStorage } from "./browser";
 import { DEFAULT_VIDEO_CONTROLS, type VideoControlsConfig } from "./video-controls";
 
@@ -14,19 +15,11 @@ const STORAGE_KEY = "skip-intro.settings";
  * extension update adds them.
  */
 export async function loadSettings(): Promise<Settings> {
-	const raw = await getSyncStorage<Settings>(STORAGE_KEY);
+	const raw = await getSyncStorage<Partial<Settings>>(STORAGE_KEY);
 
-	return {
-		videoControls: {
-			...DEFAULT_VIDEO_CONTROLS,
-			...raw?.videoControls,
-			// keyBindings is a nested object so it needs its own spread
-			keyBindings: {
-				...DEFAULT_VIDEO_CONTROLS.keyBindings,
-				...raw?.videoControls?.keyBindings,
-			},
-		},
-	};
+	return defu(raw, {
+		videoControls: DEFAULT_VIDEO_CONTROLS,
+	});
 }
 
 /** Persists settings to storage. */
