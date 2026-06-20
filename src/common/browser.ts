@@ -1,16 +1,18 @@
+import { browser } from "wxt/browser";
+
 export const getStoredTheme = async () => {
-	const storedTheme = await chrome.storage.local.get("skip-intro.theme");
+	const storedTheme = await browser.storage.local.get("skip-intro.theme");
 	return storedTheme["skip-intro.theme"] as string;
 };
 
 export const setStoredTheme = (theme: "frappe" | "latte") => {
-	chrome.storage.local.set({ "skip-intro.theme": theme });
+	browser.storage.local.set({ "skip-intro.theme": theme });
 };
 
 export const getCurrentTab = async () => {
-	return (await chrome.tabs.query({ active: true, currentWindow: true })).at(0);
+	return (await browser.tabs.query({ active: true, currentWindow: true })).at(0);
 };
 
 export const openOptionsPage = () => {
-	chrome.runtime.openOptionsPage();
+	browser.runtime.openOptionsPage();
 };
