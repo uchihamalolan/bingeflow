@@ -15,17 +15,7 @@ export class NetflixVideoController extends Html5VideoController {
 
 		window.dispatchEvent(
 			new CustomEvent("skip-intro:netflix:seek", {
-				detail: { targetTimeMs: targetSeconds * 1000 },
-			}),
-		);
-	}
-
-	override setPlaybackRate(rate: number): void {
-		const speed = Math.max(0.1, Math.min(16, rate));
-
-		window.dispatchEvent(
-			new CustomEvent("skip-intro:netflix:set-speed", {
-				detail: { rate: speed },
+				detail: JSON.stringify({ targetTimeMs: targetSeconds * 1000 }),
 			}),
 		);
 	}

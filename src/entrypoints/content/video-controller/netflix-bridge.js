@@ -19,20 +19,10 @@
 		if (!player) return;
 
 		try {
-			player.seek(e.detail.targetTimeMs);
+			const { targetTimeMs } = JSON.parse(e.detail);
+			player.seek(targetTimeMs);
 		} catch (err) {
 			console.error("[Skip Intro Bridge] Failed to seek:", err);
-		}
-	});
-
-	window.addEventListener("skip-intro:netflix:set-speed", (e) => {
-		const player = getNetflixPlayer();
-		if (!player) return;
-
-		try {
-			player.setPlaybackRate(e.detail.rate);
-		} catch (err) {
-			console.error("[Skip Intro Bridge] Failed to set playback rate:", err);
 		}
 	});
 })();
