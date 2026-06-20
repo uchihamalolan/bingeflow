@@ -66,6 +66,10 @@ To add support for a new streaming platform:
 - Popup/options pages import tokens globally via [theme.css](file:///Users/malolan/Projects/skip-intro/src/common/theme.css) (attaches to `:where(html)`).
 - Injected Shadow DOM components (e.g. the overlay) must define only the tokens they use directly on `:host` — see [overlay.css](file:///Users/malolan/Projects/skip-intro/src/content/overlay/overlay.css) as a reference.
 
+### 6. Browser Extension API Usage
+- Avoid calling browser extension APIs (like `browser.storage.*` or `browser.tabs.*`) directly inside Svelte components or business stores.
+- Instead, define reusable wrapper/helper functions in [src/common/browser.ts](file:///Users/malolan/Projects/skip-intro/src/common/browser.ts) (e.g., `getLocalStorage`, `setLocalStorage`, `getCurrentTab`) and import them where needed.
+
 ---
 
 ## 💻 Common Commands
