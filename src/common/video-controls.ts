@@ -8,6 +8,7 @@ export type VideoControlsConfig = {
 	speedStep: number;
 	/** When true the overlay starts invisible until the user mouses over the video. Default: false */
 	startHidden: boolean;
+	/** Keyboard shortcuts */
 	keyBindings: {
 		/** Default: "z" */
 		seekBack: string;

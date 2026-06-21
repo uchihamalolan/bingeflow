@@ -59,6 +59,22 @@ export function getPlatformBehaviors(config: PlatformConfig): BehaviorConfig[] {
 	});
 }
 
+/**
+ * Returns a set of keyboard shortcuts configured for the active behaviors of the given platform.
+ * If the config is null, returns an empty set.
+ */
+export function getPlatformShortcuts(config: PlatformConfig | null): Set<string> {
+	const platformShortcuts = new Set<string>();
+	if (config !== null) {
+		for (const behavior of getPlatformBehaviors(config)) {
+			if (behavior.enabled) {
+				platformShortcuts.add(behavior.shortcutKey);
+			}
+		}
+	}
+	return platformShortcuts;
+}
+
 export function detectConfig(hostname: string): PlatformConfig | null {
 	return Object.values(PLATFORMS).find(({ urlPattern }) => urlPattern.test(hostname)) ?? null;
 }
