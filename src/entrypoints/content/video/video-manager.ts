@@ -3,7 +3,7 @@ import type { VideoControlsConfig } from "@/common/video-controls";
 import { createOverlay, type OverlayHandle, positionOverlay } from "../overlay/overlay";
 import { createVideoController } from "../video-controller/create-video-controller";
 import type { VideoController } from "../video-controller/video-controller";
-import { findVideo } from "./video-utils";
+import { findVideo, getPlayerContainer } from "./video-utils";
 
 /**
  * Manages the lifecycle of the video-controls overlay for a single page.
@@ -96,8 +96,8 @@ export class VideoManager {
 	}
 
 	private onResize(): void {
-		if (this.overlayHandle !== null && this.activeVideo !== null) {
-			positionOverlay(this.overlayHandle.root, this.activeVideo);
+		if (this.overlayHandle !== null) {
+			positionOverlay(this.overlayHandle.root);
 		}
 	}
 
@@ -123,7 +123,10 @@ export class VideoManager {
 	private mount(video: HTMLVideoElement): void {
 		const controller = createVideoController(video, this.platformConfig);
 		this.activeController = controller;
-		this.overlayHandle = createOverlay(video, controller, this.config);
+
+		const playerContainer = getPlayerContainer(video, this.platformConfig?.playerContainerSelector);
+
+		this.overlayHandle = createOverlay(controller, this.config, playerContainer);
 		this.resizeObserver.observe(video);
 	}
 

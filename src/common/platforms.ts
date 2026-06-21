@@ -8,6 +8,8 @@ export type PlatformConfig = {
 	urlPattern: RegExp;
 	/** CSS selector to find the correct <video> on this platform. Falls back to largest-video heuristic if omitted. */
 	videoSelector?: string;
+	/** CSS selector to find the top-level player container relative to the video. */
+	playerContainerSelector?: string;
 	/** Per-behavior selector overrides. Only the selector differs from GLOBAL_BEHAVIORS. */
 	behaviors: Partial<Record<BehaviorType, { selector: string }>>;
 };
@@ -32,6 +34,7 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
 		platform: "netflix",
 		urlPattern: /netflix\.com/,
 		videoSelector: ".watch-video--player-view video",
+		playerContainerSelector: ".watch-video--player-view",
 		behaviors: {},
 	},
 	hotstar: {

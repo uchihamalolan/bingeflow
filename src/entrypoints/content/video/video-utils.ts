@@ -38,3 +38,28 @@ export function findVideo(selector?: string): HTMLVideoElement | null {
 
 	return findLargestVideo();
 }
+
+/**
+ * Helper to resolve the best container element for mounting the overlay.
+ * If a custom `playerContainerSelector` is provided, it attempts to find the container
+ * using `video.closest(playerContainerSelector)`.
+ * On most streaming platforms, the video grandparent is the actual player
+ * container that holds the video element and the controls overlays.
+ */
+export function getPlayerContainer(
+	video: HTMLVideoElement,
+	playerContainerSelector?: string,
+): HTMLElement {
+	if (playerContainerSelector) {
+		const container = video.closest<HTMLElement>(playerContainerSelector);
+		if (container) return container;
+	}
+
+	const parent = video.parentElement;
+	if (!parent) return video;
+
+	const grandparent = parent.parentElement;
+	if (!grandparent || grandparent === document.body) return parent;
+
+	return grandparent;
+}

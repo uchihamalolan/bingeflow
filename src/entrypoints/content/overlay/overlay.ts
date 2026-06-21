@@ -20,13 +20,14 @@ export type OverlayHandle = {
  * Returns an `OverlayHandle` to control the overlay after mount.
  */
 export function createOverlay(
-	video: HTMLVideoElement,
 	controller: VideoController,
 	config: VideoControlsConfig,
+	playerContainer: HTMLElement,
 ): OverlayHandle {
 	// ── Host element ──────────────────────────────────────────────────────────
 	const host = document.createElement("div");
-	positionOverlay(host, video);
+	playerContainer.appendChild(host);
+	positionOverlay(host);
 
 	// ── Shadow DOM ────────────────────────────────────────────────────────────
 	const shadow = host.attachShadow({ mode: "open" });
@@ -120,7 +121,7 @@ export function createOverlay(
 	dragHandle.addEventListener("pointerdown", (e) => {
 		if (e.button !== 0) return;
 
-		const container = host.parentElement ?? getPlayerContainer(video);
+		const container = host.parentElement;
 		if (!container) return;
 
 		isDragging = true;
@@ -141,7 +142,7 @@ export function createOverlay(
 	dragHandle.addEventListener("pointermove", (e) => {
 		if (!isDragging) return;
 
-		const container = host.parentElement ?? getPlayerContainer(video);
+		const container = host.parentElement;
 		if (!container) return;
 
 		const containerRect = container.getBoundingClientRect();
@@ -168,7 +169,7 @@ export function createOverlay(
 		isDragging = false;
 		dragHandle.releasePointerCapture(e.pointerId);
 
-		const container = host.parentElement ?? getPlayerContainer(video);
+		const container = host.parentElement;
 		if (!container) return;
 
 		const containerRect = container.getBoundingClientRect();
@@ -191,7 +192,6 @@ export function createOverlay(
 	});
 
 	// ── Visibility State & Listeners ──────────────────────────────────────────
-	const mouseTarget = getPlayerContainer(video);
 	let isHidden = config.startHidden;
 
 	function showOverlay(): void {
@@ -208,9 +208,6 @@ export function createOverlay(
 	} else {
 		showOverlay();
 	}
-
-	// ── Mount ─────────────────────────────────────────────────────────────────
-	mouseTarget.appendChild(host);
 
 	// ── Handle ────────────────────────────────────────────────────────────────
 	return {
@@ -246,8 +243,10 @@ export function createOverlay(
  * parent container is positioned (so `position: absolute` on `host` works).
  * Safe to call multiple times (idempotent).
  */
-export function positionOverlay(host: HTMLElement, video: HTMLVideoElement): void {
-	const container = host.parentElement ?? getPlayerContainer(video);
+export function positionOverlay(host: HTMLElement): void {
+	const container = host.parentElement;
+	if (!container) return;
+
 	const containerPos = getComputedStyle(container).position;
 	if (containerPos === "static") {
 		container.style.position = "relative";
@@ -280,21 +279,4 @@ function createButton(label: string, extraClass: string): HTMLButtonElement {
 
 function formatRate(rate: number): string {
 	return rate.toFixed(2);
-}
-
-/**
- * Helper to resolve the best container element for mounting the overlay.
- * On most streaming platforms, the video grandparent is the actual player
- * container that holds the video element and the controls overlays.
- */
-function getPlayerContainer(video: HTMLVideoElement): HTMLElement {
-	const parent = video.parentElement;
-	if (!parent) return video;
-
-	const grandparent = parent.parentElement;
-	if (!grandparent || grandparent === document.body) {
-		return parent;
-	}
-
-	return grandparent;
 }
