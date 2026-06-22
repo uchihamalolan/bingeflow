@@ -11,7 +11,7 @@ import Unsupported from "./views/Unsupported.svelte";
 
 type State =
 	| { kind: "loading" }
-	| { kind: "unsupported" }
+	| { kind: "unsupported"; hostname?: string }
 	| { kind: "found"; config: PlatformConfig };
 
 let state = $state<State>({ kind: "loading" });
@@ -26,9 +26,10 @@ onMount(async () => {
 		return;
 	}
 
-	const hostname = tab.url ? new URL(tab.url).hostname : "";
+	const url = tab.url;
+	const hostname = url?.startsWith("https://") ? new URL(url).hostname : "";
 	const config = detectConfig(hostname);
-	state = config ? { kind: "found", config } : { kind: "unsupported" };
+	state = config ? { kind: "found", config } : { kind: "unsupported", hostname };
 });
 </script>
 
@@ -44,7 +45,7 @@ onMount(async () => {
 	{#if state.kind === "loading"}
 		<Loading />
 	{:else if state.kind === "unsupported"}
-		<Unsupported />
+		<Unsupported hostname={state.hostname} />
 	{:else}
 		<Found config={state.config} />
 	{/if}

@@ -16,6 +16,9 @@ export default defineConfig({
 	}),
 	manifest: {
 		name: "BingeFlow",
+		description:
+			"Automatically skip intros, recaps, and next-episode countdowns on streaming platforms.",
+		homepage_url: "https://codeberg.org/ma101an/bingeflow",
 		permissions: ["tabs", "storage"],
 		icons: {
 			16: "icons/icon-16.png",

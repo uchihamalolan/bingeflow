@@ -1,5 +1,9 @@
 <script lang="ts">
 import ThemeToggle from "./ThemeToggle.svelte";
+
+const rateUrl = import.meta.env.FIREFOX
+	? "https://addons.mozilla.org/firefox/addon/bingeflow/"
+	: "https://chromewebstore.google.com/detail/bingeflow-placeholder";
 </script>
 
 <header class="header">
@@ -7,7 +11,11 @@ import ThemeToggle from "./ThemeToggle.svelte";
 		<span class="logo-icon" aria-hidden="true">⏭</span>
 		<div>
 			<h1 class="logo-title">BingeFlow</h1>
-			<p class="subtitle">Customize video controls, speeds, and keyboard shortcuts</p>
+			<p class="subtitle">
+				Customize video controls, speeds, and keyboard shortcuts |
+				<a href="https://codeberg.org/ma101an/bingeflow" target="_blank" rel="noreferrer">Homepage</a> |
+				<a href={rateUrl} target="_blank" rel="noreferrer">Rate BingeFlow</a>
+			</p>
 		</div>
 	</div>
 
