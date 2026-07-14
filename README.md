@@ -27,23 +27,29 @@ A lightweight web extension built with **Svelte 5**, **TypeScript**, and **WXT**
 This project uses [Bun](https://bun.sh) as the package manager and [Biome](https://biomejs.dev) for linting and formatting.
 
 ### 1. Install Dependencies
+
 ```bash
 bun install
 ```
 
 ### 2. Run the Development Server
+
 ```bash
 bun run dev
 ```
+
 This starts WXT in development mode and automatically launches a sandboxed Chrome browser preloaded with the extension. It also supports hot module reloading (HMR) for both the UI pages and content scripts.
 
 To run the development server targeting Firefox:
+
 ```bash
 bun run dev:firefox
 ```
 
 ### 3. Load the Extension Manually (Optional)
+
 If you wish to load the unpacked extension manually in your regular browser profile:
+
 1. Navigate to:
    - **Chrome**: `chrome://extensions/`
    - **Firefox**: `about:debugging#/runtime/this-ops`
@@ -71,12 +77,14 @@ If you wish to load the unpacked extension manually in your regular browser prof
 To compile and bundle the extension for release:
 
 ### Chrome (Manifest V3)
+
 ```bash
 bun run build  # Builds into .output/chrome-mv3/
 bun run zip    # Packages the build into a production-ready ZIP archive
 ```
 
 ### Firefox (Manifest V3)
+
 ```bash
 bun run build:firefox  # Builds into .output/firefox-mv3/
 bun run zip:firefox    # Packages the build into a production-ready ZIP archive
@@ -87,6 +95,7 @@ bun run zip:firefox    # Packages the build into a production-ready ZIP archive
 ## Code Quality
 
 Check formatting and linting rules using Biome:
+
 ```bash
 bun run check        # Run linter and formatter checks
 bun run fix          # Automatically fix linting and formatting issues

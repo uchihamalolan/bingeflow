@@ -5,11 +5,11 @@ import { NetflixVideoController } from "./netflix-video-controller";
 import type { VideoController } from "./video-controller";
 
 export function createVideoController(
-	video: HTMLVideoElement,
-	platformConfig: PlatformConfig | null,
+  video: HTMLVideoElement,
+  platformConfig: PlatformConfig | null,
 ): VideoController {
-	if (platformConfig?.platform === "netflix") {
-		return new NetflixVideoController(video);
-	}
-	return new Html5VideoController(video);
+  if (platformConfig?.platform === "netflix") {
+    return new NetflixVideoController(video);
+  }
+  return new Html5VideoController(video);
 }

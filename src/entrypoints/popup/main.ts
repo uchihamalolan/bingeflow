@@ -1,9 +1,8 @@
-import { mount } from "svelte";
-import App from "./App.svelte";
+import { render } from "solid-js/web";
+
+import App from "./App";
 
 const target = document.getElementById("app");
 if (!target) throw new Error("Target container 'app' not found");
 
-const app = mount(App, { target });
-
-export default app;
+render(() => App(), target);

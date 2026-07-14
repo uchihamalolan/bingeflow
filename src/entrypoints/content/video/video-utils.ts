@@ -3,21 +3,21 @@
  * or `null` if there are no visible videos on the page.
  */
 function findLargestVideo(): HTMLVideoElement | null {
-	const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
+  const videos = Array.from(document.querySelectorAll<HTMLVideoElement>("video"));
 
-	let best: HTMLVideoElement | null = null;
-	let bestArea = 0;
+  let best: HTMLVideoElement | null = null;
+  let bestArea = 0;
 
-	for (const video of videos) {
-		const { width, height } = video.getBoundingClientRect();
-		const area = width * height;
-		if (area > bestArea) {
-			bestArea = area;
-			best = video;
-		}
-	}
+  for (const video of videos) {
+    const { width, height } = video.getBoundingClientRect();
+    const area = width * height;
+    if (area > bestArea) {
+      bestArea = area;
+      best = video;
+    }
+  }
 
-	return best;
+  return best;
 }
 
 /**
@@ -28,15 +28,15 @@ function findLargestVideo(): HTMLVideoElement | null {
  * 2. Largest visible video heuristic (by bounding-box area).
  */
 export function findVideo(selector?: string): HTMLVideoElement | null {
-	if (selector) {
-		const el = document.querySelector<HTMLVideoElement>(selector);
+  if (selector) {
+    const el = document.querySelector<HTMLVideoElement>(selector);
 
-		if (el !== null && el instanceof HTMLVideoElement) {
-			return el;
-		}
-	}
+    if (el !== null && el instanceof HTMLVideoElement) {
+      return el;
+    }
+  }
 
-	return findLargestVideo();
+  return findLargestVideo();
 }
 
 /**
@@ -47,19 +47,19 @@ export function findVideo(selector?: string): HTMLVideoElement | null {
  * container that holds the video element and the controls overlays.
  */
 export function getPlayerContainer(
-	video: HTMLVideoElement,
-	playerContainerSelector?: string,
+  video: HTMLVideoElement,
+  playerContainerSelector?: string,
 ): HTMLElement {
-	if (playerContainerSelector) {
-		const container = video.closest<HTMLElement>(playerContainerSelector);
-		if (container) return container;
-	}
+  if (playerContainerSelector) {
+    const container = video.closest<HTMLElement>(playerContainerSelector);
+    if (container) return container;
+  }
 
-	const parent = video.parentElement;
-	if (!parent) return video;
+  const parent = video.parentElement;
+  if (!parent) return video;
 
-	const grandparent = parent.parentElement;
-	if (!grandparent || grandparent === document.body) return parent;
+  const grandparent = parent.parentElement;
+  if (!grandparent || grandparent === document.body) return parent;
 
-	return grandparent;
+  return grandparent;
 }

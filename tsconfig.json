@@ -1,6 +1,7 @@
 {
-	"extends": "./.wxt/tsconfig.json",
-	"compilerOptions": {
-		"types": ["svelte", "chrome"]
-	}
+  "extends": "./.wxt/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
 }

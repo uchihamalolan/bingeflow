@@ -1,158 +1,161 @@
 :host {
-	/* Spacing (in pixels to be independent of host page rem scaling) */
-	--size-1: 6px;
-	--size-2: 10px;
-	--size-6: 28px;
-	--size-8: 38px;
+  /* Spacing (in pixels to be independent of host page rem scaling) */
+  --size-1: 6px;
+  --size-2: 10px;
+  --size-6: 28px;
+  --size-8: 38px;
 
-	/* Borders */
-	--border-size-1: 1px;
-	--border-size-2: 2px;
+  /* Borders */
+  --border-size-1: 1px;
+  --border-size-2: 2px;
 
-	/* Radii */
-	--radius-2: 8px;
-	--radius-3: 12px;
+  /* Radii */
+  --radius-2: 8px;
+  --radius-3: 12px;
 
-	/* Shadows */
-	--shadow-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	--shadow-3: 0 8px 32px rgba(0, 0, 0, 0.5);
+  /* Shadows */
+  --shadow-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-3: 0 8px 32px rgba(0, 0, 0, 0.5);
 
-	/* Animations */
-	--ease-2: cubic-bezier(0.25, 0, 0.3, 1);
-	--duration-2: 200ms;
+  /* Animations */
+  --ease-2: cubic-bezier(0.25, 0, 0.3, 1);
+  --duration-2: 200ms;
 
-	/* Typography */
-	--font-sans: system-ui, -apple-system, sans-serif;
-	--font-size-00: 12px;
-	--font-size-0: 14px;
-	--font-weight-6: 600;
-	--font-weight-7: 700;
-	--letter-spacing-1: 0.01em;
+  /* Typography */
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-size-00: 12px;
+  --font-size-0: 14px;
+  --font-weight-6: 600;
+  --font-weight-7: 700;
+  --letter-spacing-1: 0.01em;
 
-	/* Colors (Frappé Dark Glass theme) */
-	--color-base: #292c3c;
-	--color-text: #c6d0f5;
-	--color-subtext: #a5adce;
-	--color-surface0: #414559;
-	--color-surface2: #626880;
-	--color-accent: #ca9ee6;
+  /* Colors (Frappé Dark Glass theme) */
+  --color-base: #292c3c;
+  --color-text: #c6d0f5;
+  --color-subtext: #a5adce;
+  --color-surface0: #414559;
+  --color-surface2: #626880;
+  --color-accent: #ca9ee6;
 
-	/* Derived Colors using Relative Color Syntax */
-	--color-bg: rgb(from var(--color-base) r g b / 0.8);
-	--color-border: rgb(from var(--color-text) r g b / 0.08);
-	--color-border-hover: rgb(from var(--color-text) r g b / 0.15);
-	--color-btn-bg: rgb(from var(--color-surface0) r g b / 0.45);
-	--color-btn-hover: rgb(from var(--color-surface2) r g b / 0.65);
-	--color-btn-active: rgb(from var(--color-surface2) r g b / 0.9);
-	--color-accent-border: rgb(from var(--color-accent) r g b / 0.2);
-	--color-accent-active: rgb(from var(--color-accent) r g b / 0.15);
-	--color-ring: rgb(from var(--color-accent) r g b / 0.4);
-	--color-ring-speed: rgb(from var(--color-accent) r g b / 0.45);
+  /* Derived Colors using Relative Color Syntax */
+  --color-bg: rgb(from var(--color-base) r g b / 0.8);
+  --color-border: rgb(from var(--color-text) r g b / 0.08);
+  --color-border-hover: rgb(from var(--color-text) r g b / 0.15);
+  --color-btn-bg: rgb(from var(--color-surface0) r g b / 0.45);
+  --color-btn-hover: rgb(from var(--color-surface2) r g b / 0.65);
+  --color-btn-active: rgb(from var(--color-surface2) r g b / 0.9);
+  --color-accent-border: rgb(from var(--color-accent) r g b / 0.2);
+  --color-accent-active: rgb(from var(--color-accent) r g b / 0.15);
+  --color-ring: rgb(from var(--color-accent) r g b / 0.4);
+  --color-ring-speed: rgb(from var(--color-accent) r g b / 0.45);
 
-	/* Interactive & Effects */
-	--blur-radius: 8px;
-	--active-scale: 0.91;
+  /* Interactive & Effects */
+  --blur-radius: 8px;
+  --active-scale: 0.91;
 }
 
 /* Reset scoped to the shadow root */
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* ── Overlay container ─────────────────────────────────────── */
 .si-overlay {
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	padding: 4px;
-	background: rgba(41, 44, 60, 0.5); /* More transparent Frappé mantle */
-	backdrop-filter: blur(8px);
-	border: var(--border-size-1) solid rgba(198, 208, 245, 0.08); /* More transparent border */
-	border-radius: var(--radius-3);
-	box-shadow: var(--shadow-3);
-	pointer-events: auto;
-	user-select: none;
-	font-size: 12px;
-	font-family: system-ui, -apple-system, sans-serif;
-	opacity: 1;
-	transition: opacity var(--duration-2) var(--ease-2);
-	width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(41, 44, 60, 0.5); /* More transparent Frappé mantle */
+  backdrop-filter: blur(8px);
+  border: var(--border-size-1) solid rgba(198, 208, 245, 0.08); /* More transparent border */
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  pointer-events: auto;
+  user-select: none;
+  font-size: 12px;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  opacity: 1;
+  transition: opacity var(--duration-2) var(--ease-2);
+  width: max-content;
 
-	&.si-hidden {
-		opacity: 0;
-		pointer-events: none;
-	}
+  &.si-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 /* ── Buttons ───────────────────────────────────────────────── */
 .si-btn {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 24px;
-	height: 24px;
-	font-weight: 600;
-	color: #c6d0f5; /* Frappé text */
-	background: rgba(65, 69, 89, 0.45); /* More transparent surface0 */
-	border: var(--border-size-1) solid rgba(198, 208, 245, 0.08);
-	border-radius: var(--radius-2);
-	cursor: pointer;
-	white-space: nowrap;
-	transition:
-		background var(--duration-2) var(--ease-2),
-		transform var(--duration-2) var(--ease-2),
-		box-shadow var(--duration-2) var(--ease-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-weight: 600;
+  color: #c6d0f5; /* Frappé text */
+  background: rgba(65, 69, 89, 0.45); /* More transparent surface0 */
+  border: var(--border-size-1) solid rgba(198, 208, 245, 0.08);
+  border-radius: var(--radius-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-2) var(--ease-2),
+    transform var(--duration-2) var(--ease-2),
+    box-shadow var(--duration-2) var(--ease-2);
 
-	&:hover {
-		background: var(--color-btn-hover);
-		border-color: var(--color-border-hover);
-		box-shadow: var(--shadow-1);
-	}
+  &:hover {
+    background: var(--color-btn-hover);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-1);
+  }
 
-	&:active,
-	&.si-active {
-		transform: scale(var(--active-scale));
-		background: var(--color-btn-active);
-		box-shadow: 0 0 0 var(--border-size-2) var(--color-ring);
-	}
+  &:active,
+  &.si-active {
+    transform: scale(var(--active-scale));
+    background: var(--color-btn-active);
+    box-shadow: 0 0 0 var(--border-size-2) var(--color-ring);
+  }
 
-	/* Speed buttons — accent theme */
-	&.si-speed-btn {
-		color: var(--color-accent);
-		border-color: var(--color-accent-border);
+  /* Speed buttons — accent theme */
+  &.si-speed-btn {
+    color: var(--color-accent);
+    border-color: var(--color-accent-border);
 
-		&:active,
-		&.si-active {
-			background: var(--color-accent-active);
-			box-shadow: 0 0 0 var(--border-size-2) var(--color-ring-speed);
-		}
-	}
+    &:active,
+    &.si-active {
+      background: var(--color-accent-active);
+      box-shadow: 0 0 0 var(--border-size-2) var(--color-ring-speed);
+    }
+  }
 }
 
 /* ── Speed badge ───────────────────────────────────────────── */
 .si-speed {
-	font-size: 11px;
-	color: #a5adce; /* Frappé subtext0 */
-	padding: 0 4px;
+  font-size: 11px;
+  color: #a5adce; /* Frappé subtext0 */
+  padding: 0 4px;
 }
 
 /* Drag handle style */
 .si-drag-handle {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--color-subtext);
-	cursor: grab;
-	padding: 0 var(--size-1);
-	font-size: var(--font-size-0);
-	font-weight: var(--font-weight-7);
-	user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-subtext);
+  cursor: grab;
+  padding: 0 var(--size-1);
+  font-size: var(--font-size-0);
+  font-weight: var(--font-weight-7);
+  user-select: none;
 
-	&:active {
-		cursor: grabbing;
-	}
+  &:active {
+    cursor: grabbing;
+  }
 }

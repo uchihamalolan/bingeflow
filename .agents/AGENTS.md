@@ -31,6 +31,7 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
 ## 🚦 Developer & Agent Instructions
 
 ### 1. Code Style, Linters & Typechecking
+
 - **Biome Checks**: Always run Biome check/format before declaring a task complete.
   ```bash
   bun run check  # Runs biome lint and format checks
@@ -43,11 +44,14 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
 - **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/bingeflow/biome.json).
 
 ### 2. Svelte Components & Styling
+
 - For Svelte 5 runes, props typing, and file conventions → see skill **`svelte-conventions`**.
 - For semantic HTML element choices, CSS class rules, and minimal styling → see skill **`svelte-styling`**.
 
 ### 3. Adding a New Platform
+
 To add support for a new streaming platform:
+
 1. Open [src/common/platforms.ts](file:///Users/malolan/Projects/bingeflow/src/common/platforms.ts).
 2. Append a new key to the `PLATFORMS` object implementing the `PlatformConfig` type:
    - `label`: Display name of the service.
@@ -58,15 +62,18 @@ To add support for a new streaming platform:
 3. If necessary, register the platform type in the `StreamingPlatform` union type.
 
 ### 4. Extension Manifest Updates
+
 - To request new permissions or adjust matching URL patterns, modify [wxt.config.ts](file:///Users/malolan/Projects/bingeflow/wxt.config.ts) or specific entrypoint configuration objects (such as matching rules inside `src/entrypoints/content.ts`) instead of writing a raw `manifest.json`.
 - Current permissions: `["storage", "tabs"]`.
 - Currently matching content scripts on: `["https://*/*"]`.
 
 ### 5. Open Props Scoping
+
 - Popup/options pages import tokens globally via [theme.css](file:///Users/malolan/Projects/bingeflow/src/common/theme.css) (attaches to `:where(html)`).
 - Injected Shadow DOM components (e.g. the overlay) must define only the tokens they use directly on `:host` — see [overlay.css](file:///Users/malolan/Projects/bingeflow/src/content/overlay/overlay.css) as a reference.
 
 ### 6. Browser Extension API Usage
+
 - Avoid calling browser extension APIs (like `browser.storage.*` or `browser.tabs.*`) directly inside Svelte components or business stores.
 - Instead, define reusable wrapper/helper functions in [src/common/browser.ts](file:///Users/malolan/Projects/bingeflow/src/common/browser.ts) (e.g., `getLocalStorage`, `setLocalStorage`, `getCurrentTab`) and import them where needed.
 
@@ -74,13 +81,13 @@ To add support for a new streaming platform:
 
 ## 💻 Common Commands
 
-| Command | Action |
-|---|---|
-| `bun install` | Installs dependencies |
-| `bun run dev` | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
-| `bun run dev:firefox` | Starts WXT dev server targeting Firefox MV3 |
-| `bun run build` | Builds the production package under `.output/chrome-mv3` |
-| `bun run build:firefox` | Builds the production package under `.output/firefox-mv3` |
-| `bun run check` | Checks formatting and code quality with Biome |
-| `bun run fix` | Resolves auto-fixable Biome issues |
-| `bun run typecheck` | Checks TypeScript type correctness without emitting files |
+| Command                 | Action                                                                  |
+| ----------------------- | ----------------------------------------------------------------------- |
+| `bun install`           | Installs dependencies                                                   |
+| `bun run dev`           | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
+| `bun run dev:firefox`   | Starts WXT dev server targeting Firefox MV3                             |
+| `bun run build`         | Builds the production package under `.output/chrome-mv3`                |
+| `bun run build:firefox` | Builds the production package under `.output/firefox-mv3`               |
+| `bun run check`         | Checks formatting and code quality with Biome                           |
+| `bun run fix`           | Resolves auto-fixable Biome issues                                      |
+| `bun run typecheck`     | Checks TypeScript type correctness without emitting files               |
