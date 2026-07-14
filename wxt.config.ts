@@ -22,10 +22,11 @@ export default defineConfig({
 		permissions: ["tabs", "storage"],
 		icons: {
 			16: "icons/icon-16.png",
+			24: "icons/icon-24.png",
 			32: "icons/icon-32.png",
-			48: "icons/icon-48.png",
-			96: "icons/icon-96.png",
+			64: "icons/icon-64.png",
 			128: "icons/icon-128.png",
+			256: "icons/icon-256.png",
 		},
 		browser_specific_settings: {
 			gecko: {

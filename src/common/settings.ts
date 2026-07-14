@@ -9,11 +9,6 @@ export type Settings = {
 
 const STORAGE_KEY = "bingeflow.settings";
 
-/**
- * Loads settings from storage, deep-merging any stored values
- * with the current defaults so that new keys are always present even after an
- * extension update adds them.
- */
 export async function loadSettings(): Promise<Settings> {
 	const raw = await getSyncStorage<Partial<Settings>>(STORAGE_KEY);
 
@@ -22,7 +17,6 @@ export async function loadSettings(): Promise<Settings> {
 	});
 }
 
-/** Persists settings to storage. */
 export async function saveSettings(s: Settings): Promise<void> {
 	await setSyncStorage(STORAGE_KEY, s);
 }

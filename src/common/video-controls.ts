@@ -1,4 +1,3 @@
-/** Configuration for the floating video-controls overlay. */
 export type VideoControlsConfig = {
 	/** Master switch: when false the overlay is never mounted. */
 	enabled: boolean;
