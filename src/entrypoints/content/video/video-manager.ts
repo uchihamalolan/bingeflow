@@ -65,6 +65,11 @@ export class VideoManager {
     this.overlayHandle?.toggle();
   }
 
+  /** Resets the overlay autohide timer. */
+  triggerActivity(): void {
+    this.overlayHandle?.triggerActivity();
+  }
+
   // ── Private ────────────────────────────────────────────────────────────────
 
   private onMutation(records: MutationRecord[]): void {

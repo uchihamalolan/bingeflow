@@ -13,6 +13,8 @@ export type OverlayHandle = {
   setHidden(hidden: boolean): void;
   /** Toggle the visibility of the overlay. */
   toggle(): void;
+  /** Reset the autohide timer (e.g. on keyboard action). */
+  triggerActivity(): void;
   /** Remove the overlay from the DOM and clean up all event listeners. */
   remove(): void;
 };
@@ -195,6 +197,7 @@ export function createOverlay(
 
   // ── Visibility State & Listeners ──────────────────────────────────────────
   let isHidden = config.startHidden;
+  let autohideTimeout: ReturnType<typeof setTimeout> | null = null;
 
   function showOverlay(): void {
     overlay.classList.remove("si-hidden");
@@ -204,11 +207,31 @@ export function createOverlay(
     overlay.classList.add("si-hidden");
   }
 
+  function resetAutohideTimer(): void {
+    if (autohideTimeout) {
+      clearTimeout(autohideTimeout);
+      autohideTimeout = null;
+    }
+
+    if (!isHidden) {
+      showOverlay();
+    }
+
+    autohideTimeout = setTimeout(() => {
+      if (!isHidden && !isDragging) {
+        hideOverlay();
+      }
+    }, 5000);
+  }
+
+  // Listen to pointer movements on the document to reset timer/show overlay
+  document.addEventListener("pointermove", resetAutohideTimer, { capture: true });
+
   // Initial visibility
   if (isHidden) {
     hideOverlay();
   } else {
-    showOverlay();
+    resetAutohideTimer();
   }
 
   // ── Handle ────────────────────────────────────────────────────────────────
@@ -218,22 +241,38 @@ export function createOverlay(
     setHidden(hidden: boolean): void {
       isHidden = hidden;
       if (hidden) {
+        if (autohideTimeout) {
+          clearTimeout(autohideTimeout);
+          autohideTimeout = null;
+        }
         hideOverlay();
       } else {
-        showOverlay();
+        resetAutohideTimer();
       }
     },
 
     toggle(): void {
       isHidden = !isHidden;
       if (isHidden) {
+        if (autohideTimeout) {
+          clearTimeout(autohideTimeout);
+          autohideTimeout = null;
+        }
         hideOverlay();
       } else {
-        showOverlay();
+        resetAutohideTimer();
       }
     },
 
+    triggerActivity(): void {
+      resetAutohideTimer();
+    },
+
     remove(): void {
+      if (autohideTimeout) {
+        clearTimeout(autohideTimeout);
+      }
+      document.removeEventListener("pointermove", resetAutohideTimer, { capture: true });
       unsubscribeRateChange();
       host.remove();
     },

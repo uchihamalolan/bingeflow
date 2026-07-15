@@ -77,6 +77,37 @@ To add support for a new streaming platform:
 - Avoid calling browser extension APIs (like `browser.storage.*` or `browser.tabs.*`) directly inside Svelte components or business stores.
 - Instead, define reusable wrapper/helper functions in [src/common/browser.ts](file:///Users/malolan/Projects/bingeflow/src/common/browser.ts) (e.g., `getLocalStorage`, `setLocalStorage`, `getCurrentTab`) and import them where needed.
 
+### 7. SolidJS/TSX Component Styling
+
+- For TSX components, **never** pass raw styling strings (e.g., class/tailwind utility names) inline directly to elements or component props.
+- Instead, define styling classes in a local static `styles` object at the top of the file, and reference them as `{styles.className}`.
+- **Avoid Class Duplication in Style Variants**: Extract shared/common utility classes into a base class string (e.g., `sliderBase` or `base`) and use `clsx` to merge it dynamically with the active variant style, instead of repeating the classes across the variant mappings.
+
+  ```typescript
+  // Correct:
+  import { clsx } from "clsx";
+
+  const styles = {
+    base: "flex items-center justify-center rounded-sm bg-transparent",
+    sizes: {
+      sm: "w-4 h-4 border-1",
+      lg: "w-8 h-8 border-2",
+    },
+  };
+
+  interface Props {
+    size: "sm" | "lg";
+  }
+
+  export default function MyComponent(props: Props) {
+    return (
+      <div class={clsx(styles.base, styles.sizes[props.size])}>
+        <span>Icon</span>
+      </div>
+    );
+  }
+  ```
+
 ---
 
 ## 💻 Common Commands

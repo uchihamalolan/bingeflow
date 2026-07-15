@@ -13,7 +13,7 @@ const styles = {
       "bg-mantle border-(~ surface0) rounded-2xl p-6 flex flex-col gap-5",
       disabled && "opacity-45 pointer-events-none",
     ),
-  sectionTitle: "m-0 text-mauve font-semibold text-lg",
+  sectionTitle: "text-mauve font-semibold text-lg",
   shortcutList: "flex flex-col gap-3",
   shortcutItem: "flex items-center justify-between py-2 border-(b surface0) last:border-none",
   shortcutLabel: "font-medium",

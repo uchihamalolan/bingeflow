@@ -1,7 +1,7 @@
 const styles = {
   wrapper:
     "flex items-center bg-surface0 border-(~ surface1) rounded-md px-2 h-8 w-30 focus-within:border-mauve",
-  inputField: "bg-transparent border-none w-full p-0 text-right outline-none appearance-none m-0",
+  inputField: "bg-transparent border-none w-full text-right outline-none appearance-none",
   unitStyle: "text-[0.75rem] text-subtext0 ml-1",
 };
 

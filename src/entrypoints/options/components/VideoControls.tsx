@@ -6,7 +6,7 @@ import type { VideoControlsConfig } from "@/common/video-controls";
 
 const styles = {
   section: "bg-mantle border-(~ surface0) rounded-2xl p-6 flex flex-col gap-5",
-  sectionTitle: "m-0 text-mauve font-semibold text-lg",
+  sectionTitle: "text-mauve font-semibold text-lg",
   settingRow: (disabled: boolean) =>
     clsx("flex items-center justify-between gap-5", disabled && "opacity-45 pointer-events-none"),
   settingInfo: "flex flex-col gap-1 flex-1",

@@ -33,24 +33,29 @@ export function addEventListeners({
       }
       if (e.key === keyBindings.seekBack) {
         controller.seek(-seekSeconds);
+        videoManager.triggerActivity();
         return;
       }
       if (e.key === keyBindings.seekFwd) {
         controller.seek(seekSeconds);
+        videoManager.triggerActivity();
         return;
       }
       if (e.key === keyBindings.speedDown) {
         const current = controller.getPlaybackRate();
         controller.setPlaybackRate(current - speedStep);
+        videoManager.triggerActivity();
         return;
       }
       if (e.key === keyBindings.speedUp) {
         const current = controller.getPlaybackRate();
         controller.setPlaybackRate(current + speedStep);
+        videoManager.triggerActivity();
         return;
       }
       if (e.key === keyBindings.resetSpeed) {
         controller.setPlaybackRate(1.0);
+        videoManager.triggerActivity();
         return;
       }
     }

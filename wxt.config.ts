@@ -15,13 +15,18 @@ export default defineConfig({
     description: "Automatically skip intros, recaps & control video.",
     homepage_url: "https://github.com/uchihamalolan/bingeflow",
     permissions: ["tabs", "storage"],
+    web_accessible_resources: [
+      {
+        resources: ["netflix-bridge.js"],
+        matches: ["*://*.netflix.com/*"],
+      },
+    ],
     icons: {
-      16: "icons/icon-16.png",
-      24: "icons/icon-24.png",
-      32: "icons/icon-32.png",
-      64: "icons/icon-64.png",
-      128: "icons/icon-128.png",
-      256: "icons/icon-256.png",
+      16: "icons/16.png",
+      32: "icons/32.png",
+      48: "icons/48.png",
+      96: "icons/96.png",
+      128: "icons/128.png",
     },
     browser_specific_settings: {
       gecko: {
@@ -34,9 +39,8 @@ export default defineConfig({
     },
     action: {
       default_icon: {
-        64: "icons/icon-64.png",
-        128: "icons/icon-128.png",
-        256: "icons/icon-256.png",
+        96: "icons/96.png",
+        128: "icons/128.png",
       },
     },
   },

@@ -1,5 +1,6 @@
+import { browser } from "wxt/browser";
+
 import { Html5VideoController } from "./html5-video-controller";
-import netflixBridge from "./netflix-bridge.js?raw";
 
 export class NetflixVideoController extends Html5VideoController {
   constructor(video: HTMLVideoElement) {
@@ -26,7 +27,7 @@ export class NetflixVideoController extends Html5VideoController {
 
     const script = document.createElement("script");
     script.id = BRIDGE_ID;
-    script.textContent = netflixBridge;
+    script.src = browser.runtime.getURL("/netflix-bridge.js");
     (document.head || document.documentElement).appendChild(script);
   }
 }

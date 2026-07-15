@@ -1,66 +1,71 @@
-import { createSignal, Match, onMount, Switch } from "solid-js";
+import { createSignal, onMount, Show } from "solid-js";
 
-import { getCurrentTab } from "@/common/browser";
-import { detectConfig, type PlatformConfig } from "@/common/platforms";
+import { openOptionsPage } from "@/common/browser";
+import { loadSettings, saveSettings, type Settings } from "@/common/settings";
 import { theme } from "@/common/store/theme";
 
-import SettingsButton from "./components/SettingsButton";
-import Found from "./components/views/Found";
-import Loading from "./components/views/Loading";
-import Unsupported from "./components/views/Unsupported";
+import EnableSwitch from "./components/EnableSwitch";
+import Header from "./components/Header";
+import ShortcutList from "./components/ShortcutList";
 
-import 'virtual:uno.css';
+import "virtual:uno.css";
 
 const styles = {
-  popup: "overflow-hidden rounded-xl",
-  toolbar: "flex items-center justify-between py-3 px-4 bg-mantle border-b border-surface0",
-  logo: "flex items-center gap-2 m-0",
+  popup: "overflow-hidden rounded-xl bg-crust text-text",
+  content: "p-4 flex flex-col gap-4",
+  linkBtn: "bg-transparent border-none text-xs text-mauve hover:underline cursor-pointer p-0",
+  footer: "px-4 pb-4 text-center",
+  separator: "bg-surface0 m-0 h-px border-none",
 };
 
-type State =
-  | { kind: "loading" }
-  | { kind: "unsupported"; hostname?: string }
-  | { kind: "found"; config: PlatformConfig };
-
 export default function App() {
-  const [state, setState] = createSignal<State>({ kind: "loading" });
+  const [settings, setSettings] = createSignal<Settings | null>(null);
 
   onMount(async () => {
     await theme.init();
-
-    const tab = await getCurrentTab();
-    if (!tab) {
-      setState({ kind: "unsupported" });
-      return;
-    }
-
-    const url = tab.url;
-    const hostname = url?.startsWith("https://") ? new URL(url).hostname : "";
-    const config = detectConfig(hostname);
-    setState(config ? { kind: "found", config } : { kind: "unsupported", hostname });
+    const loaded = await loadSettings();
+    setSettings(loaded);
   });
+
+  const toggleEnabled = async (checked: boolean) => {
+    const current = settings();
+    if (!current) return;
+
+    const updated = {
+      ...current,
+      videoControls: {
+        ...current.videoControls,
+        enabled: checked,
+      },
+    };
+    setSettings(updated);
+    await saveSettings(updated);
+  };
 
   return (
     <div class={styles.popup}>
-      <header class={styles.toolbar}>
-        <p class={styles.logo}>
-          <span aria-hidden="true">⏭</span>
-          <strong>BingeFlow</strong>
-        </p>
-        <SettingsButton />
-      </header>
+      <Header />
 
-      <Switch>
-        <Match when={state().kind === "loading"}>
-          <Loading />
-        </Match>
-        <Match when={state().kind === "unsupported"}>
-          <Unsupported hostname={(state() as { hostname?: string }).hostname} />
-        </Match>
-        <Match when={state().kind === "found"}>
-          <Found config={(state() as { config: PlatformConfig }).config} />
-        </Match>
-      </Switch>
+      <Show when={settings()}>
+        {(currentSettings) => (
+          <main class={styles.content}>
+            <EnableSwitch
+              enabled={currentSettings().videoControls.enabled}
+              onchange={toggleEnabled}
+            />
+
+            <hr class={styles.separator} />
+
+            <ShortcutList videoControls={currentSettings().videoControls} />
+          </main>
+        )}
+      </Show>
+
+      <footer class={styles.footer}>
+        <button onClick={openOptionsPage} class={styles.linkBtn} type="button">
+          Open settings to change shortcuts
+        </button>
+      </footer>
     </div>
   );
 }

@@ -11,12 +11,18 @@ import LoadingState from "./components/LoadingState";
 import VideoControls from "./components/VideoControls";
 import { settings } from "./store/settings";
 
-import 'virtual:uno.css';
+import "virtual:uno.css";
 
 const styles = {
-  container: "w-full flex flex-col gap-6",
+  container: "w-full p-12 flex flex-col gap-6",
   mainContent: "grid grid-cols-1 gap-6 items-start md:grid-cols-2",
+  footer: "flex items-center justify-center gap-3 text-xs text-subtext0 mt-8",
+  link: "hover:underline text-mauve",
 };
+
+const rateUrl = import.meta.env.FIREFOX
+  ? "https://addons.mozilla.org/firefox/addon/bingeflow/"
+  : "https://chromewebstore.google.com/detail/bingeflow-placeholder";
 
 export default function App() {
   const [saveStatus, setSaveStatus] = createSignal<"idle" | "success" | "error">("idle");
@@ -62,6 +68,20 @@ export default function App() {
               onchange={handleVideoControlsChange}
             />
           </main>
+          <footer class={styles.footer}>
+            <a
+              href="https://codeberg.org/ma101an/bingeflow"
+              target="_blank"
+              rel="noreferrer"
+              class={styles.link}
+            >
+              Homepage
+            </a>
+            <span class="text-surface2">|</span>
+            <a href={rateUrl} target="_blank" rel="noreferrer" class={styles.link}>
+              Rate BingeFlow
+            </a>
+          </footer>
           <Toast saveStatus={saveStatus()} />
         </div>
       )}
