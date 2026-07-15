@@ -1,103 +1,57 @@
-# BingeFlow ⏭️
+# BingeFlow (bingeflow)
 
-A lightweight web extension built with **Svelte 5**, **TypeScript**, and **WXT** (Next-gen Web Extension Framework) that allows you to quickly skip intros, recaps, and credits, as well as control video playback on popular streaming platforms.
+A lightweight, modern web extension that allows you to quickly skip intros, recaps, and credits, as well as control video playback on popular streaming platforms like Netflix, Prime Video, and Disney+ Hotstar.
+
+<br />
+
+[![Get Latest Release](https://img.shields.io/badge/GET_LATEST-DOWNLOAD_ZIP-2ea44f?style=for-the-badge&logo=github)](https://github.com/uchihamalolan/bingeflow/releases/latest)
 
 ## Features
 
-- **One-Key skipping**: Press a simple key (default: `S` for Skip Intro/Recap, `N` for Next Episode/Video) to trigger player actions instantly.
-- **Floating Video Controls Overlay**: Hover over the video player to access a floating overlay with controls to:
+- ⚡ **One-Key Skipping**: Press a simple key (default: `S` for Skip Intro/Recap) to trigger player actions instantly.
+- 🎛️ **Floating Video Controls Overlay**: Hover over the video player to access a floating overlay with controls to:
   - Seek backward/forward (default: `Z` / `X`).
   - Speed up/slow down playback rate (default: `W` / `Q`).
   - Reset playback speed to normal `1×` (default: `R`).
-- **Dedicated Options Page**: A settings interface to customize the extension:
-  - Toggle between Catppuccin **Frappe** (dark) and **Latte** (light) color themes.
-  - Customize floating video controls (toggle the overlay, adjust seek durations between 1s and 60s, and change speed increment steps between 0.05× and 2.0×).
-  - Enable starting the video control overlay in a hidden state (starts invisible until mouse hover).
-  - Rebind and reset default keyboard shortcuts for seek and speed controls.
-- **Auto-Detection**: Automatically identifies the active streaming platform.
-- **Multiple Platform Support**: Pre-configured CSS selectors for:
-  - **Amazon Prime Video**
-  - **Disney+ Hotstar**
-  - **Netflix**
+- 🪄 **Smart Netflix Seeking**: While popular video controllers often freeze or crash Netflix when seeking, BingeFlow controls playback smartly and smoothly without player errors. _(See [Netflix Custom Seeking Architecture](#netflix-custom-seeking-architecture) in the technical section for details.)_
+- 🪟 **Minimalist Popup UI**: A clean popup interface that lists current shortcuts, features a master enable/disable switch, and links to settings.
+- 🎨 **Theme Customizability**: Supports Catppuccin **Frappe** (dark), **Latte** (light), and **System** themes.
 
----
+## Installation
 
-## Quick Start
+To install BingeFlow manually in Google Chrome without using the Chrome Web Store:
 
-This project uses [Bun](https://bun.sh) as the package manager and [Biome](https://biomejs.dev) for linting and formatting.
+1. Download the latest `.zip` file from the project's releases page.
+2. Extract the downloaded zip file into a folder on your computer.
+3. Open Google Chrome and navigate to `chrome://extensions/` (or click Chrome menu -> **Extensions** -> **Manage Extensions**).
+4. Turn on **Developer mode** using the toggle switch in the top-right corner.
+5. Click the **Load unpacked** button in the top-left corner.
+6. Select the extracted folder (`.output/chrome-mv3` or the extracted directory) to load and install the extension.
 
-### 1. Install Dependencies
-
-```bash
-bun install
-```
-
-### 2. Run the Development Server
-
-```bash
-bun run dev
-```
-
-This starts WXT in development mode and automatically launches a sandboxed Chrome browser preloaded with the extension. It also supports hot module reloading (HMR) for both the UI pages and content scripts.
-
-To run the development server targeting Firefox:
-
-```bash
-bun run dev:firefox
-```
-
-### 3. Load the Extension Manually (Optional)
-
-If you wish to load the unpacked extension manually in your regular browser profile:
-
-1. Navigate to:
-   - **Chrome**: `chrome://extensions/`
-   - **Firefox**: `about:debugging#/runtime/this-ops`
-2. Enable **Developer mode** (or click **Load Temporary Add-on** in Firefox).
-3. Click **Load unpacked** (or select manifest in Firefox).
-4. Select the build directory:
-   - For Chrome: `.output/chrome-mv3`
-   - For Firefox: `.output/firefox-mv3`
-
----
+_Note: For Firefox, load the Firefox-mv3 unpacked build via `about:debugging#/runtime/this-ops`._
 
 ## How It Works
 
-1. **Content Script**: [src/entrypoints/content.ts](file:///Users/malolan/Projects/bingeflow/src/entrypoints/content.ts) runs on all matching pages (`matches: ["https://*/*"]`).
-2. **Platform Registry**: When a page loads, the content script detects if the hostname matches any of the registered patterns in [src/common/platforms.ts](file:///Users/malolan/Projects/bingeflow/src/common/platforms.ts).
-3. **Video Controls Overlay**: If enabled, the content script injects a floating controls overlay on the active video container. It listens to hover events and exposes buttons for playback adjustments.
-4. **Event Listener**: When keyboard shortcuts or overlay buttons are pressed, the script updates the video's properties (like `currentTime` and `playbackRate`) or queries/clicks the page's specific skip/next buttons.
-5. **Popup UI**: Clicking the extension icon displays a Svelte-based popup showing the current page's status and quick settings.
-6. **Storage API**: Configuration preferences are loaded and persisted using `browser.storage.sync` (via [src/common/settings.ts](file:///Users/malolan/Projects/bingeflow/src/common/settings.ts)), while UI theme settings are saved locally using `browser.storage.local` (via [src/common/store/theme.svelte.ts](file:///Users/malolan/Projects/bingeflow/src/common/store/theme.svelte.ts)).
+1. Clicking the extension icon opens the popup displaying active keyboard shortcuts and the main enable/disable extension switch.
+2. When a video is detected, BingeFlow mounts a custom Shadow DOM controls overlay inside the player container.
+3. User activity (pointer movement or key shortcuts) keeps the overlay visible, while inactivity automatically fades it out after 5 seconds to ensure an unobstructed viewing experience.
+4. Settings can be accessed via the options page (accessible from both the popup and Chrome extension settings) where you can customize speed steps, seek durations, and keyboard shortcuts.
 
 ---
 
-## Production Build
+## 🛠️ Development & Building (Technical)
 
-To compile and bundle the extension for release:
+This project is built using the **WXT** framework, **SolidJS**, **TypeScript**, and **UnoCSS**, with **Bun** as the package manager.
 
-### Chrome (Manifest V3)
+### Netflix Custom Seeking Architecture
 
-```bash
-bun run build  # Builds into .output/chrome-mv3/
-bun run zip    # Packages the build into a production-ready ZIP archive
-```
+> [!WARNING]
+> This integration accesses Netflix's internal, undocumented React/Cadmium player APIs. Because these APIs are unofficial, Netflix can modify or deprecate them at any time, which might require future updates to BingeFlow to keep seeking working in Netflix.
 
-### Firefox (Manifest V3)
+Standard HTML5 `<video>` seek actions (`video.currentTime = ...`) on Netflix will cause the internal player state to lose synchronization, resulting in infinite loading loops or immediate page crashes.
 
-```bash
-bun run build:firefox  # Builds into .output/firefox-mv3/
-bun run zip:firefox    # Packages the build into a production-ready ZIP archive
-```
+To bypass this limitation, BingeFlow is engineered to interface directly with Netflix's internal React/Cadmium API:
 
----
-
-## Code Quality
-
-Check formatting and linting rules using Biome:
-
-```bash
-bun run check        # Run linter and formatter checks
-bun run fix          # Automatically fix linting and formatting issues
-bun run typecheck    # Performs TypeScript compilation checks without emit
-```
+1. **Unlisted Main-World Bridge**: BingeFlow builds a standalone `netflix-bridge.js` script (defined as an unlisted script entrypoint).
+2. **CSP-Compliant Injection**: Instead of injecting inline scripts (which are blocked by Netflix's strict Content Security Policy), the content script dynamically appends a script element pointing to `browser.runtime.getURL("/netflix-bridge.js")`, which is authorized under `web_accessible_resources`.
+3. **Custom Event Tunneling**: The content script sends targeted `CustomEvent` calls across the isolated world boundary. The bridge intercepts these events in the main page context, retrieves the active player session ID using `window.netflix.appContext`, and invokes Netflix's internal `.seek()` method to safely advance playback.
