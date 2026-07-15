@@ -11,7 +11,7 @@ export default defineConfig({
   }),
   manifest: {
     name: "BingeFlow",
-    version: "0.0.1",
+    version: "0.0.2",
     description: "Automatically skip intros, recaps & control video.",
     homepage_url: "https://github.com/uchihamalolan/bingeflow",
     permissions: ["tabs", "storage"],
