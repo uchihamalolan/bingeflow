@@ -13,7 +13,7 @@ A lightweight, modern web extension that allows you to quickly skip intros, reca
   - Seek backward/forward (default: `Z` / `X`).
   - Speed up/slow down playback rate (default: `W` / `Q`).
   - Reset playback speed to normal `1×` (default: `R`).
-- 🪄 **Smart Netflix Seeking**: While popular video controllers often freeze or crash Netflix when seeking, BingeFlow controls playback smartly and smoothly without player errors. _(See [Netflix Custom Seeking Architecture](#netflix-custom-seeking-architecture) in the technical section for details.)_
+- 🪄 **Smart Netflix Seeking**: While popular video controllers often freeze or crash Netflix when seeking, BingeFlow controls playback smartly and smoothly without player errors. _([Explained below](#netflix-custom-seeking-architecture))_
 - 🪟 **Minimalist Popup UI**: A clean popup interface that lists current shortcuts, features a master enable/disable switch, and links to settings.
 - 🎨 **Theme Customizability**: Supports Catppuccin **Frappe** (dark), **Latte** (light), and **System** themes.
 
