@@ -288,11 +288,6 @@ export function positionOverlay(host: HTMLElement): void {
   const container = host.parentElement;
   if (!container) return;
 
-  const containerPos = getComputedStyle(container).position;
-  if (containerPos === "static") {
-    container.style.position = "relative";
-  }
-
   host.style.setProperty("position", "absolute", "important");
   // Only apply default left/top if they have not been set (e.g. by dragging)
   if (!host.style.left) {

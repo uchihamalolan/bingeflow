@@ -20,7 +20,6 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
     platform: "amazon_prime",
     urlPattern: /primevideo\.com/,
     videoSelector: "#dv-web-player video",
-    playerContainerSelector: "#dv-web-player",
     behaviors: {
       skip: {
         selector: ".atvwebplayersdk-action-buttons button.atvwebplayersdk-skipelement-button",

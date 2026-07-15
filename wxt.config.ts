@@ -35,9 +35,7 @@ export default defineConfig({
       gecko: {
         id: "bingeflow@malolan.net",
         strict_min_version: "142.0",
-        data_collection_permissions: {
-          required: ["none"],
-        },
+        data_collection_permissions: { required: ["none"] },
       },
     },
   },
