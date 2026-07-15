@@ -16,7 +16,7 @@ import { findVideo, getPlayerContainer } from "./video-utils";
  *   positioning styles in sync when the video resizes.
  */
 export class VideoManager {
-  private readonly config: VideoControlsConfig;
+  private config: VideoControlsConfig;
   private readonly platformConfig: PlatformConfig | null;
 
   private activeVideo: HTMLVideoElement | null = null;
@@ -43,29 +43,41 @@ export class VideoManager {
     this.scan();
   }
 
-  /** Returns the currently tracked video element, or `null` if none. */
+  getConfig(): VideoControlsConfig {
+    return this.config;
+  }
+
+  /** Updates the configuration and handles mounting/unmounting accordingly. */
+  updateConfig(newConfig: VideoControlsConfig): void {
+    const wasEnabled = this.config.enabled;
+    const nowEnabled = newConfig.enabled;
+    this.config = newConfig;
+
+    if (wasEnabled && !nowEnabled) {
+      this.unmount();
+    } else if (!wasEnabled && nowEnabled) {
+      this.scan();
+    }
+  }
+
   getVideo(): HTMLVideoElement | null {
     return this.activeVideo;
   }
 
-  /** Returns the video controller wrapping the active video, or `null` if none. */
   getController(): VideoController | null {
     return this.activeController;
   }
 
-  /** Tears down all observers and removes the overlay from the DOM. */
   destroy(): void {
     this.mutationObserver.disconnect();
     this.resizeObserver.disconnect();
     this.unmount();
   }
 
-  /** Toggles the visibility of the overlay if it is mounted. */
   toggleOverlay(): void {
     this.overlayHandle?.toggle();
   }
 
-  /** Resets the overlay autohide timer. */
   triggerActivity(): void {
     this.overlayHandle?.triggerActivity();
   }
@@ -107,10 +119,6 @@ export class VideoManager {
     }
   }
 
-  /**
-   * Finds the best video candidate and mounts or unmounts the overlay as
-   * needed. A no-op if the best candidate has not changed.
-   */
   private scan(): void {
     const found = findVideo(this.platformConfig?.videoSelector);
 

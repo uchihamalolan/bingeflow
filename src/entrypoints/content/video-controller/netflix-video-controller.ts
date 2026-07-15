@@ -8,14 +8,30 @@ export class NetflixVideoController extends Html5VideoController {
 
   private onSeeked = () => {
     if (this.targetSeekTime !== null) {
-      const hasReachedTarget =
-        Math.abs(this.video.currentTime - this.targetSeekTime) < 1.0;
+      const hasReachedTarget = Math.abs(this.video.currentTime - this.targetSeekTime) < 1.0;
       if (hasReachedTarget) {
         this.targetSeekTime = null;
         this.clearSeekTimeout();
       }
     }
   };
+
+  private clearSeekTimeout(): void {
+    if (this.seekTimeoutId) {
+      clearTimeout(this.seekTimeoutId);
+      this.seekTimeoutId = null;
+    }
+  }
+
+  private injectBridge(): void {
+    const BRIDGE_ID = "bingeflow-netflix-bridge";
+    if (document.getElementById(BRIDGE_ID)) return;
+
+    const script = document.createElement("script");
+    script.id = BRIDGE_ID;
+    script.src = browser.runtime.getURL("/netflix-bridge.js");
+    (document.head || document.documentElement).appendChild(script);
+  }
 
   constructor(video: HTMLVideoElement) {
     super(video);
@@ -25,10 +41,7 @@ export class NetflixVideoController extends Html5VideoController {
 
   override seek(deltaSeconds: number): void {
     const baseTime = this.targetSeekTime ?? this.video.currentTime;
-    const targetSeconds = Math.max(
-      0,
-      Math.min(this.video.duration ?? 0, baseTime + deltaSeconds),
-    );
+    const targetSeconds = Math.max(0, Math.min(this.video.duration ?? 0, baseTime + deltaSeconds));
     this.targetSeekTime = targetSeconds;
 
     this.clearSeekTimeout();
@@ -48,22 +61,5 @@ export class NetflixVideoController extends Html5VideoController {
     super.destroy();
     this.video.removeEventListener("seeked", this.onSeeked);
     this.clearSeekTimeout();
-  }
-
-  private clearSeekTimeout(): void {
-    if (this.seekTimeoutId) {
-      clearTimeout(this.seekTimeoutId);
-      this.seekTimeoutId = null;
-    }
-  }
-
-  private injectBridge(): void {
-    const BRIDGE_ID = "bingeflow-netflix-bridge";
-    if (document.getElementById(BRIDGE_ID)) return;
-
-    const script = document.createElement("script");
-    script.id = BRIDGE_ID;
-    script.src = browser.runtime.getURL("/netflix-bridge.js");
-    (document.head || document.documentElement).appendChild(script);
   }
 }

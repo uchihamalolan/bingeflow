@@ -1,24 +1,15 @@
 import { getPlatformBehaviors, type PlatformConfig } from "@/common/platforms";
-import type { VideoControlsConfig } from "@/common/video-controls";
 
 import { isValidPress } from "./utils/validpress";
 import type { VideoManager } from "./video/video-manager";
 
 interface Props {
   videoManager: VideoManager;
-  videoControls: VideoControlsConfig;
   platformConfig: PlatformConfig | null;
   platformShortcuts: Set<string>;
 }
 
-export function addEventListeners({
-  videoManager,
-  platformConfig,
-  videoControls,
-  platformShortcuts,
-}: Props) {
-  const { keyBindings, seekSeconds, speedStep } = videoControls;
-
+export function addEventListeners({ videoManager, platformConfig, platformShortcuts }: Props) {
   document.addEventListener("keydown", (e: KeyboardEvent) => {
     if (!isValidPress(e)) return;
 
@@ -27,6 +18,9 @@ export function addEventListeners({
 
     // If a key conflicts with a platform shortcut, we yield to the platform action.
     if (controller !== null && !platformShortcuts.has(e.key)) {
+      const config = videoManager.getConfig();
+      const { keyBindings, seekSeconds, speedStep } = config;
+
       if (e.key.toLowerCase() === "v") {
         videoManager.toggleOverlay();
         return;

@@ -1,7 +1,8 @@
+import { browser } from "wxt/browser";
 import { defineContentScript } from "wxt/utils/define-content-script";
 
 import { detectConfig, getPlatformShortcuts } from "@/common/platforms";
-import { loadSettings } from "@/common/settings";
+import { loadSettings, type Settings } from "@/common/settings";
 
 import { addEventListeners } from "./add-listeners";
 import { VideoManager } from "./video/video-manager";
@@ -21,8 +22,17 @@ export default defineContentScript({
     addEventListeners({
       videoManager,
       platformConfig,
-      videoControls,
       platformShortcuts,
+    });
+
+    browser.storage.onChanged.addListener((changes) => {
+      const settingsChange = changes["bingeflow.settings"];
+      if (settingsChange?.newValue) {
+        const newSettings = settingsChange.newValue as Settings;
+        if (newSettings.videoControls) {
+          videoManager.updateConfig(newSettings.videoControls);
+        }
+      }
     });
   },
 });
