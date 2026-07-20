@@ -20,6 +20,7 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
     platform: "amazon_prime",
     urlPattern: /primevideo\.com/,
     videoSelector: "#dv-web-player video",
+    playerContainerSelector: "#dv-web-player",
     behaviors: {
       skip: {
         selector: ".atvwebplayersdk-action-buttons button.atvwebplayersdk-skipelement-button",
@@ -46,11 +47,6 @@ export const PLATFORMS: Record<StreamingPlatform, PlatformConfig> = {
   },
 };
 
-/**
- * Returns a fully-merged `BehaviorConfig[]` for a given platform by combining
- * global defaults from `GLOBAL_BEHAVIORS` with the platform's selector overrides.
- * Only behavior types that the platform explicitly provides a selector for are included.
- */
 export function getPlatformBehaviors(config: PlatformConfig): BehaviorConfig[] {
   return Object.entries(GLOBAL_BEHAVIORS).flatMap(([type, globalDefaults]) => {
     const override = config.behaviors[type as BehaviorType];
@@ -59,10 +55,6 @@ export function getPlatformBehaviors(config: PlatformConfig): BehaviorConfig[] {
   });
 }
 
-/**
- * Returns a set of keyboard shortcuts configured for the active behaviors of the given platform.
- * If the config is null, returns an empty set.
- */
 export function getPlatformShortcuts(config: PlatformConfig | null): Set<string> {
   const platformShortcuts = new Set<string>();
   if (config !== null) {

@@ -19,6 +19,14 @@ export type OverlayHandle = {
   remove(): void;
 };
 
+const svgString = {
+  seekBack: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="M232 184a8 8 0 0 1-16 0a88 88 0 0 0-150.22-62.22L43.4 144H88a8 8 0 0 1 0 16H24a8 8 0 0 1-8-8V88a8 8 0 0 1 16 0v44.77l22.48-22.33A104 104 0 0 1 232 184"/></svg>`,
+  seekForward: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="M240 88v64a8 8 0 0 1-8 8h-64a8 8 0 0 1 0-16h44.6l-22.36-22.21A88 88 0 0 0 40 184a8 8 0 0 1-16 0a104 104 0 0 1 177.54-73.54L224 132.77V88a8 8 0 0 1 16 0"/></svg>`,
+  speedUp: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="M248.67 114.66L160.48 58.5A15.91 15.91 0 0 0 136 71.84v37.3L56.48 58.5A15.91 15.91 0 0 0 32 71.84v112.32a15.92 15.92 0 0 0 24.48 13.34L136 146.86v37.3a15.92 15.92 0 0 0 24.48 13.34l88.19-56.16a15.8 15.8 0 0 0 0-26.68M48 183.94V72.07L135.82 128Zm104 0V72.07L239.82 128Z"/></svg>`,
+  speedDown: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="M223.77 58a16 16 0 0 0-16.25.53L128 109.14v-37.3a15.91 15.91 0 0 0-24.48-13.34l-88.19 56.16a15.8 15.8 0 0 0 0 26.68l88.19 56.16A15.91 15.91 0 0 0 128 184.16v-37.3l79.52 50.64A15.91 15.91 0 0 0 232 184.16V71.84A15.83 15.83 0 0 0 223.77 58M112 183.93L24.18 128L112 72.06Zm104 0L128.18 128L216 72.06Z"/></svg>`,
+  speedReset: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --><path fill="currentColor" d="M205.66 194.34a8 8 0 0 1-11.32 11.32L128 139.31l-66.34 66.35a8 8 0 0 1-11.32-11.32L116.69 128L50.34 61.66a8 8 0 0 1 11.32-11.32L128 116.69l66.34-66.35a8 8 0 0 1 11.32 11.32L139.31 128Z"/></svg>`,
+};
+
 /**
  * Mounts a Shadow DOM overlay next to `video` inside its parent container.
  * Returns an `OverlayHandle` to control the overlay after mount.
@@ -53,19 +61,19 @@ export function createOverlay(
   speedBadge.className = "si-speed";
   speedBadge.textContent = formatRate(controller.getPlaybackRate());
 
-  const seekBackBtn = createButton("\u00ab", "");
+  const seekBackBtn = createButton(svgString.seekBack);
   seekBackBtn.setAttribute("title", `Seek back ${config.seekSeconds}s`);
 
-  const speedDownBtn = createButton("\u2212", "si-speed-btn");
+  const speedDownBtn = createButton(svgString.speedDown);
   speedDownBtn.setAttribute("title", `Decrease speed by ${config.speedStep}`);
 
-  const speedUpBtn = createButton("+", "si-speed-btn");
+  const speedUpBtn = createButton(svgString.speedUp);
   speedUpBtn.setAttribute("title", `Increase speed by ${config.speedStep}`);
 
-  const seekFwdBtn = createButton("\u00bb", "");
+  const seekFwdBtn = createButton(svgString.seekForward);
   seekFwdBtn.setAttribute("title", `Seek forward ${config.seekSeconds}s`);
 
-  const resetSpeedBtn = createButton("x", "si-speed-btn");
+  const resetSpeedBtn = createButton(svgString.speedReset);
   resetSpeedBtn.setAttribute("title", "Reset speed to 1.0");
 
   overlay.append(
@@ -81,33 +89,23 @@ export function createOverlay(
 
   // ── Seek / speed helpers ──────────────────────────────────────────────────
 
-  function flash(btn: HTMLButtonElement): void {
-    btn.classList.add("si-active");
-    setTimeout(() => btn.classList.remove("si-active"), 300);
-  }
-
   // ── Button click handlers ─────────────────────────────────────────────────
   speedDownBtn.addEventListener("click", () => {
     const current = controller.getPlaybackRate();
     controller.setPlaybackRate(current - config.speedStep);
-    flash(speedDownBtn);
   });
   seekBackBtn.addEventListener("click", () => {
     controller.seek(-config.seekSeconds);
-    flash(seekBackBtn);
   });
   seekFwdBtn.addEventListener("click", () => {
     controller.seek(config.seekSeconds);
-    flash(seekFwdBtn);
   });
   speedUpBtn.addEventListener("click", () => {
     const current = controller.getPlaybackRate();
     controller.setPlaybackRate(current + config.speedStep);
-    flash(speedUpBtn);
   });
   resetSpeedBtn.addEventListener("click", () => {
     controller.setPlaybackRate(1.0);
-    flash(resetSpeedBtn);
   });
 
   // ── Speed badge — live update ─────────────────────────────────────────────
@@ -306,10 +304,10 @@ export function positionOverlay(host: HTMLElement): void {
 
 // ── Private helpers ──────────────────────────────────────────────────────────
 
-function createButton(label: string, extraClass: string): HTMLButtonElement {
+function createButton(svg: string): HTMLButtonElement {
   const btn = document.createElement("button");
-  btn.className = extraClass ? `si-btn ${extraClass}` : "si-btn";
-  btn.textContent = label;
+  btn.className = "si-btn";
+  btn.innerHTML = svg;
   return btn;
 }
 
