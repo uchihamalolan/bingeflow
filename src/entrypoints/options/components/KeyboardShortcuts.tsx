@@ -101,7 +101,7 @@ export default function KeyboardShortcuts(props: Props) {
               <dt class={styles.shortcutLabel}>{getShortcutLabel(id)}</dt>
               <dd class={styles.shortcutActions}>
                 <KbdButton
-                   active={activeRebindKey() === id}
+                  active={activeRebindKey() === id}
                   disabled={!props.videoControls.enabled}
                   value={formatKey(props.videoControls.keyBindings[id])}
                   onclick={() => setActiveRebindKey(id)}

@@ -26,7 +26,11 @@ export default function KbdButton(props: Props) {
       disabled={props.disabled ?? false}
       onClick={() => props.onclick()}
     >
-      {props.active ? getMessage("pressKeyPlaceholder") : <kbd class={styles.keyDisplay}>{props.value}</kbd>}
+      {props.active ? (
+        getMessage("pressKeyPlaceholder")
+      ) : (
+        <kbd class={styles.keyDisplay}>{props.value}</kbd>
+      )}
     </button>
   );
 }

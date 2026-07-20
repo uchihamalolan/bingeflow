@@ -18,9 +18,7 @@ export default function Header() {
         <img src="/icons/128.png" alt="BingeFlow Icon" class={styles.logoIcon} />
         <div>
           <h1 class={styles.logoTitle}>BingeFlow</h1>
-          <p class={styles.subtitle}>
-            {getMessage("optionsSubtitle")}
-          </p>
+          <p class={styles.subtitle}>{getMessage("optionsSubtitle")}</p>
         </div>
       </div>
 

@@ -28,9 +28,7 @@ export default function VideoControls(props: Props) {
       <div class={styles.settingRow(false)}>
         <dl class={styles.settingInfo}>
           <dt class={styles.settingLabel}>{getMessage("enableOverlayLabel")}</dt>
-          <dd class={styles.settingDesc}>
-            {getMessage("enableOverlayDesc")}
-          </dd>
+          <dd class={styles.settingDesc}>{getMessage("enableOverlayDesc")}</dd>
         </dl>
         <Switch
           id="enabled-toggle"
@@ -87,9 +85,7 @@ export default function VideoControls(props: Props) {
       <div class={styles.settingRow(!props.videoControls.enabled)}>
         <dl class={styles.settingInfo}>
           <dt class={styles.settingLabel}>{getMessage("startHiddenLabel")}</dt>
-          <dd class={styles.settingDesc}>
-            {getMessage("startHiddenDesc")}
-          </dd>
+          <dd class={styles.settingDesc}>{getMessage("startHiddenDesc")}</dd>
         </dl>
         <Switch
           id="start-hidden-toggle"

@@ -63,16 +63,28 @@ export function createOverlay(
   speedBadge.textContent = formatRate(controller.getPlaybackRate());
 
   const seekBackBtn = createButton(svgString.seekBack);
-  seekBackBtn.setAttribute("title", getMessage("overlaySeekBackTooltip", String(config.seekSeconds)));
+  seekBackBtn.setAttribute(
+    "title",
+    getMessage("overlaySeekBackTooltip", String(config.seekSeconds)),
+  );
 
   const speedDownBtn = createButton(svgString.speedDown);
-  speedDownBtn.setAttribute("title", getMessage("overlayDecreaseSpeedTooltip", String(config.speedStep)));
+  speedDownBtn.setAttribute(
+    "title",
+    getMessage("overlayDecreaseSpeedTooltip", String(config.speedStep)),
+  );
 
   const speedUpBtn = createButton(svgString.speedUp);
-  speedUpBtn.setAttribute("title", getMessage("overlayIncreaseSpeedTooltip", String(config.speedStep)));
+  speedUpBtn.setAttribute(
+    "title",
+    getMessage("overlayIncreaseSpeedTooltip", String(config.speedStep)),
+  );
 
   const seekFwdBtn = createButton(svgString.seekForward);
-  seekFwdBtn.setAttribute("title", getMessage("overlaySeekForwardTooltip", String(config.seekSeconds)));
+  seekFwdBtn.setAttribute(
+    "title",
+    getMessage("overlaySeekForwardTooltip", String(config.seekSeconds)),
+  );
 
   const resetSpeedBtn = createButton(svgString.speedReset);
   resetSpeedBtn.setAttribute("title", getMessage("overlayResetSpeedTooltip"));
@@ -308,7 +320,14 @@ export function positionOverlay(host: HTMLElement): void {
 function createButton(svg: string): HTMLButtonElement {
   const btn = document.createElement("button");
   btn.className = "si-btn";
-  btn.innerHTML = svg;
+
+  const parser = new DOMParser();
+  const parsed = parser.parseFromString(svg, "image/svg+xml");
+  const svgNode = parsed.documentElement;
+  if (svgNode && svgNode.tagName.toLowerCase() === "svg") {
+    btn.appendChild(svgNode);
+  }
+
   return btn;
 }
 

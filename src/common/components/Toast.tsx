@@ -19,7 +19,9 @@ export default function Toast(props: Props) {
   return (
     <Show when={props.saveStatus !== "idle"}>
       <div class={`${styles.toast} ${styles.status(props.saveStatus)}`} role="status">
-        {props.saveStatus === "success" ? getMessage("optionsSaved") : getMessage("optionsFailedToSave")}
+        {props.saveStatus === "success"
+          ? getMessage("optionsSaved")
+          : getMessage("optionsFailedToSave")}
       </div>
     </Show>
   );
