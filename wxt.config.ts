@@ -12,7 +12,7 @@ export default defineConfig({
   manifest: {
     name: "__MSG_extName__",
     description: "__MSG_extDescription__",
-    version: "0.0.4",
+    version: "0.0.5",
     homepage_url: "https://github.com/uchihamalolan/bingeflow",
     permissions: ["tabs", "storage"],
     default_locale: "en",
