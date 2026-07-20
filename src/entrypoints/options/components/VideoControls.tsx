@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 
+import { getMessage } from "@/common/browser";
 import NumberInput from "@/common/components/NumberInput";
 import Switch from "@/common/components/Switch";
 import type { VideoControlsConfig } from "@/common/video-controls";
@@ -22,18 +23,18 @@ interface Props {
 export default function VideoControls(props: Props) {
   return (
     <article class={styles.section}>
-      <h2 class={styles.sectionTitle}>Video Controls</h2>
+      <h2 class={styles.sectionTitle}>{getMessage("videoControlsTitle")}</h2>
 
       <div class={styles.settingRow(false)}>
         <dl class={styles.settingInfo}>
-          <dt class={styles.settingLabel}>Enable Overlay</dt>
+          <dt class={styles.settingLabel}>{getMessage("enableOverlayLabel")}</dt>
           <dd class={styles.settingDesc}>
-            Show the floating video controls overlay on pages with video elements
+            {getMessage("enableOverlayDesc")}
           </dd>
         </dl>
         <Switch
           id="enabled-toggle"
-          ariaLabel="Enable Overlay"
+          ariaLabel={getMessage("enableOverlayLabel")}
           checked={props.videoControls.enabled}
           onchange={(checked) => {
             props.onchange((c) => {
@@ -45,8 +46,8 @@ export default function VideoControls(props: Props) {
 
       <div class={styles.settingRow(!props.videoControls.enabled)}>
         <dl class={styles.settingInfo}>
-          <dt class={styles.settingLabel}>Seek Duration</dt>
-          <dd class={styles.settingDesc}>Seconds to seek forward or backward</dd>
+          <dt class={styles.settingLabel}>{getMessage("seekDurationLabel")}</dt>
+          <dd class={styles.settingDesc}>{getMessage("seekDurationDesc")}</dd>
         </dl>
         <NumberInput
           value={props.videoControls.seekSeconds}
@@ -65,8 +66,8 @@ export default function VideoControls(props: Props) {
 
       <div class={styles.settingRow(!props.videoControls.enabled)}>
         <dl class={styles.settingInfo}>
-          <dt class={styles.settingLabel}>Playback Speed Step</dt>
-          <dd class={styles.settingDesc}>Playback-rate increment or decrement per button click</dd>
+          <dt class={styles.settingLabel}>{getMessage("playbackSpeedStepLabel")}</dt>
+          <dd class={styles.settingDesc}>{getMessage("playbackSpeedStepDesc")}</dd>
         </dl>
         <NumberInput
           value={props.videoControls.speedStep}
@@ -85,14 +86,14 @@ export default function VideoControls(props: Props) {
 
       <div class={styles.settingRow(!props.videoControls.enabled)}>
         <dl class={styles.settingInfo}>
-          <dt class={styles.settingLabel}>Start Hidden</dt>
+          <dt class={styles.settingLabel}>{getMessage("startHiddenLabel")}</dt>
           <dd class={styles.settingDesc}>
-            Hide the overlay by default until mouse activity is detected near the video
+            {getMessage("startHiddenDesc")}
           </dd>
         </dl>
         <Switch
           id="start-hidden-toggle"
-          ariaLabel="Start Hidden"
+          ariaLabel={getMessage("startHiddenLabel")}
           checked={props.videoControls.startHidden}
           disabled={!props.videoControls.enabled}
           onchange={(checked) => {

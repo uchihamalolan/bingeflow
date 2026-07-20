@@ -1,3 +1,4 @@
+import { getMessage } from "@/common/browser";
 import type { VideoControlsConfig } from "@/common/video-controls";
 
 interface Props {
@@ -17,30 +18,30 @@ export default function ShortcutList(props: Props) {
 
   return (
     <div class={styles.container}>
-      <p class={styles.title}>Shortcuts</p>
+      <p class={styles.title}>{getMessage("shortcutsHeader")}</p>
       <ul class={styles.shortcutList}>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">Toggle Overlay</span>
+          <span class="text-subtext0">{getMessage("shortcutToggleOverlay")}</span>
           <kbd class={styles.kbd}>V</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">Seek Backward</span>
+          <span class="text-subtext0">{getMessage("shortcutSeekBackward")}</span>
           <kbd class={styles.kbd}>{bindings().seekBack.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">Seek Forward</span>
+          <span class="text-subtext0">{getMessage("shortcutSeekForward")}</span>
           <kbd class={styles.kbd}>{bindings().seekFwd.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">Decrease Speed</span>
+          <span class="text-subtext0">{getMessage("shortcutDecreaseSpeed")}</span>
           <kbd class={styles.kbd}>{bindings().speedDown.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">Increase Speed</span>
+          <span class="text-subtext0">{getMessage("shortcutIncreaseSpeed")}</span>
           <kbd class={styles.kbd}>{bindings().speedUp.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">Reset Speed</span>
+          <span class="text-subtext0">{getMessage("shortcutResetSpeed")}</span>
           <kbd class={styles.kbd}>{bindings().resetSpeed.toUpperCase()}</kbd>
         </li>
       </ul>

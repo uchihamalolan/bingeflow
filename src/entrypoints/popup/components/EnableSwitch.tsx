@@ -1,3 +1,4 @@
+import { getMessage } from "@/common/browser";
 import Switch from "@/common/components/Switch";
 
 interface Props {
@@ -13,10 +14,10 @@ const styles = {
 export default function EnableSwitch(props: Props) {
   return (
     <div class={styles.container}>
-      <span class={styles.label}>Enable BingeFlow</span>
+      <span class={styles.label}>{getMessage("enableBingeFlow")}</span>
       <Switch
         id="enable-extension"
-        ariaLabel="Enable Extension"
+        ariaLabel={getMessage("enableExtensionAria")}
         checked={props.enabled}
         onchange={props.onchange}
         size="sm"

@@ -10,11 +10,12 @@ export default defineConfig({
     plugins: [UnoCSS(), solidPlugin()],
   }),
   manifest: {
-    name: "BingeFlow",
+    name: "__MSG_extName__",
+    description: "__MSG_extDescription__",
     version: "0.0.4",
-    description: "Automatically skip intros, recaps & control video.",
     homepage_url: "https://github.com/uchihamalolan/bingeflow",
     permissions: ["tabs", "storage"],
+    default_locale: "en",
     action: {
       default_icon: "icons/128.png",
       default_title: "Bingeflow",

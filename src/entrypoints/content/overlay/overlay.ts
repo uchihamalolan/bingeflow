@@ -1,3 +1,4 @@
+import { getMessage } from "@/common/browser";
 import type { VideoControlsConfig } from "@/common/video-controls";
 
 import type { VideoController } from "../video-controller/video-controller";
@@ -55,26 +56,26 @@ export function createOverlay(
   const dragHandle = document.createElement("span");
   dragHandle.className = "si-drag-handle";
   dragHandle.textContent = "\u22ee\u22ee"; // ⋮⋮ vertical grab dots
-  dragHandle.setAttribute("title", "Drag to reposition");
+  dragHandle.setAttribute("title", getMessage("overlayDragTooltip"));
 
   const speedBadge = document.createElement("span");
   speedBadge.className = "si-speed";
   speedBadge.textContent = formatRate(controller.getPlaybackRate());
 
   const seekBackBtn = createButton(svgString.seekBack);
-  seekBackBtn.setAttribute("title", `Seek back ${config.seekSeconds}s`);
+  seekBackBtn.setAttribute("title", getMessage("overlaySeekBackTooltip", String(config.seekSeconds)));
 
   const speedDownBtn = createButton(svgString.speedDown);
-  speedDownBtn.setAttribute("title", `Decrease speed by ${config.speedStep}`);
+  speedDownBtn.setAttribute("title", getMessage("overlayDecreaseSpeedTooltip", String(config.speedStep)));
 
   const speedUpBtn = createButton(svgString.speedUp);
-  speedUpBtn.setAttribute("title", `Increase speed by ${config.speedStep}`);
+  speedUpBtn.setAttribute("title", getMessage("overlayIncreaseSpeedTooltip", String(config.speedStep)));
 
   const seekFwdBtn = createButton(svgString.seekForward);
-  seekFwdBtn.setAttribute("title", `Seek forward ${config.seekSeconds}s`);
+  seekFwdBtn.setAttribute("title", getMessage("overlaySeekForwardTooltip", String(config.seekSeconds)));
 
   const resetSpeedBtn = createButton(svgString.speedReset);
-  resetSpeedBtn.setAttribute("title", "Reset speed to 1.0");
+  resetSpeedBtn.setAttribute("title", getMessage("overlayResetSpeedTooltip"));
 
   overlay.append(
     dragHandle,

@@ -1,10 +1,18 @@
 import { Show } from "solid-js";
 
+import { getMessage } from "@/common/browser";
 import { theme } from "@/common/store/theme";
 
 interface Props {
   class?: string;
 }
+
+const getThemeLabel = (t: string) => {
+  if (t === "system") return getMessage("themeSystem");
+  if (t === "frappe") return getMessage("themeFrappe");
+  if (t === "latte") return getMessage("themeLatte");
+  return t;
+};
 
 export default function ThemeToggle(props: Props) {
   return (
@@ -12,8 +20,8 @@ export default function ThemeToggle(props: Props) {
       class={props.class}
       type="button"
       onClick={() => theme.toggle()}
-      aria-label={`Current theme: ${theme.current}. Click to cycle.`}
-      title={`Current theme: ${theme.current}. Click to cycle.`}
+      aria-label={getMessage("themeToggleLabel", getThemeLabel(theme.current))}
+      title={getMessage("themeToggleLabel", getThemeLabel(theme.current))}
     >
       <Show when={theme.current === "system"}>
         <span class="i-lucide:monitor h-5 w-5" aria-hidden="true" />

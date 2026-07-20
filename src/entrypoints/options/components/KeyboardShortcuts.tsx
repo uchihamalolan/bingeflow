@@ -1,6 +1,7 @@
 import { clsx } from "clsx";
 import { createSignal, For, onCleanup, onMount } from "solid-js";
 
+import { getMessage } from "@/common/browser";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_VIDEO_CONTROLS } from "@/common/video-controls";
 
@@ -27,16 +28,25 @@ interface Props {
 
 type BindingKey = keyof VideoControlsConfig["keyBindings"];
 
-const shortcutConfigs: { id: BindingKey; label: string }[] = [
-  { id: "seekBack", label: "Seek Backward" },
-  { id: "seekFwd", label: "Seek Forward" },
-  { id: "speedDown", label: "Decrease Speed" },
-  { id: "speedUp", label: "Increase Speed" },
-  { id: "resetSpeed", label: "Reset Speed" },
+const shortcutConfigs: { id: BindingKey }[] = [
+  { id: "seekBack" },
+  { id: "seekFwd" },
+  { id: "speedDown" },
+  { id: "speedUp" },
+  { id: "resetSpeed" },
 ];
 
+const getShortcutLabel = (id: BindingKey) => {
+  if (id === "seekBack") return getMessage("shortcutSeekBackward");
+  if (id === "seekFwd") return getMessage("shortcutSeekForward");
+  if (id === "speedDown") return getMessage("shortcutDecreaseSpeed");
+  if (id === "speedUp") return getMessage("shortcutIncreaseSpeed");
+  if (id === "resetSpeed") return getMessage("shortcutResetSpeed");
+  return id;
+};
+
 function formatKey(key: string): string {
-  if (key === " ") return "Space";
+  if (key === " ") return getMessage("spaceKeyLabel");
   if (key.length === 1) return key.toUpperCase();
   return key;
 }
@@ -82,16 +92,16 @@ export default function KeyboardShortcuts(props: Props) {
 
   return (
     <article class={styles.section(!props.videoControls.enabled)}>
-      <h2 class={styles.sectionTitle}>Keyboard Shortcuts</h2>
+      <h2 class={styles.sectionTitle}>{getMessage("keyboardShortcutsTitle")}</h2>
 
       <dl class={styles.shortcutList}>
         <For each={shortcutConfigs}>
-          {({ id, label }) => (
+          {({ id }) => (
             <div class={styles.shortcutItem}>
-              <dt class={styles.shortcutLabel}>{label}</dt>
+              <dt class={styles.shortcutLabel}>{getShortcutLabel(id)}</dt>
               <dd class={styles.shortcutActions}>
                 <KbdButton
-                  active={activeRebindKey() === id}
+                   active={activeRebindKey() === id}
                   disabled={!props.videoControls.enabled}
                   value={formatKey(props.videoControls.keyBindings[id])}
                   onclick={() => setActiveRebindKey(id)}

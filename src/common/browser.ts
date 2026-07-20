@@ -25,3 +25,7 @@ export const getLocalStorage = async <T>(key: string): Promise<T | undefined> =>
 export const setLocalStorage = async <T>(key: string, value: T): Promise<void> => {
   await browser.storage.local.set({ [key]: value });
 };
+
+export const getMessage = (key: any, substitutions?: any): string => {
+  return browser.i18n.getMessage(key, substitutions);
+};

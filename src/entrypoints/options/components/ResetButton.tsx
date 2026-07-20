@@ -1,3 +1,5 @@
+import { getMessage } from "@/common/browser";
+
 const styles = {
   resetBtn:
     "bg-transparent border-(~ transparent) text-subtext0 w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:enabled:(bg-surface0 border-surface1 text-red) disabled:(opacity-30 cursor-not-allowed)",
@@ -17,7 +19,7 @@ export default function ResetButton(props: Props) {
       class={styles.resetBtn}
       disabled={props.disabled ?? false}
       onClick={() => props.onclick()}
-      title={props.title ?? "Reset to default"}
+      title={props.title ?? getMessage("resetToDefaultTitle")}
     >
       <span class={`${styles.resetIcon} i-lucide:rotate-ccw`} aria-hidden="true" />
     </button>

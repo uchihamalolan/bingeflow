@@ -1,4 +1,4 @@
-import { openOptionsPage } from "@/common/browser";
+import { getMessage, openOptionsPage } from "@/common/browser";
 
 const styles = {
   settingsBtn:
@@ -12,7 +12,7 @@ export default function SettingsButton() {
       class={styles.settingsBtn}
       type="button"
       onClick={openOptionsPage}
-      aria-label="Open Settings"
+      aria-label={getMessage("openSettingsAria")}
     >
       <span class={`${styles.settingsIcon} i-lucide:settings`} aria-hidden="true" />
     </button>

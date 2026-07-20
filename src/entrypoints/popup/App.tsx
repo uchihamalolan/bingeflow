@@ -1,6 +1,6 @@
 import { createSignal, onMount, Show } from "solid-js";
 
-import { openOptionsPage } from "@/common/browser";
+import { getMessage, openOptionsPage } from "@/common/browser";
 import { loadSettings, saveSettings, type Settings } from "@/common/settings";
 import { theme } from "@/common/store/theme";
 
@@ -63,7 +63,7 @@ export default function App() {
 
       <footer class={styles.footer}>
         <button onClick={openOptionsPage} class={styles.linkBtn} type="button">
-          Open settings to change shortcuts
+          {getMessage("openSettingsLink")}
         </button>
       </footer>
     </div>

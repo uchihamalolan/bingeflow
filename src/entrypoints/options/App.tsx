@@ -1,5 +1,6 @@
 import { createSignal, onMount, Show } from "solid-js";
 
+import { getMessage } from "@/common/browser";
 import Toast from "@/common/components/Toast";
 import { saveSettings } from "@/common/settings";
 import { theme } from "@/common/store/theme";
@@ -75,11 +76,11 @@ export default function App() {
               rel="noreferrer"
               class={styles.link}
             >
-              Homepage
+              {getMessage("optionsHomepage")}
             </a>
             <span class="text-surface2">|</span>
             <a href={rateUrl} target="_blank" rel="noreferrer" class={styles.link}>
-              Rate BingeFlow
+              {getMessage("optionsRate")}
             </a>
           </footer>
           <Toast saveStatus={saveStatus()} />

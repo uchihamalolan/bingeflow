@@ -1,3 +1,4 @@
+import { getMessage } from "@/common/browser";
 import ThemeToggle from "@/common/components/ThemeToggle";
 
 const styles = {
@@ -18,7 +19,7 @@ export default function Header() {
         <div>
           <h1 class={styles.logoTitle}>BingeFlow</h1>
           <p class={styles.subtitle}>
-            Dart past intros, glide back & forward, and hover over controls.
+            {getMessage("optionsSubtitle")}
           </p>
         </div>
       </div>
