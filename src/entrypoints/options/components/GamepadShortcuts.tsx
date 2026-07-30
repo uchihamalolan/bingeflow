@@ -1,7 +1,7 @@
 import { For } from "solid-js";
 
 import Switch from "@/common/components/Switch";
-import { getGamepadButtonLabel } from "@/common/gamepad-labels";
+import { getGamepadButtonLabel } from "@/common/gamepad";
 import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_GAMEPAD_BINDINGS } from "@/common/video-controls";
