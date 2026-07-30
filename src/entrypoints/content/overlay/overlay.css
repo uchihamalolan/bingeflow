@@ -1,0 +1,136 @@
+:host {
+  /* Shadows */
+  --shadow-3: 0 8px 32px oklch(0% 0 0 / 0.5);
+
+  /* Animations */
+  --ease-2: cubic-bezier(0.25, 0, 0.3, 1);
+
+  --font: system-ui, -apple-system, sans-serif;
+
+  /* Colors (Frappé Dark Glass theme) */
+  --color-base: oklch(30% 0.03 276);
+  --color-text: oklch(86% 0.05 273);
+  --color-subtext: oklch(75% 0.05 274);
+  --color-surface0: oklch(39% 0.03 276);
+  --color-surface2: oklch(52% 0.04 274);
+  --color-accent: oklch(76% 0.11 312);
+
+  /* Derived Colors using Relative Color Syntax */
+  --color-bg: color-mix(in oklch, var(--color-base) 80%, transparent);
+  --color-border: color-mix(in oklch, var(--color-text) 8%, transparent);
+  --color-border-hover: color-mix(in oklch, var(--color-text) 15%, transparent);
+  --color-btn-bg: color-mix(in oklch, var(--color-surface0) 45%, transparent);
+  --color-btn-hover: color-mix(in oklch, var(--color-surface2) 65%, transparent);
+  --color-btn-active: color-mix(in oklch, var(--color-surface2) 90%, transparent);
+  --color-accent-border: color-mix(in oklch, var(--color-accent) 20%, transparent);
+  --color-accent-active: color-mix(in oklch, var(--color-accent) 15%, transparent);
+  --color-ring: color-mix(in oklch, var(--color-accent) 40%, transparent);
+  --color-ring-speed: color-mix(in oklch, var(--color-accent) 45%, transparent);
+}
+
+/* Reset scoped to the shadow root */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Overlay container ─────────────────────────────────────── */
+.si-overlay {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  font-size: 12px;
+
+  gap: 4px;
+  padding: 4px;
+
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-3);
+  background: color-mix(in oklch, var(--color-base) 50%, transparent);
+  opacity: 1;
+
+  border: 1px solid;
+  border-color: color-mix(in oklch, var(--color-text) 8%, transparent);
+  border-radius: 12px;
+
+  pointer-events: auto;
+  user-select: none;
+  transition: opacity 200ms var(--ease-2);
+
+  &.si-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.si-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  padding: 2px;
+  aspect-ratio: 1;
+  line-height: 1;
+
+  color: color-mix(in oklch, var(--color-accent) 70%, transparent);
+  background: color-mix(in oklch var(--color-surface0) 45%, transparent);
+
+  border: 1px solid var(--color-accent-border);
+  border-radius: 8px;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition:
+    background 200ms var(--ease-2),
+    transform 200ms var(--ease-2),
+    box-shadow 200ms var(--ease-2);
+
+  & > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: var(--color-btn-hover);
+    border-color: var(--color-border-hover);
+  }
+
+  &:active {
+    transform: scale(0.91);
+    background: var(--color-accent-active);
+    box-shadow: 0 0 0 2px var(--color-ring-speed);
+  }
+}
+
+/* ── Speed badge ───────────────────────────────────────────── */
+.si-speed {
+  font-size: 11px;
+  color: var(--color-subtext);
+  padding: 0 4px 0 0;
+}
+
+/* Drag handle style */
+.si-drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+
+  color: var(--color-subtext);
+
+  cursor: grab;
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
