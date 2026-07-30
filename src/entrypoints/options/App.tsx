@@ -19,7 +19,6 @@ const styles = {
   container: cx({
     layout: "flex flex-col gap-6",
     spacing: "p-12",
-    sizing: "w-full",
   }),
   mainContent: cx({
     layout: "columns-1 md:columns-2 gap-6",

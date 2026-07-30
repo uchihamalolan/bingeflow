@@ -14,8 +14,7 @@ const styles = {
     typography: "text-xs font-semibold text-subtext0 uppercase tracking-wider",
   }),
   shortcutList: cx({
-    layout: "flex flex-col gap-2 list-none",
-    spacing: "p-0 m-0",
+    layout: "flex flex-col gap-2",
   }),
   shortcutItem: cx({
     layout: "flex items-center justify-between",

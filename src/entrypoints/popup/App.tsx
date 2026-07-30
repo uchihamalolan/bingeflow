@@ -33,8 +33,6 @@ const styles = {
   }),
   separator: cx({
     colors: "bg-surface0",
-    borders: "border-none",
-    spacing: "m-0",
     sizing: "h-px",
   }),
 };

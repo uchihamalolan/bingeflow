@@ -18,7 +18,6 @@ const styles = {
       state: clsx("cursor-pointer", active && "animate-pulse"),
     }),
   keyDisplay: cx({
-    colors: "bg-transparent",
     borders: "border-none",
   }),
 };
