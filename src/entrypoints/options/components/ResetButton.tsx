@@ -1,9 +1,17 @@
 import { getMessage } from "@/common/browser";
+import { cx } from "@/common/utils/cx";
 
 const styles = {
-  resetBtn:
-    "bg-transparent border-(~ transparent) text-subtext0 w-8 h-8 rounded-md flex items-center justify-center cursor-pointer hover:enabled:(bg-surface0 border-surface1 text-red) disabled:(opacity-30 cursor-not-allowed)",
-  resetIcon: "w-5 h-5",
+  resetBtn: cx({
+    layout: "flex items-center justify-center",
+    colors: "bg-transparent text-subtext0 hover:enabled:(bg-surface0 border-surface1 text-red)",
+    borders: "border-(~ transparent) rounded-md",
+    sizing: "w-8 h-8",
+    state: "cursor-pointer disabled:(opacity-30 cursor-not-allowed)",
+  }),
+  resetIcon: cx({
+    sizing: "w-5 h-5",
+  }),
 };
 
 interface Props {
@@ -21,7 +29,7 @@ export default function ResetButton(props: Props) {
       onClick={() => props.onclick()}
       title={props.title ?? getMessage("resetToDefaultTitle")}
     >
-      <span class={`${styles.resetIcon} i-lucide:rotate-ccw`} aria-hidden="true" />
+      <span class={cx({ state: `${styles.resetIcon} i-lucide:rotate-ccw` })} aria-hidden="true" />
     </button>
   );
 }

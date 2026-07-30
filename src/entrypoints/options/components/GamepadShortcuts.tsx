@@ -1,8 +1,8 @@
-import { clsx } from "clsx";
 import { For } from "solid-js";
 
-import { getGamepadButtonLabel } from "@/common/gamepad-labels";
 import Switch from "@/common/components/Switch";
+import { getGamepadButtonLabel } from "@/common/gamepad-labels";
+import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_GAMEPAD_BINDINGS } from "@/common/video-controls";
 
@@ -12,18 +12,41 @@ import ResetButton from "./ResetButton";
 
 const styles = {
   section: (disabled: boolean) =>
-    clsx(
-      "bg-mantle border-(~ surface0) rounded-2xl p-6 flex flex-col gap-5",
-      disabled && "opacity-45 pointer-events-none",
-    ),
-  settingRow: "flex items-center justify-between gap-5 border-b border-surface0 pb-4",
-  settingInfo: "flex flex-col gap-1 flex-1",
-  settingLabel: "font-semibold",
-  settingDesc: "text-xs text-subtext0",
-  shortcutList: "flex flex-col gap-3",
-  shortcutItem: "flex items-center justify-between py-2 border-b border-surface0 last:border-none",
-  shortcutLabel: "font-medium text-sm",
-  shortcutActions: "flex items-center gap-3",
+    cx({
+      layout: "flex flex-col gap-5",
+      colors: "bg-mantle",
+      borders: "border-(~ surface0) rounded-2xl",
+      spacing: "p-6",
+      state: disabled && "opacity-45 pointer-events-none",
+    }),
+  settingRow: cx({
+    layout: "flex items-center justify-between gap-5",
+    borders: "border-b border-surface0",
+    spacing: "pb-4",
+  }),
+  settingInfo: cx({
+    layout: "flex flex-col gap-1 flex-1",
+  }),
+  settingLabel: cx({
+    typography: "font-semibold",
+  }),
+  settingDesc: cx({
+    typography: "text-xs text-subtext0",
+  }),
+  shortcutList: cx({
+    layout: "flex flex-col gap-3",
+  }),
+  shortcutItem: cx({
+    layout: "flex items-center justify-between",
+    borders: "border-b border-surface0 last:border-none",
+    spacing: "py-2",
+  }),
+  shortcutLabel: cx({
+    typography: "font-medium text-sm",
+  }),
+  shortcutActions: cx({
+    layout: "flex items-center gap-3",
+  }),
 };
 
 interface Props {

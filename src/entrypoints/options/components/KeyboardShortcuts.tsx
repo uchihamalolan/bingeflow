@@ -1,7 +1,7 @@
-import { clsx } from "clsx";
 import { For } from "solid-js";
 
 import { getMessage } from "@/common/browser";
+import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_VIDEO_CONTROLS } from "@/common/video-controls";
 
@@ -11,15 +11,31 @@ import ResetButton from "./ResetButton";
 
 const styles = {
   section: (disabled: boolean) =>
-    clsx(
-      "bg-mantle border-(~ surface0) rounded-2xl p-6 flex flex-col gap-5",
-      disabled && "opacity-45 pointer-events-none",
-    ),
-  sectionTitle: "text-mauve font-semibold text-lg",
-  shortcutList: "flex flex-col gap-3",
-  shortcutItem: "flex items-center justify-between py-2 border-b border-surface0 last:border-none",
-  shortcutLabel: "font-medium",
-  shortcutActions: "flex items-center gap-3",
+    cx({
+      layout: "flex flex-col gap-5",
+      colors: "bg-mantle",
+      borders: "border-(~ surface0) rounded-2xl",
+      spacing: "p-6",
+      state: disabled && "opacity-45 pointer-events-none",
+    }),
+  sectionTitle: cx({
+    colors: "text-mauve",
+    typography: "font-semibold text-lg",
+  }),
+  shortcutList: cx({
+    layout: "flex flex-col gap-3",
+  }),
+  shortcutItem: cx({
+    layout: "flex items-center justify-between",
+    borders: "border-b border-surface0 last:border-none",
+    spacing: "py-2",
+  }),
+  shortcutLabel: cx({
+    typography: "font-medium",
+  }),
+  shortcutActions: cx({
+    layout: "flex items-center gap-3",
+  }),
 };
 
 interface Props {
@@ -70,7 +86,8 @@ export default function KeyboardShortcuts(props: Props) {
       <dl class={styles.shortcutList}>
         <For each={shortcutConfigs}>
           {({ id }) => {
-            const isDisabled = () => props.videoControls.keyBindings[id] === DEFAULT_VIDEO_CONTROLS.keyBindings[id]
+            const isDisabled = () =>
+              props.videoControls.keyBindings[id] === DEFAULT_VIDEO_CONTROLS.keyBindings[id];
 
             return (
               <div class={styles.shortcutItem}>

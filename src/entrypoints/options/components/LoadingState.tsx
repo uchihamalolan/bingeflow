@@ -1,8 +1,15 @@
 import Spinner from "@/common/components/Spinner";
+import { cx } from "@/common/utils/cx";
 
 const styles = {
-  loadingContainer: "flex flex-col items-center justify-center min-h-80 text-subtext0",
-  loadingText: "mt-5",
+  loadingContainer: cx({
+    layout: "flex flex-col items-center justify-center",
+    colors: "text-subtext0",
+    sizing: "min-h-80",
+  }),
+  loadingText: cx({
+    spacing: "mt-5",
+  }),
 };
 
 export default function LoadingState() {

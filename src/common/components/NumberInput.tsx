@@ -1,8 +1,23 @@
+import { cx } from "@/common/utils/cx";
+
 const styles = {
-  wrapper:
-    "flex items-center bg-surface0 border-(~ surface1) rounded-md px-2 h-8 w-30 focus-within:border-mauve",
-  inputField: "bg-transparent border-none w-full text-right outline-none appearance-none",
-  unitStyle: "text-[0.75rem] text-subtext0 ml-1",
+  wrapper: cx({
+    layout: "flex items-center",
+    colors: "bg-surface0 focus-within:border-mauve",
+    borders: "border-(~ surface1) rounded-md",
+    spacing: "px-2",
+    sizing: "h-8 w-30",
+  }),
+  inputField: cx({
+    colors: "bg-transparent",
+    borders: "border-none outline-none",
+    sizing: "w-full",
+    typography: "text-right appearance-none",
+  }),
+  unitStyle: cx({
+    typography: "text-[0.75rem] text-subtext0",
+    spacing: "ml-1",
+  }),
 };
 
 interface Props {

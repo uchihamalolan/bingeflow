@@ -3,6 +3,7 @@ import { createSignal, onMount, Show } from "solid-js";
 import { getMessage, openOptionsPage } from "@/common/browser";
 import { loadSettings, saveSettings, type Settings } from "@/common/settings";
 import { theme } from "@/common/store/theme";
+import { cx } from "@/common/utils/cx";
 
 import EnableSwitch from "./components/EnableSwitch";
 import Header from "./components/Header";
@@ -11,11 +12,31 @@ import ShortcutList from "./components/ShortcutList";
 import "virtual:uno.css";
 
 const styles = {
-  popup: "overflow-hidden rounded-xl bg-crust text-text",
-  content: "p-4 flex flex-col gap-4",
-  linkBtn: "bg-transparent border-none text-xs text-mauve hover:underline cursor-pointer p-0",
-  footer: "px-4 pb-4 text-center",
-  separator: "bg-surface0 m-0 h-px border-none",
+  popup: cx({
+    colors: "bg-crust text-text",
+    borders: "overflow-hidden rounded-xl",
+  }),
+  content: cx({
+    layout: "flex flex-col gap-4",
+    spacing: "p-4",
+  }),
+  linkBtn: cx({
+    colors: "bg-transparent text-mauve hover:underline",
+    borders: "border-none",
+    typography: "text-xs",
+    spacing: "p-0",
+    state: "cursor-pointer",
+  }),
+  footer: cx({
+    spacing: "px-4 pb-4",
+    typography: "text-center",
+  }),
+  separator: cx({
+    colors: "bg-surface0",
+    borders: "border-none",
+    spacing: "m-0",
+    sizing: "h-px",
+  }),
 };
 
 export default function App() {

@@ -1,14 +1,31 @@
 import ThemeToggle from "@/common/components/ThemeToggle";
+import { cx } from "@/common/utils/cx";
 
 import SettingsButton from "./SettingsButton";
 
 const styles = {
-  toolbar: "flex items-center justify-between py-3 px-4 bg-mantle border-b border-surface0",
-  logo: "flex items-center gap-2",
-  logoIcon: "h-5 w-5",
-  actionsContainer: "flex items-center gap-1",
-  themeToggle:
-    "text-subtext0 hover:(bg-surface0 text-text) flex cursor-pointer items-center justify-center rounded-sm border-none bg-transparent p-1",
+  toolbar: cx({
+    layout: "flex items-center justify-between",
+    colors: "bg-mantle",
+    borders: "border-b border-surface0",
+    spacing: "py-3 px-4",
+  }),
+  logo: cx({
+    layout: "flex items-center gap-2",
+  }),
+  logoIcon: cx({
+    sizing: "h-5 w-5",
+  }),
+  actionsContainer: cx({
+    layout: "flex items-center gap-1",
+  }),
+  themeToggle: cx({
+    layout: "flex items-center justify-center",
+    colors: "text-subtext0 bg-transparent hover:(bg-surface0 text-text)",
+    borders: "border-none rounded-sm",
+    spacing: "p-1",
+    state: "cursor-pointer",
+  }),
 };
 
 export default function Header() {

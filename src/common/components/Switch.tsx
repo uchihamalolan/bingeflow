@@ -1,14 +1,18 @@
-import { clsx } from "clsx";
+import { cx } from "@/common/utils/cx";
 
 const styles = {
   switchContainer: {
-    sm: "relative inline-block w-10 h-5.5 shrink-0",
-    md: "relative inline-block w-16 h-7 shrink-0",
-    lg: "relative inline-block w-20 h-9.5 shrink-0",
+    sm: cx({ layout: "relative inline-block shrink-0", sizing: "w-10 h-5.5" }),
+    md: cx({ layout: "relative inline-block shrink-0", sizing: "w-16 h-7" }),
+    lg: cx({ layout: "relative inline-block shrink-0", sizing: "w-20 h-9.5" }),
   },
-  switchInput: "peer sr-only",
-  sliderBase:
-    "absolute cursor-pointer inset-0 bg-surface0 transition duration-150 rounded-full border-(~ surface1) before:(absolute content-[''] bg-text transition duration-150 rounded-full) peer-checked:(bg-mauve border-mauve before:bg-base)",
+  switchInput: cx({ layout: "peer sr-only" }),
+  sliderBase: cx({
+    layout: "absolute inset-0",
+    colors: "bg-surface0 peer-checked:(bg-mauve border-mauve before:bg-base)",
+    borders: "rounded-full border-(~ surface1)",
+    state: "cursor-pointer transition duration-150 before:(absolute content-[''] bg-text transition duration-150 rounded-full)",
+  }),
   sliderSize: {
     sm: "before:(h-4 w-4 left-[2.5px] bottom-[2.5px]) peer-checked:before:translate-x-[calc(2.5rem-1rem-5px)]",
     md: "before:(h-5 w-5 left-[3px] bottom-[3px]) peer-checked:before:translate-x-[calc(4rem-1.25rem-6px)]",
@@ -40,7 +44,7 @@ export default function Switch(props: Props) {
         disabled={props.disabled}
         onChange={(e) => props.onchange?.(e.currentTarget.checked)}
       />
-      <span class={clsx(styles.sliderBase, styles.sliderSize[size()])}></span>
+      <span class={cx({ state: `${styles.sliderBase} ${styles.sliderSize[size()]}` })}></span>
     </label>
   );
 }

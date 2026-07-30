@@ -3,6 +3,7 @@ import { onMount, Show } from "solid-js";
 import { getMessage } from "@/common/browser";
 import Toast from "@/common/components/Toast";
 import { theme } from "@/common/store/theme";
+import { cx } from "@/common/utils/cx";
 
 import GamepadShortcuts from "./components/GamepadShortcuts";
 import Header from "./components/Header";
@@ -15,10 +16,24 @@ import { settings } from "./store/settings";
 import "virtual:uno.css";
 
 const styles = {
-  container: "w-full p-12 flex flex-col gap-6",
-  mainContent: "columns-1 md:columns-2 gap-6 [&>*]:mb-6 [&>*]:break-inside-avoid",
-  footer: "flex items-center justify-center gap-3 text-xs text-subtext0 mt-8",
-  link: "hover:underline text-mauve",
+  container: cx({
+    layout: "flex flex-col gap-6",
+    spacing: "p-12",
+    sizing: "w-full",
+  }),
+  mainContent: cx({
+    layout: "columns-1 md:columns-2 gap-6",
+    spacing: "[&>*]:mb-6",
+    elevation: "[&>*]:break-inside-avoid",
+  }),
+  footer: cx({
+    layout: "flex items-center justify-center gap-3",
+    typography: "text-xs text-subtext0",
+    spacing: "mt-8",
+  }),
+  link: cx({
+    typography: "hover:underline text-mauve",
+  }),
 };
 
 const rateUrl = import.meta.env.FIREFOX

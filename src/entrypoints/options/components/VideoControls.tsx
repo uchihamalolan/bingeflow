@@ -1,18 +1,34 @@
-import { clsx } from "clsx";
-
 import { getMessage } from "@/common/browser";
 import NumberInput from "@/common/components/NumberInput";
 import Switch from "@/common/components/Switch";
+import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 
 const styles = {
-  section: "bg-mantle border-(~ surface0) rounded-2xl p-6 flex flex-col gap-5",
-  sectionTitle: "text-mauve font-semibold text-lg",
+  section: cx({
+    layout: "flex flex-col gap-5",
+    colors: "bg-mantle",
+    borders: "border-(~ surface0) rounded-2xl",
+    spacing: "p-6",
+  }),
+  sectionTitle: cx({
+    colors: "text-mauve",
+    typography: "font-semibold text-lg",
+  }),
   settingRow: (disabled: boolean) =>
-    clsx("flex items-center justify-between gap-5", disabled && "opacity-45 pointer-events-none"),
-  settingInfo: "flex flex-col gap-1 flex-1",
-  settingLabel: "font-semibold",
-  settingDesc: "text-xs text-subtext0",
+    cx({
+      layout: "flex items-center justify-between gap-5",
+      state: disabled && "opacity-45 pointer-events-none",
+    }),
+  settingInfo: cx({
+    layout: "flex flex-col gap-1 flex-1",
+  }),
+  settingLabel: cx({
+    typography: "font-semibold",
+  }),
+  settingDesc: cx({
+    typography: "text-xs text-subtext0",
+  }),
 };
 
 interface Props {
