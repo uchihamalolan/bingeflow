@@ -1,14 +1,21 @@
+import { clsx } from "clsx";
+
 import { getMessage } from "@/common/browser";
 import { cx } from "@/common/utils/cx";
 
 const styles = {
   kbdBtn: (active: boolean) =>
     cx({
-      colors: active ? "bg-[rgba(202,158,230,0.1)] text-mauve" : "bg-surface0 text-mauve hover:enabled:(bg-surface1 border-surface2 text-text)",
-      borders: active ? "border-mauve border-b-2 rounded-md" : "border-(~ surface1) border-b-2 rounded-md",
+      colors: clsx(
+        "text-mauve",
+        active
+          ? "bg-[rgba(202,158,230,0.1)]"
+          : "bg-surface0 hover:enabled:(bg-surface1 border-surface2 text-text)",
+      ),
+      borders: clsx("border-b-2 rounded-md", active ? "border-mauve" : "border-(~ surface1)"),
       typography: "text-sm",
       sizing: "min-w-[80px]",
-      state: active ? "animate-pulse cursor-pointer" : "cursor-pointer",
+      state: clsx("cursor-pointer", active && "animate-pulse"),
     }),
   keyDisplay: cx({
     colors: "bg-transparent",

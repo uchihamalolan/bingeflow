@@ -1,3 +1,5 @@
+import { clsx } from "clsx";
+
 import { getMessage } from "@/common/browser";
 import { cx } from "@/common/utils/cx";
 
@@ -29,7 +31,7 @@ export default function ResetButton(props: Props) {
       onClick={() => props.onclick()}
       title={props.title ?? getMessage("resetToDefaultTitle")}
     >
-      <span class={cx({ state: `${styles.resetIcon} i-lucide:rotate-ccw` })} aria-hidden="true" />
+      <span class={cx({ layout: clsx(styles.resetIcon, "i-lucide:rotate-ccw") })} aria-hidden="true" />
     </button>
   );
 }

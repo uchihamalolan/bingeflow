@@ -1,3 +1,5 @@
+import { clsx } from "clsx";
+
 import { cx } from "@/common/utils/cx";
 
 const styles = {
@@ -20,5 +22,5 @@ interface Props {
 export default function Spinner(props: Props) {
   const size = () => props.size ?? "medium";
 
-  return <span class={cx({ state: [styles.base, styles.sizes[size()]] })}></span>;
+  return <span class={cx({ layout: clsx(styles.base, styles.sizes[size()]) })}></span>;
 }

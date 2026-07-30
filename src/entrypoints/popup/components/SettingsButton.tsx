@@ -1,3 +1,5 @@
+import { clsx } from "clsx";
+
 import { getMessage, openOptionsPage } from "@/common/browser";
 import { cx } from "@/common/utils/cx";
 
@@ -22,7 +24,8 @@ export default function SettingsButton() {
       onClick={openOptionsPage}
       aria-label={getMessage("openSettingsAria")}
     >
-      <span class={cx({ state: `${styles.settingsIcon} i-lucide:settings` })} aria-hidden="true" />
+      <span class={cx({ layout: clsx(styles.settingsIcon, "i-lucide:settings") })} aria-hidden="true" />
     </button>
   );
 }
+

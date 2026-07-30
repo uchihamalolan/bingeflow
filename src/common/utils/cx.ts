@@ -1,5 +1,3 @@
-import { clsx, type ClassValue } from "clsx";
-
 export type StyleCategoryKey =
   /** Display types (flex, grid, block), flex/grid alignment, self-positioning, and gaps (gap-*, gap-x-*, gap-y-*). */
   | "layout"
@@ -18,16 +16,20 @@ export type StyleCategoryKey =
   /** Interactive state behaviors, transitions, opacity levels, and pointer events. */
   | "state";
 
-export type CategorizedStyles = Partial<Record<StyleCategoryKey, ClassValue>>;
+export type CategorizedStyles = Partial<
+  Record<StyleCategoryKey, string | undefined | false | null>
+>
 
 export function cx(categories: CategorizedStyles): string {
   const parts: string[] = [];
 
   for (const key in categories) {
     const val = categories[key as keyof CategorizedStyles];
-    const evaluated = clsx(val);
-    if (evaluated) {
-      parts.push(evaluated.trim());
+    if (val && typeof val === "string") {
+      const trimmed = val.trim();
+      if (trimmed) {
+        parts.push(trimmed);
+      }
     }
   }
 
