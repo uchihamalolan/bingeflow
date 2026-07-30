@@ -6,6 +6,7 @@ export type GamepadBindings = {
   speedUp: number | null;
   resetSpeed: number | null;
   toggleOverlay: number | null;
+  togglePlay: number | null;
 };
 
 export type KeyBindings = {
@@ -34,6 +35,7 @@ export const DEFAULT_GAMEPAD_BINDINGS: GamepadBindings = {
   speedUp: 5, // RB / R1
   resetSpeed: 0, // A / Cross
   toggleOverlay: 3, // Y / Triangle
+  togglePlay: 1, // B / Circle
 };
 
 export const DEFAULT_KEY_BINDINGS: KeyBindings = {

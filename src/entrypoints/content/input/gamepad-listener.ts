@@ -106,6 +106,7 @@ export class GamepadListener {
     if (bindings.speedUp === buttonIndex) return "speedUp";
     if (bindings.resetSpeed === buttonIndex) return "resetSpeed";
     if (bindings.toggleOverlay === buttonIndex) return "toggleOverlay";
+    if (bindings.togglePlay === buttonIndex) return "togglePlay";
     return null;
   }
 }

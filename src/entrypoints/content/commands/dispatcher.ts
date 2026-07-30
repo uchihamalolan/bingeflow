@@ -38,6 +38,10 @@ export class CommandDispatcher {
       case "toggleOverlay":
         this.videoManager.toggleOverlay();
         break;
+      case "togglePlay":
+        controller.togglePlay();
+        this.videoManager.triggerActivity();
+        break;
       case "seekBack":
         controller.seek(-seekSeconds);
         this.videoManager.triggerActivity();

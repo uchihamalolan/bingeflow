@@ -38,6 +38,7 @@ const ACTIONS: { key: BoundActionKey; label: string }[] = [
   { key: "speedUp", label: "Increase Speed" },
   { key: "resetSpeed", label: "Reset Speed" },
   { key: "toggleOverlay", label: "Toggle Overlay" },
+  { key: "togglePlay", label: "Play / Pause" },
 ];
 
 export default function GamepadShortcuts(props: Props) {

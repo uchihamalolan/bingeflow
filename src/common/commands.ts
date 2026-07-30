@@ -4,7 +4,8 @@ export type VideoCommand =
   | "speedDown"
   | "speedUp"
   | "resetSpeed"
-  | "toggleOverlay";
+  | "toggleOverlay"
+  | "togglePlay";
 
 export type PlatformCommand = "skip" | "next";
 
@@ -17,4 +18,5 @@ export const VIDEO_COMMANDS: VideoCommand[] = [
   "speedUp",
   "resetSpeed",
   "toggleOverlay",
+  "togglePlay",
 ];

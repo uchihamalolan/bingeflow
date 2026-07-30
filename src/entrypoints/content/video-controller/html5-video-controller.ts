@@ -18,6 +18,14 @@ export class Html5VideoController implements VideoController {
     this.video.currentTime = Math.max(0, Math.min(this.video.duration || 0, target));
   }
 
+  togglePlay(): void {
+    if (this.video.paused) {
+      void this.video.play();
+    } else {
+      this.video.pause();
+    }
+  }
+
   setPlaybackRate(rate: number): void {
     const speed = Math.max(0.1, Math.min(16, rate));
     this.video.playbackRate = speed;

@@ -1,6 +1,8 @@
 export interface VideoController {
   /** Seeks the video by `deltaSeconds` relative to current position. */
   seek(deltaSeconds: number): void;
+  /** Toggles play/pause state. */
+  togglePlay(): void;
   /** Sets the playback speed directly. */
   setPlaybackRate(rate: number): void;
   /** Returns the current playback rate. */
