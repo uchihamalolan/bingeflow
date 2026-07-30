@@ -1,15 +1,15 @@
-import { createSignal, onMount, Show } from "solid-js";
+import { onMount, Show } from "solid-js";
 
 import { getMessage } from "@/common/browser";
 import Toast from "@/common/components/Toast";
-import { saveSettings } from "@/common/settings";
 import { theme } from "@/common/store/theme";
-import type { VideoControlsConfig } from "@/common/video-controls";
 
+import GamepadShortcuts from "./components/GamepadShortcuts";
 import Header from "./components/Header";
 import KeyboardShortcuts from "./components/KeyboardShortcuts";
 import LoadingState from "./components/LoadingState";
 import VideoControls from "./components/VideoControls";
+import { useSettingsSave } from "./hooks/useSettingsSave";
 import { settings } from "./store/settings";
 
 import "virtual:uno.css";
@@ -26,35 +26,11 @@ const rateUrl = import.meta.env.FIREFOX
   : "https://chromewebstore.google.com/detail/bingeflow-placeholder";
 
 export default function App() {
-  const [saveStatus, setSaveStatus] = createSignal<"idle" | "success" | "error">("idle");
+  const { saveStatus, handleVideoControlsChange } = useSettingsSave();
 
   onMount(async () => {
     await Promise.all([theme.init(), settings.init()]);
   });
-
-  const triggerSave = async () => {
-    if (!settings.current) return;
-
-    try {
-      const clone = JSON.parse(JSON.stringify(settings.current));
-      await saveSettings(clone);
-      setSaveStatus("success");
-    } catch (error) {
-      console.error("Failed to save settings:", error);
-      setSaveStatus("error");
-    }
-
-    setTimeout(() => {
-      setSaveStatus("idle");
-    }, 2000);
-  };
-
-  const handleVideoControlsChange = (updater: (controls: VideoControlsConfig) => void) => {
-    settings.update((s) => {
-      updater(s.videoControls);
-    });
-    void triggerSave();
-  };
 
   return (
     <Show when={settings.current} fallback={<LoadingState />}>
@@ -65,6 +41,10 @@ export default function App() {
           <main class={styles.mainContent}>
             <VideoControls videoControls={s().videoControls} onchange={handleVideoControlsChange} />
             <KeyboardShortcuts
+              videoControls={s().videoControls}
+              onchange={handleVideoControlsChange}
+            />
+            <GamepadShortcuts
               videoControls={s().videoControls}
               onchange={handleVideoControlsChange}
             />

@@ -43,7 +43,7 @@ export const DEFAULT_KEY_BINDINGS: KeyBindings = {
   speedUp: "w",
   resetSpeed: "r",
   toggleOverlay: "v",
-}
+};
 
 export const DEFAULT_VIDEO_CONTROLS: VideoControlsConfig = {
   enabled: true,

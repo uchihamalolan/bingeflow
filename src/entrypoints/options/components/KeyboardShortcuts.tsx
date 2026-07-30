@@ -1,10 +1,11 @@
 import { clsx } from "clsx";
-import { createSignal, For, onCleanup, onMount } from "solid-js";
+import { For } from "solid-js";
 
 import { getMessage } from "@/common/browser";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_VIDEO_CONTROLS } from "@/common/video-controls";
 
+import { type BindingKey, useKeyboardRecorder } from "../hooks/useKeyboardRecorder";
 import KbdButton from "./KbdButton";
 import ResetButton from "./ResetButton";
 
@@ -16,7 +17,7 @@ const styles = {
     ),
   sectionTitle: "text-mauve font-semibold text-lg",
   shortcutList: "flex flex-col gap-3",
-  shortcutItem: "flex items-center justify-between py-2 border-(b surface0) last:border-none",
+  shortcutItem: "flex items-center justify-between py-2 border-b border-surface0 last:border-none",
   shortcutLabel: "font-medium",
   shortcutActions: "flex items-center gap-3",
 };
@@ -25,8 +26,6 @@ interface Props {
   videoControls: VideoControlsConfig;
   onchange: (updater: (controls: VideoControlsConfig) => void) => void;
 }
-
-type BindingKey = keyof VideoControlsConfig["keyBindings"];
 
 const shortcutConfigs: { id: BindingKey }[] = [
   { id: "seekBack" },
@@ -54,36 +53,8 @@ function formatKey(key: string): string {
 }
 
 export default function KeyboardShortcuts(props: Props) {
-  const [activeRebindKey, setActiveRebindKey] = createSignal<BindingKey | null>(null);
-
-  const handleKeydown = (event: KeyboardEvent) => {
-    const key = activeRebindKey();
-    if (!key) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (event.key === "Escape") {
-      setActiveRebindKey(null);
-      return;
-    }
-
-    if (["Control", "Shift", "Alt", "Meta"].includes(event.key)) {
-      return;
-    }
-
-    props.onchange((c) => {
-      c.keyBindings[key] = event.key;
-    });
-    setActiveRebindKey(null);
-  };
-
-  onMount(() => {
-    window.addEventListener("keydown", handleKeydown, true);
-  });
-
-  onCleanup(() => {
-    window.removeEventListener("keydown", handleKeydown, true);
+  const { activeRebindKey, setActiveRebindKey } = useKeyboardRecorder({
+    onchange: props.onchange,
   });
 
   const resetKey = (key: BindingKey) => {
@@ -98,26 +69,27 @@ export default function KeyboardShortcuts(props: Props) {
 
       <dl class={styles.shortcutList}>
         <For each={shortcutConfigs}>
-          {({ id }) => (
-            <div class={styles.shortcutItem}>
-              <dt class={styles.shortcutLabel}>{getShortcutLabel(id)}</dt>
-              <dd class={styles.shortcutActions}>
-                <KbdButton
-                  active={activeRebindKey() === id}
-                  disabled={!props.videoControls.enabled}
-                  value={formatKey(props.videoControls.keyBindings[id])}
-                  onclick={() => setActiveRebindKey(id)}
-                />
-                <ResetButton
-                  disabled={
-                    !props.videoControls.enabled ||
-                    props.videoControls.keyBindings[id] === DEFAULT_VIDEO_CONTROLS.keyBindings[id]
-                  }
-                  onclick={() => resetKey(id)}
-                />
-              </dd>
-            </div>
-          )}
+          {({ id }) => {
+            const isDisabled = () => props.videoControls.keyBindings[id] === DEFAULT_VIDEO_CONTROLS.keyBindings[id]
+
+            return (
+              <div class={styles.shortcutItem}>
+                <dt class={styles.shortcutLabel}>{getShortcutLabel(id)}</dt>
+                <dd class={styles.shortcutActions}>
+                  <KbdButton
+                    active={activeRebindKey() === id}
+                    disabled={!props.videoControls.enabled}
+                    value={formatKey(props.videoControls.keyBindings[id])}
+                    onclick={() => setActiveRebindKey(id)}
+                  />
+                  <ResetButton
+                    disabled={!props.videoControls.enabled || isDisabled()}
+                    onclick={() => resetKey(id)}
+                  />
+                </dd>
+              </div>
+            );
+          }}
         </For>
       </dl>
     </article>
