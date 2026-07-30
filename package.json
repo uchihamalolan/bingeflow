@@ -12,8 +12,8 @@
     "zip:firefox": "wxt zip -b firefox --mv3",
     "zip:all": "wxt zip & wxt zip -b firefox --mv3",
     "postinstall": "wxt prepare",
-    "lint": "vp lint",
-    "fmt": "vp fmt"
+    "lint": "oxlint",
+    "fmt": "oxfmt"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -26,14 +26,12 @@
     "typescript": "~5.9.3",
     "unocss": "^66.7.5",
     "vite-plugin-solid": "^2.11.0",
-    "vite-plus": "^0.2.4",
     "wxt": "^0.20.26"
   },
-  "packageManager": "pnpm@11.16.0",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.16.0",
+      "version": "11.17.0",
       "onFail": "error"
     }
   }
