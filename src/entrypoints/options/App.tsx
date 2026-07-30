@@ -16,7 +16,7 @@ import "virtual:uno.css";
 
 const styles = {
   container: "w-full p-12 flex flex-col gap-6",
-  mainContent: "columns-1 md:columns-2 gap-6 space-y-6 [&>*]:break-inside-avoid",
+  mainContent: "columns-1 md:columns-2 gap-6 [&>*]:mb-6 [&>*]:break-inside-avoid",
   footer: "flex items-center justify-center gap-3 text-xs text-subtext0 mt-8",
   link: "hover:underline text-mauve",
 };
