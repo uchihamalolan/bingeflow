@@ -9,7 +9,7 @@ const styles = {
       colors: clsx(
         "text-mauve",
         active
-          ? "bg-[rgba(202,158,230,0.1)]"
+          ? "bg-mauve/10"
           : "bg-surface0 hover:enabled:(bg-surface1 border-surface2 text-text)",
       ),
       borders: clsx("border-b-2 rounded-md", active ? "border-mauve" : "border-(~ surface1)"),
