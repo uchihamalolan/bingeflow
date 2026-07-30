@@ -1,0 +1,45 @@
+{
+  "name": "bingeflow",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run -c configs/vitest.config.ts",
+    "lint": "oxlint -c configs/oxlint.config.ts",
+    "fmt": "oxfmt -c configs/oxfmt.config.ts",
+    "postinstall": "wxt prepare",
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox --mv3",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox --mv3",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox --mv3",
+    "zip:all": "wxt zip & wxt zip -b firefox --mv3"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "defu": "^6.1.7",
+    "solid-js": "^1.9.3"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.2",
+    "@solidjs/testing-library": "^0.8.10",
+    "@testing-library/user-event": "^14.6.1",
+    "happy-dom": "^20.11.1",
+    "oxfmt": "^0.61.0",
+    "oxlint": "^1.76.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "typescript": "~5.9.3",
+    "unocss": "^66.7.5",
+    "vite-plugin-solid": "^2.11.0",
+    "vitest": "^4.1.10",
+    "wxt": "^0.20.26"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.18.0",
+      "onFail": "error"
+    }
+  }
+}
