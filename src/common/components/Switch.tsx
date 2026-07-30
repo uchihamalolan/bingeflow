@@ -44,7 +44,7 @@ export default function Switch(props: Props) {
         disabled={props.disabled}
         onChange={(e) => props.onchange?.(e.currentTarget.checked)}
       />
-      <span class={cx({ state: `${styles.sliderBase} ${styles.sliderSize[size()]}` })}></span>
+      <span class={cx({ state: [styles.sliderBase, styles.sliderSize[size()]] })}></span>
     </label>
   );
 }
