@@ -27,5 +27,5 @@ export const setLocalStorage = async <T>(key: string, value: T): Promise<void> =
 };
 
 export const getMessage = (key: any, substitutions?: any): string => {
-  return browser.i18n.getMessage(key, substitutions);
+  return browser.i18n?.getMessage?.(key, substitutions) ?? String(key);
 };
