@@ -1,67 +1,39 @@
-import { getPlatformBehaviors, type PlatformConfig } from "@/common/platforms";
-
-import { isValidPress } from "./utils/validpress";
+import { CommandDispatcher } from "./commands/dispatcher";
+import { GamepadListener } from "./input/gamepad-listener";
+import { KeyboardListener } from "./input/keyboard-listener";
+import type { PlatformManager } from "./platform/platform-manager";
 import type { VideoManager } from "./video/video-manager";
 
 interface Props {
   videoManager: VideoManager;
-  platformConfig: PlatformConfig | null;
+  platformManager: PlatformManager;
   platformShortcuts: Set<string>;
 }
 
-export function addEventListeners({ videoManager, platformConfig, platformShortcuts }: Props) {
-  document.addEventListener("keydown", (e: KeyboardEvent) => {
-    if (!isValidPress(e)) return;
-
-    // ── Video-control shortcuts ─────────────────────────────────────────────
-    const controller = videoManager.getController();
-
-    // If a key conflicts with a platform shortcut, we yield to the platform action.
-    if (controller !== null && !platformShortcuts.has(e.key)) {
-      const config = videoManager.getConfig();
-      const { keyBindings, seekSeconds, speedStep } = config;
-
-      if (e.key.toLowerCase() === "v") {
-        videoManager.toggleOverlay();
-        return;
-      }
-      if (e.key === keyBindings.seekBack) {
-        controller.seek(-seekSeconds);
-        videoManager.triggerActivity();
-        return;
-      }
-      if (e.key === keyBindings.seekFwd) {
-        controller.seek(seekSeconds);
-        videoManager.triggerActivity();
-        return;
-      }
-      if (e.key === keyBindings.speedDown) {
-        const current = controller.getPlaybackRate();
-        controller.setPlaybackRate(current - speedStep);
-        videoManager.triggerActivity();
-        return;
-      }
-      if (e.key === keyBindings.speedUp) {
-        const current = controller.getPlaybackRate();
-        controller.setPlaybackRate(current + speedStep);
-        videoManager.triggerActivity();
-        return;
-      }
-      if (e.key === keyBindings.resetSpeed) {
-        controller.setPlaybackRate(1.0);
-        videoManager.triggerActivity();
-        return;
-      }
-    }
-
-    // ── Platform-behavior shortcuts (skip-intro, next-episode, …) ──────────
-    if (platformConfig === null) return;
-
-    for (const behavior of getPlatformBehaviors(platformConfig)) {
-      if (behavior.enabled && e.key === behavior.shortcutKey) {
-        document.querySelector<HTMLElement>(behavior.selector)?.click();
-        break;
-      }
-    }
+export function addEventListeners({ videoManager, platformManager, platformShortcuts }: Props) {
+  const dispatcher = new CommandDispatcher({
+    videoManager,
+    platformManager,
   });
+
+  // Initialize keyboard listener
+  const keyboardListener = new KeyboardListener({
+    dispatcher,
+    videoManager,
+    platformManager,
+    platformShortcuts,
+  });
+  keyboardListener.start();
+
+  // Initialize gamepad listener
+  const gamepadListener = new GamepadListener({
+    dispatcher,
+    getBindings: () => videoManager.getConfig().gamepadBindings,
+  });
+  gamepadListener.start();
+
+  return {
+    keyboardListener,
+    gamepadListener,
+  };
 }

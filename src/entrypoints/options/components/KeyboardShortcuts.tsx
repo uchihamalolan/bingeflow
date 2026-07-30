@@ -34,6 +34,7 @@ const shortcutConfigs: { id: BindingKey }[] = [
   { id: "speedDown" },
   { id: "speedUp" },
   { id: "resetSpeed" },
+  { id: "toggleOverlay" },
 ];
 
 const getShortcutLabel = (id: BindingKey) => {
@@ -42,6 +43,7 @@ const getShortcutLabel = (id: BindingKey) => {
   if (id === "speedDown") return getMessage("shortcutDecreaseSpeed");
   if (id === "speedUp") return getMessage("shortcutIncreaseSpeed");
   if (id === "resetSpeed") return getMessage("shortcutResetSpeed");
+  if (id === "toggleOverlay") return "Toggle Overlay";
   return id;
 };
 

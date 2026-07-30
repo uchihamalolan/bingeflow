@@ -14,6 +14,7 @@ export type KeyBindings = {
   speedDown: string;
   speedUp: string;
   resetSpeed: string;
+  toggleOverlay: string;
 };
 
 export type VideoControlsConfig = {
@@ -41,6 +42,7 @@ export const DEFAULT_KEY_BINDINGS: KeyBindings = {
   speedDown: "q",
   speedUp: "w",
   resetSpeed: "r",
+  toggleOverlay: "v",
 }
 
 export const DEFAULT_VIDEO_CONTROLS: VideoControlsConfig = {
