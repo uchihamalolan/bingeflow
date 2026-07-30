@@ -6,7 +6,7 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
 
 ## 🛠️ Tech Stack & Tooling
 
-- **Runtime & Package Manager**: [Bun](https://bun.sh/) (utilizes `bun.lock` for lockfiles, run all scripts with `bun`).
+- **Runtime & Package Manager**: [pnpm](https://pnpm.io/) (utilizes `pnpm-lock.yaml` for lockfiles, run scripts with `pnpm`).
 - **Framework**: [Svelte 5](https://svelte.dev/) (uses Svelte 5 runes like `$state` and `$props` for reactivity).
 - **Bundler**: [WXT](https://wxt.dev/) (Next-gen Web Extension Framework built on Vite).
 - **Linter & Formatter**: [Biome](https://biomejs.dev/) (configured via [biome.json](file:///Users/malolan/Projects/bingeflow/biome.json)).
@@ -32,14 +32,14 @@ This repository is a Google Chrome and Firefox extension named **Skip Intro**, d
 
 ### 1. Code Style, Linters & Typechecking
 
-- **Biome Checks**: Always run Biome check/format before declaring a task complete.
+- **Lint & Format Checks**: Always run lint/fmt checks before declaring a task complete.
   ```bash
-  bun run check  # Runs biome lint and format checks
-  bun run fix    # Automatically applies biome fixes and formats
+  pnpm run lint  # Runs lint checks
+  pnpm run fmt   # Automatically formats code
   ```
 - **Typechecking**: Always run TypeScript typechecking to verify there are no compilation errors before declaring a task complete.
   ```bash
-  bun run typecheck  # Performs TypeScript compilation checks without emit
+  ./node_modules/.bin/tsc --noEmit  # Performs TypeScript compilation checks without emit
   ```
 - **Lint Errors**: Ensure all changes conform to the rules in [biome.json](file:///Users/malolan/Projects/bingeflow/biome.json).
 
@@ -114,11 +114,11 @@ To add support for a new streaming platform:
 
 | Command                 | Action                                                                  |
 | ----------------------- | ----------------------------------------------------------------------- |
-| `bun install`           | Installs dependencies                                                   |
-| `bun run dev`           | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
-| `bun run dev:firefox`   | Starts WXT dev server targeting Firefox MV3                             |
-| `bun run build`         | Builds the production package under `.output/chrome-mv3`                |
-| `bun run build:firefox` | Builds the production package under `.output/firefox-mv3`               |
-| `bun run check`         | Checks formatting and code quality with Biome                           |
-| `bun run fix`           | Resolves auto-fixable Biome issues                                      |
-| `bun run typecheck`     | Checks TypeScript type correctness without emitting files               |
+| `pnpm install`          | Installs dependencies                                                   |
+| `pnpm run dev`          | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
+| `pnpm run dev:firefox`  | Starts WXT dev server targeting Firefox MV3                             |
+| `pnpm run build`        | Builds the production package under `.output/chrome-mv3`                |
+| `pnpm run build:firefox`| Builds the production package under `.output/firefox-mv3`               |
+| `pnpm run lint`         | Checks formatting and code quality                                      |
+| `pnpm run fmt`          | Resolves auto-fixable formatting issues                                 |
+| `./node_modules/.bin/tsc --noEmit` | Checks TypeScript type correctness without emitting files  |

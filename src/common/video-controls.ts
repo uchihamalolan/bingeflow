@@ -1,37 +1,53 @@
-export type VideoControlsConfig = {
-  /** Master switch: when false the overlay is never mounted. */
+export type GamepadBindings = {
   enabled: boolean;
-  /** Seconds to seek backward / forward per button press. Default: 5 */
-  seekSeconds: number;
-  /** Playback-rate increment / decrement per button press. Default: 0.25 */
-  speedStep: number;
-  /** When true the overlay starts invisible until the user mouses over the video. Default: false */
-  startHidden: boolean;
-  /** Keyboard shortcuts */
-  keyBindings: {
-    /** Default: "z" */
-    seekBack: string;
-    /** Default: "x" */
-    seekFwd: string;
-    /** Default: "q" */
-    speedDown: string;
-    /** Default: "w" */
-    speedUp: string;
-    /** Default: "r" */
-    resetSpeed: string;
-  };
+  seekBack: number | null;
+  seekFwd: number | null;
+  speedDown: number | null;
+  speedUp: number | null;
+  resetSpeed: number | null;
+  toggleOverlay: number | null;
 };
+
+export type KeyBindings = {
+  seekBack: string;
+  seekFwd: string;
+  speedDown: string;
+  speedUp: string;
+  resetSpeed: string;
+};
+
+export type VideoControlsConfig = {
+  enabled: boolean;
+  seekSeconds: number;
+  speedStep: number;
+  startHidden: boolean;
+  keyBindings: KeyBindings;
+  gamepadBindings: GamepadBindings;
+};
+
+export const DEFAULT_GAMEPAD_BINDINGS: GamepadBindings = {
+  enabled: true,
+  seekBack: 14, // D-Pad Left
+  seekFwd: 15, // D-Pad Right
+  speedDown: 4, // LB / L1
+  speedUp: 5, // RB / R1
+  resetSpeed: 0, // A / Cross
+  toggleOverlay: 3, // Y / Triangle
+};
+
+export const DEFAULT_KEY_BINDINGS: KeyBindings = {
+  seekBack: "z",
+  seekFwd: "x",
+  speedDown: "q",
+  speedUp: "w",
+  resetSpeed: "r",
+}
 
 export const DEFAULT_VIDEO_CONTROLS: VideoControlsConfig = {
   enabled: true,
   seekSeconds: 5,
   speedStep: 0.25,
   startHidden: false,
-  keyBindings: {
-    seekBack: "z",
-    seekFwd: "x",
-    speedDown: "q",
-    speedUp: "w",
-    resetSpeed: "r",
-  },
+  keyBindings: DEFAULT_KEY_BINDINGS,
+  gamepadBindings: DEFAULT_GAMEPAD_BINDINGS,
 };
