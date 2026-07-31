@@ -23,13 +23,16 @@ interface Props {
 }
 
 export default function ResetButton(props: Props) {
+  const title = props.title ?? getMessage("resetToDefaultTitle")
+
   return (
     <button
       type="button"
       class={styles.resetBtn}
       disabled={props.disabled ?? false}
       onClick={() => props.onclick()}
-      title={props.title ?? getMessage("resetToDefaultTitle")}
+      title={title}
+      aria-label={title}
     >
       <span
         class={cx({ layout: clsx(styles.resetIcon, "i-lucide:rotate-ccw") })}

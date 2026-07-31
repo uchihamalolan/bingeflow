@@ -14,9 +14,9 @@ const styles = {
 
 export default function LoadingState() {
   return (
-    <div class={styles.loadingContainer} role="status">
+    <output class={styles.loadingContainer}>
       <Spinner size="large" />
       <p class={styles.loadingText}>Loading settings...</p>
-    </div>
+    </output>
   );
 }

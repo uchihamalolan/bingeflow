@@ -25,11 +25,11 @@ interface Props {
 export default function Toast(props: Props) {
   return (
     <Show when={props.saveStatus !== "idle"}>
-      <div class={styles.toast(props.saveStatus)} role="status">
+      <output class={styles.toast(props.saveStatus)}>
         {props.saveStatus === "success"
           ? getMessage("optionsSaved")
           : getMessage("optionsFailedToSave")}
-      </div>
+      </output>
     </Show>
   );
 }
