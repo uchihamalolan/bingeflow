@@ -12,8 +12,8 @@
     "zip:firefox": "wxt zip -b firefox --mv3",
     "zip:all": "wxt zip & wxt zip -b firefox --mv3",
     "postinstall": "wxt prepare",
-    "lint": "oxlint",
-    "fmt": "oxfmt"
+    "lint": "oxlint -c ~/.config/oxc/oxlint.json",
+    "fmt": "oxfmt -c ~/.config/oxc/oxfmt.json"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.2",
-    "eslint-plugin-solid": "^0.14.5",
+    "oxlint-tsgolint": "^7.0.2001",
     "typescript": "~5.9.3",
     "unocss": "^66.7.5",
     "vite-plugin-solid": "^2.11.0",

@@ -13,7 +13,8 @@ const styles = {
     layout: "absolute inset-0",
     colors: "bg-surface0 peer-checked:(bg-mauve border-mauve before:bg-base)",
     borders: "rounded-full border-(~ surface1)",
-    state: "cursor-pointer transition duration-150 before:(absolute content-[''] bg-text transition duration-150 rounded-full)",
+    state:
+      "cursor-pointer transition duration-150 before:(absolute content-[''] bg-text transition duration-150 rounded-full)",
   }),
   sliderSize: {
     sm: "before:(h-4 w-4 left-[2.5px] bottom-[2.5px]) peer-checked:before:translate-x-[calc(2.5rem-1rem-5px)]",

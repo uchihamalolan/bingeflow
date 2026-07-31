@@ -37,7 +37,9 @@ export default function ShortcutList(props: Props) {
       <ul class={styles.shortcutList}>
         <li class={styles.shortcutItem}>
           <span class="text-subtext0">{getMessage("shortcutToggleOverlay")}</span>
-          <kbd class={styles.kbd}>{bindings().toggleOverlay ? bindings().toggleOverlay.toUpperCase() : "V"}</kbd>
+          <kbd class={styles.kbd}>
+            {bindings().toggleOverlay ? bindings().toggleOverlay.toUpperCase() : "V"}
+          </kbd>
         </li>
         <li class={styles.shortcutItem}>
           <span class="text-subtext0">{getMessage("shortcutSeekBackward")}</span>

@@ -1,4 +1,5 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
+
 import type { GamepadBindings, VideoControlsConfig } from "@/common/video-controls";
 
 export type BoundActionKey = keyof Omit<GamepadBindings, "enabled">;

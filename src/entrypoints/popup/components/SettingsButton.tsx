@@ -24,8 +24,10 @@ export default function SettingsButton() {
       onClick={openOptionsPage}
       aria-label={getMessage("openSettingsAria")}
     >
-      <span class={cx({ layout: clsx(styles.settingsIcon, "i-lucide:settings") })} aria-hidden="true" />
+      <span
+        class={cx({ layout: clsx(styles.settingsIcon, "i-lucide:settings") })}
+        aria-hidden="true"
+      />
     </button>
   );
 }
-

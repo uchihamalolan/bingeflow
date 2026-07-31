@@ -1,6 +1,8 @@
 import { createSignal } from "solid-js";
+
 import { saveSettings } from "@/common/settings";
 import type { VideoControlsConfig } from "@/common/video-controls";
+
 import { settings } from "../store/settings";
 
 export function useSettingsSave() {

@@ -1,4 +1,5 @@
 import { type Command, type VideoCommand, VIDEO_COMMANDS } from "@/common/commands";
+
 import type { PlatformManager } from "../platform/platform-manager";
 import type { VideoManager } from "../video/video-manager";
 

@@ -1,4 +1,5 @@
 import { createSignal, onCleanup, onMount } from "solid-js";
+
 import type { VideoControlsConfig } from "@/common/video-controls";
 
 export type BindingKey = keyof VideoControlsConfig["keyBindings"];

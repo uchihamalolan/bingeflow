@@ -13,9 +13,7 @@ const styles = {
       layout: "flex items-center gap-2",
       spacing: "py-4 px-6",
       borders: clsx("border rounded-xl", isSuccess(saveStatus) ? "border-green" : "border-red"),
-      colors: isSuccess(saveStatus)
-        ? "text-green bg-green/8"
-        : "text-red bg-red/8",
+      colors: isSuccess(saveStatus) ? "text-green bg-green/8" : "text-red bg-red/8",
       state: "animate-slideIn",
     }),
 };

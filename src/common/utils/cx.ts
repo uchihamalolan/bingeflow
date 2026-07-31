@@ -18,7 +18,7 @@ export type StyleCategoryKey =
 
 export type CategorizedStyles = Partial<
   Record<StyleCategoryKey, string | undefined | false | null>
->
+>;
 
 export function cx(categories: CategorizedStyles): string {
   const parts: string[] = [];

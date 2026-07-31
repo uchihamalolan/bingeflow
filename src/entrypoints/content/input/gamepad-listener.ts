@@ -1,5 +1,6 @@
 import type { Command } from "@/common/commands";
 import type { GamepadBindings } from "@/common/video-controls";
+
 import type { CommandDispatcher } from "../commands/dispatcher";
 
 interface Props {

@@ -31,7 +31,10 @@ export default function ResetButton(props: Props) {
       onClick={() => props.onclick()}
       title={props.title ?? getMessage("resetToDefaultTitle")}
     >
-      <span class={cx({ layout: clsx(styles.resetIcon, "i-lucide:rotate-ccw") })} aria-hidden="true" />
+      <span
+        class={cx({ layout: clsx(styles.resetIcon, "i-lucide:rotate-ccw") })}
+        aria-hidden="true"
+      />
     </button>
   );
 }
