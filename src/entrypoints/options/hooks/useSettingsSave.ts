@@ -12,7 +12,7 @@ export function useSettingsSave() {
     if (!settings.current) return;
 
     try {
-      const clone = JSON.parse(JSON.stringify(settings.current));
+      const clone = structuredClone(settings.current);
       await saveSettings(clone);
       setSaveStatus("success");
     } catch (error) {

@@ -1,4 +1,4 @@
-import { createSignal, onMount, Show } from "solid-js";
+import { Show } from "solid-js";
 
 import { getMessage, openOptionsPage } from "@/common/browser";
 import { loadSettings, saveSettings, type Settings } from "@/common/settings";
@@ -8,6 +8,7 @@ import { cx } from "@/common/utils/cx";
 import EnableSwitch from "./components/EnableSwitch";
 import Header from "./components/Header";
 import ShortcutList from "./components/ShortcutList";
+import { usePopupSettings } from "./hooks/usePopupSettings";
 
 import "virtual:uno.css";
 
@@ -38,28 +39,7 @@ const styles = {
 };
 
 export default function App() {
-  const [settings, setSettings] = createSignal<Settings | null>(null);
-
-  onMount(async () => {
-    await theme.init();
-    const loaded = await loadSettings();
-    setSettings(loaded);
-  });
-
-  const toggleEnabled = async (checked: boolean) => {
-    const current = settings();
-    if (!current) return;
-
-    const updated = {
-      ...current,
-      videoControls: {
-        ...current.videoControls,
-        enabled: checked,
-      },
-    };
-    setSettings(updated);
-    await saveSettings(updated);
-  };
+  const { settings, isEnabled, toggleEnabled } = usePopupSettings();
 
   return (
     <div class={styles.popup}>
@@ -68,10 +48,7 @@ export default function App() {
       <Show when={settings()}>
         {(currentSettings) => (
           <main class={styles.content}>
-            <EnableSwitch
-              enabled={currentSettings().videoControls.enabled}
-              onchange={toggleEnabled}
-            />
+            <EnableSwitch enabled={isEnabled()} onchange={toggleEnabled} />
 
             <hr class={styles.separator} />
 

@@ -9,10 +9,10 @@ interface Props {
 
 const styles = {
   container: cx({
-    layout: "flex items-center justify-between",
+    layout: "flex items-center justify-between gap-2",
   }),
   label: cx({
-    typography: "text-sm font-semibold",
+    typography: "text-sm font-semibold truncate",
   }),
 };
 

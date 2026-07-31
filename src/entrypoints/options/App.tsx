@@ -5,6 +5,7 @@ import Toast from "@/common/components/Toast";
 import { theme } from "@/common/store/theme";
 import { cx } from "@/common/utils/cx";
 
+import EnabledSites from "./components/EnabledSites";
 import GamepadShortcuts from "./components/GamepadShortcuts";
 import Header from "./components/Header";
 import KeyboardShortcuts from "./components/KeyboardShortcuts";
@@ -54,6 +55,7 @@ export default function App() {
 
           <main class={styles.mainContent}>
             <VideoControls videoControls={s().videoControls} onchange={handleVideoControlsChange} />
+            <EnabledSites enabledDomains={s().enabledDomains} />
             <KeyboardShortcuts
               videoControls={s().videoControls}
               onchange={handleVideoControlsChange}

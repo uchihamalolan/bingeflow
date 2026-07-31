@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function ResetButton(props: Props) {
-  const title = props.title ?? getMessage("resetToDefaultTitle")
+  const title = props.title ?? getMessage("resetToDefaultTitle");
 
   return (
     <button

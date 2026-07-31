@@ -5,17 +5,27 @@ import { DEFAULT_VIDEO_CONTROLS, type VideoControlsConfig } from "./video-contro
 
 export type Settings = {
   videoControls: VideoControlsConfig;
-  // Future: per-platform behavior enable/disable overrides go here
+  enabledDomains: string[];
 };
+
+export const DEFAULT_ENABLED_DOMAINS = [
+  "netflix.com",
+  "hotstar.com",
+  "primevideo.com",
+  "youtube.com",
+];
 
 const STORAGE_KEY = "bingeflow.settings";
 
 export async function loadSettings(): Promise<Settings> {
   const raw = await getSyncStorage<Partial<Settings>>(STORAGE_KEY);
 
-  return defu(raw, {
-    videoControls: DEFAULT_VIDEO_CONTROLS,
-  });
+  return {
+    videoControls: defu(raw?.videoControls, DEFAULT_VIDEO_CONTROLS),
+    enabledDomains: Array.isArray(raw?.enabledDomains)
+      ? raw.enabledDomains
+      : DEFAULT_ENABLED_DOMAINS,
+  };
 }
 
 export async function saveSettings(s: Settings): Promise<void> {
