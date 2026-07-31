@@ -1,0 +1,155 @@
+{
+  "extName": {
+    "message": "BingeFlow"
+  },
+  "extDescription": {
+    "message": "Automatically skip intros, recaps & control video."
+  },
+  "enableBingeFlow": {
+    "message": "Enable BingeFlow"
+  },
+  "enableExtensionAria": {
+    "message": "Enable Extension"
+  },
+  "openSettingsAria": {
+    "message": "Open Settings"
+  },
+  "openSettingsLink": {
+    "message": "Open settings to change shortcuts"
+  },
+  "shortcutsHeader": {
+    "message": "Shortcuts"
+  },
+  "shortcutToggleOverlay": {
+    "message": "Toggle Overlay"
+  },
+  "shortcutSeekBackward": {
+    "message": "Seek Backward"
+  },
+  "shortcutSeekForward": {
+    "message": "Seek Forward"
+  },
+  "shortcutDecreaseSpeed": {
+    "message": "Decrease Speed"
+  },
+  "shortcutIncreaseSpeed": {
+    "message": "Increase Speed"
+  },
+  "shortcutResetSpeed": {
+    "message": "Reset Speed"
+  },
+  "optionsSubtitle": {
+    "message": "Dart past intros, glide back & forward, and hover over controls."
+  },
+  "optionsHomepage": {
+    "message": "Homepage"
+  },
+  "optionsRate": {
+    "message": "Rate BingeFlow"
+  },
+  "optionsSaved": {
+    "message": "Saved ✓"
+  },
+  "optionsFailedToSave": {
+    "message": "Failed to save ✗"
+  },
+  "videoControlsTitle": {
+    "message": "Video Controls"
+  },
+  "enableOverlayLabel": {
+    "message": "Enable Overlay"
+  },
+  "enableOverlayDesc": {
+    "message": "Show the floating video controls overlay on pages with video elements"
+  },
+  "seekDurationLabel": {
+    "message": "Seek Duration"
+  },
+  "seekDurationDesc": {
+    "message": "Seconds to seek forward or backward"
+  },
+  "playbackSpeedStepLabel": {
+    "message": "Playback Speed Step"
+  },
+  "playbackSpeedStepDesc": {
+    "message": "Playback-rate increment or decrement per button click"
+  },
+  "startHiddenLabel": {
+    "message": "Start Hidden"
+  },
+  "startHiddenDesc": {
+    "message": "Hide the overlay by default until mouse activity is detected near the video"
+  },
+  "keyboardShortcutsTitle": {
+    "message": "Keyboard Shortcuts"
+  },
+  "resetToDefaultTitle": {
+    "message": "Reset to default"
+  },
+  "pressKeyPlaceholder": {
+    "message": "Press key..."
+  },
+  "spaceKeyLabel": {
+    "message": "Space"
+  },
+  "overlayDragTooltip": {
+    "message": "Drag to reposition"
+  },
+  "overlaySeekBackTooltip": {
+    "message": "Seek back $seconds$s",
+    "placeholders": {
+      "seconds": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "overlayDecreaseSpeedTooltip": {
+    "message": "Decrease speed by $step$",
+    "placeholders": {
+      "step": {
+        "content": "$1",
+        "example": "0.1"
+      }
+    }
+  },
+  "overlayIncreaseSpeedTooltip": {
+    "message": "Increase speed by $step$",
+    "placeholders": {
+      "step": {
+        "content": "$1",
+        "example": "0.1"
+      }
+    }
+  },
+  "overlaySeekForwardTooltip": {
+    "message": "Seek forward $seconds$s",
+    "placeholders": {
+      "seconds": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "overlayResetSpeedTooltip": {
+    "message": "Reset speed to 1.0"
+  },
+  "themeToggleLabel": {
+    "message": "Current theme: $theme$. Click to cycle.",
+    "placeholders": {
+      "theme": {
+        "content": "$1",
+        "example": "system"
+      }
+    }
+  },
+  "themeSystem": {
+    "message": "System"
+  },
+  "themeFrappe": {
+    "message": "Frappe"
+  },
+  "themeLatte": {
+    "message": "Latte"
+  }
+}
