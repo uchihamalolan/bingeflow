@@ -1,0 +1,80 @@
+/* Reset and Baseline Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:where(html) {
+  background-color: var(--base);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+:where(a) {
+  color: var(--blue);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+:where(input, button, select, textarea) {
+  font: inherit;
+  color: inherit;
+}
+
+:root {
+  /* base colors (frappe default) */
+  --base: oklch(33% 0.03 274.8deg);
+  --mantle: oklch(30% 0.03 276.2deg);
+  --crust: oklch(27% 0.03 275.1deg);
+  --surface0: oklch(39% 0.03 275.9deg);
+  --surface1: oklch(46% 0.04 273deg);
+  --surface2: oklch(52% 0.04 274deg);
+  --overlay0: oklch(58% 0.04 275.2deg);
+  --text: oklch(86% 0.05 273.3deg);
+  --subtext0: oklch(75% 0.05 274.5deg);
+  --mauve: oklch(76% 0.11 311.7deg);
+  --blue: oklch(74% 0.1 265.7deg);
+  --green: oklch(81% 0.11 133.4deg);
+  --red: oklch(72% 0.12 19.4deg);
+  --peach: oklch(77% 0.11 47.7deg);
+}
+
+:root[data-theme="frappe"] {
+  --base: oklch(33% 0.03 274.8deg);
+  --mantle: oklch(30% 0.03 276.2deg);
+  --crust: oklch(27% 0.03 275.1deg);
+  --surface0: oklch(39% 0.03 275.9deg);
+  --surface1: oklch(46% 0.04 273deg);
+  --surface2: oklch(52% 0.04 274deg);
+  --overlay0: oklch(58% 0.04 275.2deg);
+  --text: oklch(86% 0.05 273.3deg);
+  --subtext0: oklch(75% 0.05 274.5deg);
+  --mauve: oklch(76% 0.11 311.7deg);
+  --blue: oklch(74% 0.1 265.7deg);
+  --green: oklch(81% 0.11 133.4deg);
+  --red: oklch(72% 0.12 19.4deg);
+  --peach: oklch(77% 0.11 47.7deg);
+}
+
+:root[data-theme="latte"] {
+  --base: oklch(96% 0.01 264.5deg);
+  --mantle: oklch(93% 0.01 264.5deg);
+  --crust: oklch(91% 0.01 264.5deg);
+  --surface0: oklch(86% 0.01 268.5deg);
+  --surface1: oklch(81% 0.02 271.2deg);
+  --surface2: oklch(76% 0.02 273.2deg);
+  --overlay0: oklch(71% 0.02 274.6deg);
+  --text: oklch(44% 0.04 279.3deg);
+  --subtext0: oklch(55% 0.03 279.1deg);
+  --mauve: oklch(55% 0.25 297deg);
+  --blue: oklch(56% 0.23 262.1deg);
+  --green: oklch(63% 0.18 140.4deg);
+  --red: oklch(55% 0.22 19.8deg);
+  --peach: oklch(69% 0.2 42.4deg);
+}
