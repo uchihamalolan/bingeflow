@@ -8,16 +8,8 @@ const styles = {
     spacing: "px-2",
     sizing: "h-8 w-30",
   }),
-  inputField: cx({
-    colors: "bg-transparent",
-    borders: "border-none outline-none",
-    sizing: "w-full",
-    typography: "text-right appearance-none",
-  }),
-  unitStyle: cx({
-    typography: "text-[0.75rem] text-subtext0",
-    spacing: "ml-1",
-  }),
+  inputField: "input-clean text-right",
+  unitStyle: "text-[0.75rem] text-subtext0 ml-1",
 };
 
 interface Props {

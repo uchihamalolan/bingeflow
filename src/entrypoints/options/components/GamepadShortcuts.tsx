@@ -1,8 +1,8 @@
+import { clsx } from "clsx";
 import { For } from "solid-js";
 
 import Switch from "@/common/components/Switch";
 import { getGamepadButtonLabel } from "@/common/gamepad";
-import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_GAMEPAD_BINDINGS } from "@/common/video-controls";
 
@@ -11,42 +11,15 @@ import KbdButton from "./KbdButton";
 import ResetButton from "./ResetButton";
 
 const styles = {
-  section: (disabled: boolean) =>
-    cx({
-      layout: "flex flex-col gap-5",
-      colors: "bg-mantle",
-      borders: "border-(~ surface0) rounded-2xl",
-      spacing: "p-6",
-      state: disabled && "opacity-45 pointer-events-none",
-    }),
-  settingRow: cx({
-    layout: "flex items-center justify-between gap-5",
-    borders: "border-b border-surface0",
-    spacing: "pb-4",
-  }),
-  settingInfo: cx({
-    layout: "flex flex-col gap-1 flex-1",
-  }),
-  settingLabel: cx({
-    typography: "font-semibold",
-  }),
-  settingDesc: cx({
-    typography: "text-xs text-subtext0",
-  }),
-  shortcutList: cx({
-    layout: "flex flex-col gap-3",
-  }),
-  shortcutItem: cx({
-    layout: "flex items-center justify-between",
-    borders: "border-b border-surface0 last:border-none",
-    spacing: "py-2",
-  }),
-  shortcutLabel: cx({
-    typography: "font-medium text-sm",
-  }),
-  shortcutActions: cx({
-    layout: "flex items-center gap-3",
-  }),
+  section: (disabled: boolean) => clsx("card-panel", disabled && "state-disabled"),
+  settingRow: "setting-row border-b border-surface0 pb-4",
+  settingInfo: "setting-info",
+  settingLabel: "setting-label",
+  settingDesc: "text-muted",
+  shortcutList: "flex flex-col gap-3",
+  shortcutItem: "shortcut-row",
+  shortcutLabel: "font-medium text-sm",
+  shortcutActions: "flex items-center gap-3",
 };
 
 interface Props {

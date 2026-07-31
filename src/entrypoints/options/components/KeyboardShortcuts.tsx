@@ -1,7 +1,7 @@
+import { clsx } from "clsx";
 import { For } from "solid-js";
 
 import { getMessage } from "@/common/browser";
-import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 import { DEFAULT_VIDEO_CONTROLS } from "@/common/video-controls";
 
@@ -10,32 +10,12 @@ import KbdButton from "./KbdButton";
 import ResetButton from "./ResetButton";
 
 const styles = {
-  section: (disabled: boolean) =>
-    cx({
-      layout: "flex flex-col gap-5",
-      colors: "bg-mantle",
-      borders: "border-(~ surface0) rounded-2xl",
-      spacing: "p-6",
-      state: disabled && "opacity-45 pointer-events-none",
-    }),
-  sectionTitle: cx({
-    colors: "text-mauve",
-    typography: "font-semibold text-lg",
-  }),
-  shortcutList: cx({
-    layout: "flex flex-col gap-3",
-  }),
-  shortcutItem: cx({
-    layout: "flex items-center justify-between",
-    borders: "border-b border-surface0 last:border-none",
-    spacing: "py-2",
-  }),
-  shortcutLabel: cx({
-    typography: "font-medium",
-  }),
-  shortcutActions: cx({
-    layout: "flex items-center gap-3",
-  }),
+  section: (disabled: boolean) => clsx("card-panel", disabled && "state-disabled"),
+  sectionTitle: "section-title",
+  shortcutList: "flex flex-col gap-3",
+  shortcutItem: "shortcut-row",
+  shortcutLabel: "font-medium",
+  shortcutActions: "flex items-center gap-3",
 };
 
 interface Props {

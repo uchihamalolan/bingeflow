@@ -9,23 +9,17 @@ interface Props {
 
 const styles = {
   details: cx({
-    layout: "flex flex-col gap-5",
-    colors: "bg-mantle",
-    borders: "border-(~ surface0) rounded-2xl",
-    spacing: "p-6",
-    typography: "text-text group"
+    preset: "card-panel",
+    layout: "gap-0 open:gap-5",
+    spacing: "px-6 py-4 open:p-6",
+    typography: "text-text group",
   }),
   summary: cx({
     layout: "flex items-center justify-between gap-3 list-none cursor-pointer select-none",
     colors: "text-mauve hover:text-mauve/80",
   }),
-  summaryLeft: cx({
-    layout: "flex items-center gap-2",
-  }),
-  title: cx({
-    colors: "text-mauve",
-    typography: "font-semibold text-lg",
-  }),
+  summaryLeft: "flex items-center gap-2",
+  title: "section-title",
   badge: cx({
     colors: "bg-surface0 text-subtext0",
     borders: "rounded-full",
@@ -36,26 +30,10 @@ const styles = {
     layout: clsx("i-lucide:chevron-down", "w-5 h-5"),
     colors: "text-subtext0 transition-transform duration-200 group-open:rotate-180",
   }),
-  grid: cx({
-    layout: "flex flex-wrap gap-2",
-    spacing: "pt-4",
-  }),
-  domainTag: cx({
-    colors: "bg-surface0/70 text-text border-(~ surface1)",
-    borders: "rounded-lg",
-    spacing: "px-3 py-1.5",
-    typography: "text-xs font-mono",
-    layout: "flex items-center gap-2",
-  }),
-  dot: cx({
-    colors: "bg-green",
-    borders: "rounded-full",
-    sizing: "w-2 h-2",
-  }),
-  emptyState: cx({
-    typography: "text-xs text-subtext0 italic",
-    spacing: "pt-4",
-  }),
+  grid: "flex flex-wrap gap-2 pt-4",
+  domainTag: "tag-domain",
+  dot: "bg-green rounded-full w-2 h-2",
+  emptyState: "text-muted italic pt-4",
 };
 
 export default function EnabledSites(props: Props) {

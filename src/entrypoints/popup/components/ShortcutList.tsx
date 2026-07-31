@@ -1,5 +1,4 @@
 import { getMessage } from "@/common/browser";
-import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 
 interface Props {
@@ -7,25 +6,12 @@ interface Props {
 }
 
 const styles = {
-  container: cx({
-    layout: "flex flex-col gap-2",
-  }),
-  title: cx({
-    typography: "text-xs font-semibold text-subtext0 uppercase tracking-wider",
-  }),
-  shortcutList: cx({
-    layout: "flex flex-col gap-2",
-  }),
-  shortcutItem: cx({
-    layout: "flex items-center justify-between",
-    typography: "text-sm",
-  }),
-  kbd: cx({
-    colors: "bg-surface0 text-text",
-    borders: "border border-surface1 rounded",
-    spacing: "px-2 py-0.5",
-    typography: "text-xs font-mono",
-  }),
+  container: "flex flex-col gap-2",
+  title: "text-xs font-semibold text-subtext0 uppercase tracking-wider",
+  shortcutList: "flex flex-col gap-2",
+  shortcutItem: "flex items-center justify-between text-sm",
+  label: "text-subtext0",
+  kbd: "kbd-badge",
 };
 
 export default function ShortcutList(props: Props) {
@@ -36,29 +22,29 @@ export default function ShortcutList(props: Props) {
       <p class={styles.title}>{getMessage("shortcutsHeader")}</p>
       <ul class={styles.shortcutList}>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">{getMessage("shortcutToggleOverlay")}</span>
+          <span class={styles.label}>{getMessage("shortcutToggleOverlay")}</span>
           <kbd class={styles.kbd}>
             {bindings().toggleOverlay ? bindings().toggleOverlay.toUpperCase() : "V"}
           </kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">{getMessage("shortcutSeekBackward")}</span>
+          <span class={styles.label}>{getMessage("shortcutSeekBackward")}</span>
           <kbd class={styles.kbd}>{bindings().seekBack.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">{getMessage("shortcutSeekForward")}</span>
+          <span class={styles.label}>{getMessage("shortcutSeekForward")}</span>
           <kbd class={styles.kbd}>{bindings().seekFwd.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">{getMessage("shortcutDecreaseSpeed")}</span>
+          <span class={styles.label}>{getMessage("shortcutDecreaseSpeed")}</span>
           <kbd class={styles.kbd}>{bindings().speedDown.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">{getMessage("shortcutIncreaseSpeed")}</span>
+          <span class={styles.label}>{getMessage("shortcutIncreaseSpeed")}</span>
           <kbd class={styles.kbd}>{bindings().speedUp.toUpperCase()}</kbd>
         </li>
         <li class={styles.shortcutItem}>
-          <span class="text-subtext0">{getMessage("shortcutResetSpeed")}</span>
+          <span class={styles.label}>{getMessage("shortcutResetSpeed")}</span>
           <kbd class={styles.kbd}>{bindings().resetSpeed.toUpperCase()}</kbd>
         </li>
       </ul>

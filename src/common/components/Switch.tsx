@@ -4,11 +4,11 @@ import { cx } from "@/common/utils/cx";
 
 const styles = {
   switchContainer: {
-    sm: cx({ layout: "relative inline-block shrink-0", sizing: "w-10 h-5.5" }),
-    md: cx({ layout: "relative inline-block shrink-0", sizing: "w-16 h-7" }),
-    lg: cx({ layout: "relative inline-block shrink-0", sizing: "w-20 h-9.5" }),
+    sm: "relative inline-block shrink-0 w-10 h-5.5",
+    md: "relative inline-block shrink-0 w-16 h-7",
+    lg: "relative inline-block shrink-0 w-20 h-9.5",
   },
-  switchInput: cx({ layout: "peer sr-only" }),
+  switchInput: "peer sr-only",
   sliderBase: cx({
     layout: "absolute inset-0",
     colors: "bg-surface0 peer-checked:(bg-mauve border-mauve before:bg-base)",
@@ -47,7 +47,7 @@ export default function Switch(props: Props) {
         disabled={props.disabled}
         onChange={(e) => props.onchange?.(e.currentTarget.checked)}
       />
-      <span class={cx({ state: clsx(styles.sliderBase, styles.sliderSize[size()]) })}></span>
+      <span class={clsx(styles.sliderBase, styles.sliderSize[size()])}></span>
     </label>
   );
 }

@@ -1,4 +1,3 @@
-import { clsx } from "clsx";
 import { Show } from "solid-js";
 
 import { getMessage } from "@/common/browser";
@@ -9,12 +8,9 @@ const isSuccess = (s: string) => s === "success";
 const styles = {
   toast: (saveStatus: "success" | "error" | "idle") =>
     cx({
-      elevation: "fixed top-6 right-6 z-[9999]",
-      layout: "flex items-center gap-2",
-      spacing: "py-4 px-6",
-      borders: clsx("border rounded-xl", isSuccess(saveStatus) ? "border-green" : "border-red"),
+      preset: "toast-base",
+      borders: isSuccess(saveStatus) ? "border-green" : "border-red",
       colors: isSuccess(saveStatus) ? "text-green bg-green/8" : "text-red bg-red/8",
-      state: "animate-slideIn",
     }),
 };
 

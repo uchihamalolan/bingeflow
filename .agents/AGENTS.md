@@ -108,6 +108,14 @@ To add support for a new streaming platform:
   }
   ```
 
+### 8. UnoCSS Shortcuts & `cx` Usage Rules
+
+- **Prefer Shortcuts for Uniform Design**: Always extract reusable, multi-class component patterns (e.g. `flex-center`, `card-panel`, `setting-row`, `section-title`, `btn-link`, `text-muted`) into `shortcuts` inside [uno.config.ts](file:///Users/malolan/Projects/bingeflow/uno.config.ts) rather than duplicating custom atomic classes across files.
+- **`cx` Usage Threshold**:
+  - Avoid `cx({ ... })` by default for short class lists (< 6 classes) or single presets. Use direct strings or `clsx()` instead.
+  - Reserve `cx({ ... })` for complex style blocks containing **6 or more classes**.
+  - When `cx` is used, place shortcut presets in the `preset` field (e.g. `cx({ preset: "flex-center", ... })`).
+
 ---
 
 ## 💻 Common Commands

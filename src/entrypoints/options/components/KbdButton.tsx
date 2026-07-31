@@ -17,9 +17,7 @@ const styles = {
       sizing: "min-w-[80px]",
       state: clsx("cursor-pointer", active && "animate-pulse"),
     }),
-  keyDisplay: cx({
-    borders: "border-none",
-  }),
+  keyDisplay: "border-none",
 };
 
 interface Props {

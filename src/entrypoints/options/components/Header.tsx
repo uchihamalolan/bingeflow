@@ -8,21 +8,12 @@ const styles = {
     spacing: "pb-4",
     borders: "border-b border-surface0",
   }),
-  logoArea: cx({
-    layout: "flex items-center gap-4",
-  }),
-  logoIcon: cx({
-    sizing: "w-9 h-9",
-  }),
-  logoTitle: cx({
-    typography: "text-[1.5rem]",
-  }),
-  subtitle: cx({
-    typography: "text-subtext0",
-    spacing: "mt-1",
-  }),
+  logoArea: "flex items-center gap-4",
+  logoIcon: "w-9 h-9",
+  logoTitle: "text-[1.5rem]",
+  subtitle: "text-subtext0 mt-1",
   themeToggle: cx({
-    layout: "flex items-center justify-center",
+    preset: "flex-center",
     colors: "bg-surface0 hover:(bg-surface1 border-surface2)",
     borders: "border-(~ surface1) rounded-full",
     sizing: "h-12 w-12",

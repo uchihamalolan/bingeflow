@@ -3,13 +3,12 @@ import { cx } from "@/common/utils/cx";
 
 const styles = {
   loadingContainer: cx({
-    layout: "flex flex-col items-center justify-center",
+    preset: "flex-center",
+    layout: "flex-col",
     colors: "text-subtext0",
     sizing: "min-h-80",
   }),
-  loadingText: cx({
-    spacing: "mt-5",
-  }),
+  loadingText: "mt-5",
 };
 
 export default function LoadingState() {

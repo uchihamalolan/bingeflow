@@ -1,6 +1,5 @@
 import { getMessage } from "@/common/browser";
 import Switch from "@/common/components/Switch";
-import { cx } from "@/common/utils/cx";
 
 interface Props {
   enabled: boolean;
@@ -8,12 +7,8 @@ interface Props {
 }
 
 const styles = {
-  container: cx({
-    layout: "flex items-center justify-between gap-2",
-  }),
-  label: cx({
-    typography: "text-sm font-semibold truncate",
-  }),
+  container: "flex items-center justify-between gap-2",
+  label: "text-sm font-semibold truncate",
 };
 
 export default function EnableSwitch(props: Props) {

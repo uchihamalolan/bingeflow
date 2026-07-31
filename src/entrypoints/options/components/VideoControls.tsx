@@ -1,34 +1,17 @@
+import { clsx } from "clsx";
+
 import { getMessage } from "@/common/browser";
 import NumberInput from "@/common/components/NumberInput";
 import Switch from "@/common/components/Switch";
-import { cx } from "@/common/utils/cx";
 import type { VideoControlsConfig } from "@/common/video-controls";
 
 const styles = {
-  section: cx({
-    layout: "flex flex-col gap-5",
-    colors: "bg-mantle",
-    borders: "border-(~ surface0) rounded-2xl",
-    spacing: "p-6",
-  }),
-  sectionTitle: cx({
-    colors: "text-mauve",
-    typography: "font-semibold text-lg",
-  }),
-  settingRow: (disabled: boolean) =>
-    cx({
-      layout: "flex items-center justify-between gap-5",
-      state: disabled && "opacity-45 pointer-events-none",
-    }),
-  settingInfo: cx({
-    layout: "flex flex-col gap-1 flex-1",
-  }),
-  settingLabel: cx({
-    typography: "font-semibold",
-  }),
-  settingDesc: cx({
-    typography: "text-xs text-subtext0",
-  }),
+  section: "card-panel",
+  sectionTitle: "section-title",
+  settingRow: (disabled: boolean) => clsx("setting-row", disabled && "state-disabled"),
+  settingInfo: "setting-info",
+  settingLabel: "setting-label",
+  settingDesc: "text-muted",
 };
 
 interface Props {

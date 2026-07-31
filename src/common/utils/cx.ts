@@ -1,4 +1,6 @@
 export type StyleCategoryKey =
+  /** Common reusable UnoCSS shortcut presets or design system aliases. */
+  | "preset"
   /** Display types (flex, grid, block), flex/grid alignment, self-positioning, and gaps (gap-*, gap-x-*, gap-y-*). */
   | "layout"
   /** Internal padding (p-*, px-*, py-*) and external margins (m-*, mb-*, mt-*). */

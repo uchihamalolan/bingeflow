@@ -17,23 +17,15 @@ import { settings } from "./store/settings";
 import "virtual:uno.css";
 
 const styles = {
-  container: cx({
-    layout: "flex flex-col gap-6",
-    spacing: "p-12",
-  }),
-  mainContent: cx({
-    layout: "columns-1 md:columns-2 gap-6",
-    spacing: "[&>*]:mb-6",
-    elevation: "[&>*]:break-inside-avoid",
-  }),
+  container: "flex flex-col gap-6 p-12",
+  mainContent: "columns-1 md:columns-2 gap-6 [&>*]:mb-6 [&>*]:break-inside-avoid",
   footer: cx({
-    layout: "flex items-center justify-center gap-3",
-    typography: "text-xs text-subtext0",
+    preset: "text-muted flex-center",
+    layout: "gap-3",
     spacing: "mt-8",
   }),
-  link: cx({
-    typography: "hover:underline text-mauve",
-  }),
+  link: "btn-link",
+  divider: "text-surface2",
 };
 
 const rateUrl = import.meta.env.FIREFOX
@@ -74,7 +66,7 @@ export default function App() {
             >
               {getMessage("optionsHomepage")}
             </a>
-            <span class="text-surface2">|</span>
+            <span class={styles.divider}>|</span>
             <a href={rateUrl} target="_blank" rel="noreferrer" class={styles.link}>
               {getMessage("optionsRate")}
             </a>
