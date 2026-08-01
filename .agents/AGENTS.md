@@ -122,16 +122,15 @@ To add support for a new streaming platform:
 
 ---
 
-
 ## 💻 Common Commands
 
-| Command                 | Action                                                                  |
-| ----------------------- | ----------------------------------------------------------------------- |
-| `pnpm install`          | Installs dependencies                                                   |
-| `pnpm run dev`          | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
-| `pnpm run dev:firefox`  | Starts WXT dev server targeting Firefox MV3                             |
-| `pnpm run build`        | Builds the production package under `.output/chrome-mv3`                |
-| `pnpm run build:firefox`| Builds the production package under `.output/firefox-mv3`               |
-| `pnpm run lint`         | Checks formatting and code quality                                      |
-| `pnpm run fmt`          | Resolves auto-fixable formatting issues                                 |
-| `./node_modules/.bin/tsc --noEmit` | Checks TypeScript type correctness without emitting files  |
+| Command                            | Action                                                                  |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| `pnpm install`                     | Installs dependencies                                                   |
+| `pnpm run dev`                     | Starts WXT dev server (automatically runs unpacked extension in Chrome) |
+| `pnpm run dev:firefox`             | Starts WXT dev server targeting Firefox MV3                             |
+| `pnpm run build`                   | Builds the production package under `.output/chrome-mv3`                |
+| `pnpm run build:firefox`           | Builds the production package under `.output/firefox-mv3`               |
+| `pnpm run lint`                    | Checks formatting and code quality                                      |
+| `pnpm run fmt`                     | Resolves auto-fixable formatting issues                                 |
+| `./node_modules/.bin/tsc --noEmit` | Checks TypeScript type correctness without emitting files               |

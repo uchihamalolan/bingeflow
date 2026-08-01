@@ -1,11 +1,18 @@
 import { browser } from "wxt/browser";
 
 export const getCurrentTab = async () => {
-  return (await browser.tabs.query({ active: true, currentWindow: true })).at(0);
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  if (tabs.length > 0) return tabs[0];
+  const activeTabs = await browser.tabs.query({ active: true });
+  return activeTabs.at(0);
 };
 
 export const openOptionsPage = () => {
-  void browser.runtime.openOptionsPage();
+  try {
+    void browser.runtime.openOptionsPage();
+  } catch {
+    // Unimplemented in fake browser / test environment
+  }
 };
 
 export const getSyncStorage = async <T>(key: string): Promise<T | undefined> => {
