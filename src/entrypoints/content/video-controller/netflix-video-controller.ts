@@ -29,7 +29,10 @@ export class NetflixVideoController extends Html5VideoController {
 
     const script = document.createElement("script");
     script.id = BRIDGE_ID;
-    script.src = browser.runtime.getURL("/netflix-bridge.js");
+    // Omit script src during test mode (Vitest / HappyDOM) to avoid script loading DOMExceptions
+    if (import.meta.env.MODE !== "test") {
+      script.src = browser.runtime.getURL("/netflix-bridge.js");
+    }
     (document.head || document.documentElement).appendChild(script);
   }
 
