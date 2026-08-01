@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest run",
-    "lint": "oxlint",
-    "fmt": "oxfmt",
+    "test": "vitest run -c configs/vitest.config.ts",
+    "lint": "oxlint -c configs/oxlint.config.ts",
+    "fmt": "oxfmt -c configs/oxfmt.config.ts",
     "postinstall": "wxt prepare",
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox --mv3",

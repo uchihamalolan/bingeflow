@@ -28,6 +28,7 @@ web-ext.config.ts
 # Build outputs
 dist
 release
+coverage
 
 # ai generated
 docs

@@ -7,7 +7,7 @@ export default defineConfig({
   imports: false,
   srcDir: "src",
   vite: () => ({
-    plugins: [UnoCSS(), solidPlugin()],
+    plugins: [UnoCSS("configs/uno.config.ts"), solidPlugin()],
   }),
   manifest: {
     name: "__MSG_extName__",

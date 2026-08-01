@@ -20,5 +20,15 @@
 
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
-  }
+  },
+
+  "unocss.configPath": "configs/uno.config.ts",
+  "vitest.configPath": "configs/vitest.config.ts",
+  "oxc.configPath": "configs/oxlint.config.ts",
+  "oxc.fmt.configPath": "configs/oxfmt.config.ts",
+  "oxc.typeAware": true,
+  "oxc.disableNestedConfig": true,
+  "oxc.enable.oxfmt": true,
+  "oxc.enable.oxlint": true,
+  "oxc.requireConfig": true
 }
