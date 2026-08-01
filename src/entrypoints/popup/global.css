@@ -1,0 +1,8 @@
+@import "@/common/styles/base.css";
+
+body {
+  width: 280px;
+  transition:
+    background-color var(--duration-2) var(--ease-2),
+    color var(--duration-2) var(--ease-2);
+}
