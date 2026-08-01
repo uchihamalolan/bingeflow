@@ -43,6 +43,8 @@ _Note: For Firefox, load the Firefox-mv3 unpacked build via `about:debugging#/ru
 
 This project is built using the **WXT** framework, **SolidJS**, **TypeScript**, and **UnoCSS**, with **pnpm** as the package manager.
 
+For detailed codebase architecture, directory structure, developer recipes, and engineering guidelines, see [DEVELOPMENT.md](DEVELOPMENT.md).
+
 ### Netflix Custom Seeking Architecture
 
 > [!WARNING]
