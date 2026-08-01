@@ -33,3 +33,5 @@ coverage
 # ai generated
 docs
 TODO.md
+
+.env*
