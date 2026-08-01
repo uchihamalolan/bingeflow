@@ -1,6 +1,6 @@
 # BingeFlow (bingeflow)
 
-A lightweight, modern web extension that allows you to quickly skip intros, recaps, and credits, as well as control video playback on popular streaming platforms like Netflix, Prime Video, and Disney+ Hotstar.
+A lightweight, modern web extension that allows you to quickly skip intros, recaps, and credits, as well as control video playback on popular streaming platforms like Netflix, Prime Video, Disney+ Hotstar, and YouTube.
 
 <br />
 
@@ -8,14 +8,16 @@ A lightweight, modern web extension that allows you to quickly skip intros, reca
 
 ## Features
 
-- ⚡ **One-Key Skipping**: Press a simple key (default: `S` for Skip Intro/Recap) to trigger player actions instantly.
+- ⚡ **One-Key Skipping**: Press a simple key (default: `S` for Skip Intro/Recap) to trigger player skip & next actions instantly.
 - 🎛️ **Floating Video Controls Overlay**: Hover over the video player to access a floating overlay with controls to:
   - Seek backward/forward (default: `Z` / `X`).
   - Speed up/slow down playback rate (default: `W` / `Q`).
   - Reset playback speed to normal `1×` (default: `R`).
+- 🎮 **Gamepad & Controller Support**: Seamlessly control playback, speed, and seeking using connected Bluetooth or USB gamepads.
+- 🌐 **Per-Site Domain Controls**: Selectively enable or disable BingeFlow features on specific domains (e.g., Netflix, Prime Video, Hotstar, YouTube).
 - 🪄 **Smart Netflix Seeking**: While popular video controllers often freeze or crash Netflix when seeking, BingeFlow controls playback smartly and smoothly without player errors. _([Explained below](#netflix-custom-seeking-architecture))_
-- 🪟 **Minimalist Popup UI**: A clean popup interface that lists current shortcuts, features a master enable/disable switch, and links to settings.
-- 🎨 **Theme Customizability**: Supports Catppuccin **Frappe** (dark), **Latte** (light), and **System** themes.
+- 🪟 **Minimalist Popup UI**: A clean popup interface that lists current shortcuts, features site toggles, a master enable switch, and links to settings.
+- 🎨 **Theme Customizability**: Supports Catppuccin **Frappé** (dark), **Latte** (light), and **System** themes.
 
 ## Installation
 
@@ -32,18 +34,29 @@ _Note: For Firefox, load the Firefox-mv3 unpacked build via `about:debugging#/ru
 
 ## How It Works
 
-1. Clicking the extension icon opens the popup displaying active keyboard shortcuts and the main enable/disable extension switch.
+1. Clicking the extension icon opens the popup displaying active keyboard shortcuts, domain enablement toggles, and the main enable/disable extension switch.
 2. When a video is detected, BingeFlow mounts a custom Shadow DOM controls overlay inside the player container.
-3. User activity (pointer movement or key shortcuts) keeps the overlay visible, while inactivity automatically fades it out after 5 seconds to ensure an unobstructed viewing experience.
-4. Settings can be accessed via the options page (accessible from both the popup and Chrome extension settings) where you can customize speed steps, seek durations, and keyboard shortcuts.
+3. User activity (pointer movement, key shortcuts, or gamepad input) keeps the overlay visible, while inactivity automatically fades it out after 5 seconds to ensure an unobstructed viewing experience.
+4. Settings can be accessed via the options page (accessible from both the popup and extension settings) where you can customize speed steps, seek durations, gamepad bindings, and keyboard shortcuts.
 
 ---
 
 ## 🛠️ Development & Building (Technical)
 
-This project is built using the **WXT** framework, **SolidJS**, **TypeScript**, and **UnoCSS**, with **pnpm** as the package manager.
+This project is built using the **WXT** framework, **SolidJS**, **TypeScript**, and **UnoCSS**, with **pnpm** as the package manager. Tooling configurations are organized under the `configs/` directory (`uno.config.ts`, `oxlint.config.ts`, `oxfmt.config.ts`, `vitest.config.ts`).
 
-For detailed codebase architecture, directory structure, developer recipes, and engineering guidelines, see [DEVELOPMENT.md](DEVELOPMENT.md).
+- **Developer Blueprint**: For codebase architecture, directory structure, developer recipes, and engineering guidelines, see [DEVELOPMENT.md](DEVELOPMENT.md).
+- **Architecture Decision Records**: For technical trade-offs and design choices, see [DECISIONS.md](DECISIONS.md).
+
+### Quick Commands
+
+```bash
+pnpm install     # Install dependencies
+pnpm run dev     # Start WXT dev server (Chrome unpacked)
+pnpm run lint    # Check code quality with Oxlint
+pnpm run fmt     # Format code with Oxfmt
+pnpm test        # Run Vitest unit & component test suite
+```
 
 ### Netflix Custom Seeking Architecture
 
