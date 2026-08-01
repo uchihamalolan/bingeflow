@@ -41,7 +41,7 @@ _Note: For Firefox, load the Firefox-mv3 unpacked build via `about:debugging#/ru
 
 ## 🛠️ Development & Building (Technical)
 
-This project is built using the **WXT** framework, **SolidJS**, **TypeScript**, and **UnoCSS**, with **Bun** as the package manager.
+This project is built using the **WXT** framework, **SolidJS**, **TypeScript**, and **UnoCSS**, with **pnpm** as the package manager.
 
 ### Netflix Custom Seeking Architecture
 

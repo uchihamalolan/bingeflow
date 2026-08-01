@@ -116,7 +116,12 @@ To add support for a new streaming platform:
   - Reserve `cx({ ... })` for complex style blocks containing **6 or more classes**.
   - When `cx` is used, place shortcut presets in the `preset` field (e.g. `cx({ preset: "flex-center", ... })`).
 
+### 9. Command Error Handling
+
+- **Immediate Reporting on Failure**: If any shell command fails (e.g., `command not found`, missing environment dependencies, or failed script execution), **stop execution immediately** and report the exact failure output to the user. Do not attempt to search for binaries, inspect system environments, or attempt self-recovery without user intervention.
+
 ---
+
 
 ## 💻 Common Commands
 
