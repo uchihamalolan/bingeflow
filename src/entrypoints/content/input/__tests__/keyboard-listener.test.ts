@@ -14,7 +14,7 @@ describe("KeyboardListener", () => {
     document.body.innerHTML = "";
     mockDispatcher = { executeCommand: vi.fn() };
     mockVideoManager = {
-      getController: vi.fn().mockReturnValue({}),
+      hasActiveVideo: vi.fn().mockReturnValue(true),
       getConfig: vi.fn().mockReturnValue(DEFAULT_VIDEO_CONTROLS),
     };
     mockPlatformManager = {

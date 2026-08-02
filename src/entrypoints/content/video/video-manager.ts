@@ -1,3 +1,4 @@
+import type { VideoCommand } from "@/common/commands";
 import type { PlatformConfig } from "@/common/platforms";
 import type { VideoControlsConfig } from "@/common/video-controls";
 
@@ -64,8 +65,48 @@ export class VideoManager {
     return this.activeVideo;
   }
 
-  getController(): VideoController | null {
-    return this.activeController;
+  hasActiveVideo(): boolean {
+    return this.activeController !== null;
+  }
+
+  execute(command: VideoCommand): void {
+    if (this.activeController === null) return;
+
+    const { seekSeconds, speedStep } = this.config;
+
+    switch (command) {
+      case "toggleOverlay":
+        this.toggleOverlay();
+        break;
+      case "togglePlay":
+        this.activeController.togglePlay();
+        this.triggerActivity();
+        break;
+      case "seekBack":
+        this.activeController.seek(-seekSeconds);
+        this.triggerActivity();
+        break;
+      case "seekFwd":
+        this.activeController.seek(seekSeconds);
+        this.triggerActivity();
+        break;
+      case "speedDown": {
+        const current = this.activeController.getPlaybackRate();
+        this.activeController.setPlaybackRate(current - speedStep);
+        this.triggerActivity();
+        break;
+      }
+      case "speedUp": {
+        const current = this.activeController.getPlaybackRate();
+        this.activeController.setPlaybackRate(current + speedStep);
+        this.triggerActivity();
+        break;
+      }
+      case "resetSpeed":
+        this.activeController.setPlaybackRate(1.0);
+        this.triggerActivity();
+        break;
+    }
   }
 
   destroy(): void {
@@ -74,15 +115,15 @@ export class VideoManager {
     this.unmount();
   }
 
-  toggleOverlay(): void {
+  // ── Private ────────────────────────────────────────────────────────────────
+
+  private toggleOverlay(): void {
     this.overlayHandle?.toggle();
   }
 
-  triggerActivity(): void {
+  private triggerActivity(): void {
     this.overlayHandle?.triggerActivity();
   }
-
-  // ── Private ────────────────────────────────────────────────────────────────
 
   private onMutation(records: MutationRecord[]): void {
     let needsScan = false;

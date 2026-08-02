@@ -125,14 +125,14 @@ This repository is a Google Chrome and Firefox extension named **BingeFlow** (fo
 
 ## 💻 Common Commands
 
-| Command                            | Action                                                                  |
-| ---------------------------------- | ----------------------------------------------------------------------- |
-| `pnpm install`                     | Installs dependencies                                                   |
-| `pnpm run dev`                     | Starts WXT dev server targeting Chrome MV3                              |
-| `pnpm run dev:firefox`             | Starts WXT dev server targeting Firefox MV3                             |
-| `pnpm run build`                   | Builds production package under `.output/chrome-mv3`                    |
-| `pnpm run build:firefox`           | Builds production package under `.output/firefox-mv3`                   |
-| `pnpm run lint`                    | Runs code linting & type checks                                         |
-| `pnpm run fmt`                     | Formats codebase using Biome / oxfmt                                    |
-| `pnpm test`                        | Runs Vitest unit & component test suite                                 |
-| `./node_modules/.bin/tsc --noEmit` | Checks TypeScript type correctness without emitting files               |
+| Command                            | Action                                                    |
+| ---------------------------------- | --------------------------------------------------------- |
+| `pnpm install`                     | Installs dependencies                                     |
+| `pnpm run dev`                     | Starts WXT dev server targeting Chrome MV3                |
+| `pnpm run dev:firefox`             | Starts WXT dev server targeting Firefox MV3               |
+| `pnpm run build`                   | Builds production package under `.output/chrome-mv3`      |
+| `pnpm run build:firefox`           | Builds production package under `.output/firefox-mv3`     |
+| `pnpm run lint`                    | Runs code linting & type checks                           |
+| `pnpm run fmt`                     | Formats codebase using Biome / oxfmt                      |
+| `pnpm test`                        | Runs Vitest unit & component test suite                   |
+| `./node_modules/.bin/tsc --noEmit` | Checks TypeScript type correctness without emitting files |

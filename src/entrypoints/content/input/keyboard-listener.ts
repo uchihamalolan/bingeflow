@@ -35,10 +35,8 @@ export class KeyboardListener {
   private onKeyDown = (e: KeyboardEvent): void => {
     if (!this.isValidPress(e)) return;
 
-    const controller = this.videoManager.getController();
-
     // Check video control keyboard bindings if key is not reserved by platform shortcut
-    if (controller !== null && !this.platformShortcuts.has(e.key)) {
+    if (this.videoManager.hasActiveVideo() && !this.platformShortcuts.has(e.key)) {
       const { keyBindings } = this.videoManager.getConfig();
       let matchedCommand: Command | null = null;
 

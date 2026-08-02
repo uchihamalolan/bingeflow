@@ -23,50 +23,9 @@ export class CommandDispatcher {
 
   public executeCommand(command: Command): void {
     if (this.isVideoCommand(command)) {
-      this.executeVideoCommand(command);
+      this.videoManager.execute(command);
     } else {
       this.platformManager.execute(command);
-    }
-  }
-
-  private executeVideoCommand(command: VideoCommand): void {
-    const controller = this.videoManager.getController();
-    if (controller === null) return;
-
-    const { seekSeconds, speedStep } = this.videoManager.getConfig();
-
-    switch (command) {
-      case "toggleOverlay":
-        this.videoManager.toggleOverlay();
-        break;
-      case "togglePlay":
-        controller.togglePlay();
-        this.videoManager.triggerActivity();
-        break;
-      case "seekBack":
-        controller.seek(-seekSeconds);
-        this.videoManager.triggerActivity();
-        break;
-      case "seekFwd":
-        controller.seek(seekSeconds);
-        this.videoManager.triggerActivity();
-        break;
-      case "speedDown": {
-        const current = controller.getPlaybackRate();
-        controller.setPlaybackRate(current - speedStep);
-        this.videoManager.triggerActivity();
-        break;
-      }
-      case "speedUp": {
-        const current = controller.getPlaybackRate();
-        controller.setPlaybackRate(current + speedStep);
-        this.videoManager.triggerActivity();
-        break;
-      }
-      case "resetSpeed":
-        controller.setPlaybackRate(1.0);
-        this.videoManager.triggerActivity();
-        break;
     }
   }
 }
