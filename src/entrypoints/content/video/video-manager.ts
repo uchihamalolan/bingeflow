@@ -20,8 +20,8 @@ export class VideoManager {
   private config: VideoControlsConfig;
   private readonly platformConfig: PlatformConfig | null;
 
-  private activeVideo: HTMLVideoElement | null = null;
-  private activeController: VideoController | null = null;
+  private videoEl: HTMLVideoElement | null = null;
+  private videoController: VideoController | null = null;
   private overlayHandle: OverlayHandle | null = null;
 
   private readonly mutationObserver: MutationObserver;
@@ -62,15 +62,15 @@ export class VideoManager {
   }
 
   getVideo(): HTMLVideoElement | null {
-    return this.activeVideo;
+    return this.videoEl;
   }
 
   hasActiveVideo(): boolean {
-    return this.activeController !== null;
+    return this.videoController !== null;
   }
 
   execute(command: VideoCommand): void {
-    if (this.activeController === null) return;
+    if (this.videoController === null) return;
 
     const { seekSeconds, speedStep } = this.config;
 
@@ -79,31 +79,31 @@ export class VideoManager {
         this.toggleOverlay();
         break;
       case "togglePlay":
-        this.activeController.togglePlay();
+        this.videoController.togglePlay();
         this.triggerActivity();
         break;
       case "seekBack":
-        this.activeController.seek(-seekSeconds);
+        this.videoController.seek(-seekSeconds);
         this.triggerActivity();
         break;
       case "seekFwd":
-        this.activeController.seek(seekSeconds);
+        this.videoController.seek(seekSeconds);
         this.triggerActivity();
         break;
       case "speedDown": {
-        const current = this.activeController.getPlaybackRate();
-        this.activeController.setPlaybackRate(current - speedStep);
+        const current = this.videoController.getPlaybackRate();
+        this.videoController.setPlaybackRate(current - speedStep);
         this.triggerActivity();
         break;
       }
       case "speedUp": {
-        const current = this.activeController.getPlaybackRate();
-        this.activeController.setPlaybackRate(current + speedStep);
+        const current = this.videoController.getPlaybackRate();
+        this.videoController.setPlaybackRate(current + speedStep);
         this.triggerActivity();
         break;
       }
       case "resetSpeed":
-        this.activeController.setPlaybackRate(1.0);
+        this.videoController.setPlaybackRate(1.0);
         this.triggerActivity();
         break;
     }
@@ -142,8 +142,8 @@ export class VideoManager {
       // A node was removed — check if it is or contains our active video
       for (const node of record.removedNodes) {
         if (
-          node === this.activeVideo ||
-          (node instanceof Element && this.activeVideo !== null && node.contains(this.activeVideo))
+          node === this.videoEl ||
+          (node instanceof Element && this.videoEl !== null && node.contains(this.videoEl))
         ) {
           needsScan = true;
           break outer;
@@ -164,20 +164,20 @@ export class VideoManager {
     const found = findVideo(this.platformConfig?.videoSelector);
 
     // Nothing changed — skip
-    if (found === this.activeVideo) return;
+    if (found === this.videoEl) return;
 
     // Tear down what was previously mounted (sets this.activeVideo = null)
     this.unmount();
 
     if (found !== null && this.config.enabled) {
-      this.activeVideo = found;
+      this.videoEl = found;
       this.mount(found);
     }
   }
 
   private mount(video: HTMLVideoElement): void {
     const controller = createVideoController(video, this.platformConfig);
-    this.activeController = controller;
+    this.videoController = controller;
 
     const playerContainer = getPlayerContainer(video, this.platformConfig?.playerContainerSelector);
 
@@ -189,12 +189,12 @@ export class VideoManager {
     this.overlayHandle?.remove();
     this.overlayHandle = null;
 
-    this.activeController?.destroy();
-    this.activeController = null;
+    this.videoController?.destroy();
+    this.videoController = null;
 
-    if (this.activeVideo !== null) {
-      this.resizeObserver.unobserve(this.activeVideo);
-      this.activeVideo = null;
+    if (this.videoEl !== null) {
+      this.resizeObserver.unobserve(this.videoEl);
+      this.videoEl = null;
     }
   }
 }
